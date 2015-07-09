@@ -1,0 +1,14 @@
+package com.yaao.app.system.dao.news;
+
+import java.util.List;
+import com.yaao.app.system.entity.news.News;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface INewsDao {
+  public List<News> getList(String statement,News t);
+}

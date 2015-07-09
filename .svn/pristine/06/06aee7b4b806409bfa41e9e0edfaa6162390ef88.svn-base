@@ -1,0 +1,20 @@
+package com.yaao.app.system.dao.brand.impl;
+
+import java.util.List;
+import org.springframework.stereotype.Repository;
+import com.yaao.app.system.dao.brand.IBrandDao;
+import com.yaao.app.commnd.base.impl.BaseDaoImpl;
+import com.yaao.app.system.entity.brand.Brand;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Repository
+public class BrandDaoImpl extends BaseDaoImpl<Brand, Integer> implements IBrandDao{
+public List<Brand> getList(String statement,Brand t){
+  return super.selectList(statement, t);
+  }
+}

@@ -1,0 +1,25 @@
+package com.yaao.app.system.service.model.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.yaao.app.system.dao.model.impl.ModelDaoImpl;
+import com.yaao.app.system.service.model.IModelService;
+import com.yaao.app.commnd.base.impl.BaseServiceImpl;
+import com.yaao.app.system.entity.model.Model;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Service
+public class ModelServiceImpl extends BaseServiceImpl<Model, Integer> implements IModelService{
+  @Autowired
+  private ModelDaoImpl dao;
+
+  public List<Model> selectModel(Model t){
+       return dao.getList("selectModel", t);
+  }
+}

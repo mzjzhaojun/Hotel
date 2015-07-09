@@ -1,0 +1,14 @@
+package com.yichuang.kyjd.system.dao.user;
+
+import java.util.List;
+import com.yichuang.kyjd.system.entity.user.User;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface IUserDao {
+  public List<User> getList(String statement,User t);
+}

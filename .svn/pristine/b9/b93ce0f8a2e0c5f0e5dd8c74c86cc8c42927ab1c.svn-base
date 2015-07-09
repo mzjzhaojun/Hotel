@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Specialty_info">
+  <sql id="Base_Column_List">
+     rowid,title,name,type,count,price,new_price,image_url,context,higth_count,is_top,is_coupon,higth_coupon_count,higth_coupon_price,is_add,status,modification_date,add_date,modification_user,add_user,remark
+  </sql>
+  <resultMap id="ResultMap" type="com.yaao.app.system.entity.specialty_info.Specialty_info">
+         <id property="rowid" column="rowid" />
+         <id property="title" column="title" />
+         <id property="name" column="name" />
+         <id property="type" column="type" />
+         <id property="count" column="count" />
+         <id property="price" column="price" />
+         <id property="new_price" column="new_price" />
+         <id property="image_url" column="image_url" />
+         <id property="context" column="context" />
+         <id property="higth_count" column="higth_count" />
+         <id property="is_top" column="is_top" />
+         <id property="is_coupon" column="is_coupon" />
+         <id property="higth_coupon_count" column="higth_coupon_count" />
+         <id property="higth_coupon_price" column="higth_coupon_price" />
+         <id property="is_add" column="is_add" />
+         <id property="status" column="status" />
+         <id property="modification_date" column="modification_date" />
+         <id property="add_date" column="add_date" />
+         <id property="modification_user" column="modification_user" />
+         <id property="add_user" column="add_user" />
+         <id property="remark" column="remark" />
+  </resultMap>
+  <insert id="save" parameterType="com.yaao.app.system.entity.specialty_info.Specialty_info">
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+  	SELECT LAST_INSERT_ID() AS id 
+  </selectKey>
+  insert into ht_specialty_info (title,name,type,count,price,new_price,image_url,context,higth_count,is_top,is_coupon,higth_coupon_count,higth_coupon_price,is_add,status,modification_date,add_date,modification_user,add_user,remark)
+         values (#{title},#{name},#{type},#{count},#{price},#{new_price},#{image_url},#{context},#{higth_count},#{is_top},#{is_coupon},#{higth_coupon_count},#{higth_coupon_price},#{is_add},#{status},#{modification_date},#{add_date},#{modification_user},#{add_user},#{remark})
+  </insert>
+ <delete id="deleteByIds" parameterType="java.util.List">
+     delete from ht_specialty_info where id in 
+        <foreach collection="array" index="index" item="item" open="("
+          separator="," close=")">
+           #{item}
+        </foreach>
+ </delete>
+ <update id="update" parameterType="com.yaao.app.system.entity.specialty_info.Specialty_info">
+    update ht_specialty_info
+         <set>
+             <if test="rowid != null">
+                   rowid = #{rowid},
+             </if>
+             <if test="title != null">
+                   title = #{title},
+             </if>
+             <if test="name != null">
+                   name = #{name},
+             </if>
+             <if test="type != null">
+                   type = #{type},
+             </if>
+             <if test="count != null">
+                   count = #{count},
+             </if>
+             <if test="price != null">
+                   price = #{price},
+             </if>
+             <if test="new_price != null">
+                   new_price = #{new_price},
+             </if>
+             <if test="image_url != null">
+                   image_url = #{image_url},
+             </if>
+             <if test="context != null">
+                   context = #{context},
+             </if>
+             <if test="higth_count != null">
+                   higth_count = #{higth_count},
+             </if>
+             <if test="is_top != null">
+                   is_top = #{is_top},
+             </if>
+             <if test="is_coupon != null">
+                   is_coupon = #{is_coupon},
+             </if>
+             <if test="higth_coupon_count != null">
+                   higth_coupon_count = #{higth_coupon_count},
+             </if>
+             <if test="higth_coupon_price != null">
+                   higth_coupon_price = #{higth_coupon_price},
+             </if>
+             <if test="is_add != null">
+                   is_add = #{is_add},
+             </if>
+             <if test="status != null">
+                   status = #{status},
+             </if>
+             <if test="modification_date != null">
+                   modification_date = #{modification_date},
+             </if>
+             <if test="add_date != null">
+                   add_date = #{add_date},
+             </if>
+             <if test="modification_user != null">
+                   modification_user = #{modification_user},
+             </if>
+             <if test="add_user != null">
+                   add_user = #{add_user},
+             </if>
+             <if test="remark != null">
+                   remark = #{remark}
+             </if>
+          </set>
+     where id = #{id}
+ </update>
+ <select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from ht_specialty_info 
+        where id = #{id}
+ </select>
+ <select id="getList" parameterType="com.yaao.app.system.entity.specialty_info.Specialty_info" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from ht_specialty_info 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+ <select id="getPage" parameterType="com.yaao.app.system.entity.specialty_info.Specialty_info" resultMap="ResultMap">
+      select
+       <include refid="Base_Column_List" />
+        from ht_specialty_info 
+       <where>
+             <if test="name != null and name != ''">
+         		  name like "%"#{name}"%"
+             </if>
+       </where>
+ </select>
+ <select id="getCount" parameterType="com.yaao.app.system.entity.specialty_info.Specialty_info" resultType="int">
+       select count(*) from ht_specialty_info 
+         <where>
+             <if test="name != null and name != ''">
+                name like "%"#{name}"%"
+             </if>
+         </where>
+ </select>
+ <select id="selectSpecialty_info" parameterType="com.yaao.app.system.entity.specialty_info.Specialty_info" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from ht_specialty_info 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+</mapper>

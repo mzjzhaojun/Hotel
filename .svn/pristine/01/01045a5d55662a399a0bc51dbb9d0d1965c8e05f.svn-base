@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Customer">
+	<sql id="Base_Column_List">
+		rowid,nickname,name,code,sex,birthday,status,phone,addr,head_img,integral,rating,sys_create_time,accout,password,cardtype,idcard,remarks
+	</sql>
+	<resultMap id="ResultMap"
+		type="com.yichuang.kyjd.rest.entity.customer.Customer">
+		<id property="rowid" column="rowid" />
+		<id property="nickname" column="nickname" />
+		<id property="name" column="name" />
+		<id property="code" column="code" />
+		<id property="sex" column="sex" />
+		<id property="birthday" column="birthday" />
+		<id property="status" column="status" />
+		<id property="phone" column="phone" />
+		<id property="addr" column="addr" />
+		<id property="head_img" column="head_img" />
+		<id property="integral" column="integral" />
+		<id property="rating" column="rating" />
+		<id property="sys_create_time" column="sys_create_time" />
+		<id property="accout" column="accout" />
+		<id property="password" column="password" />
+		<id property="cardtype" column="cardtype" />
+		<id property="idcard" column="idcard" />
+		<id property="remarks" column="remarks" />
+	</resultMap>
+	<insert id="save" parameterType="com.yichuang.kyjd.rest.entity.customer.Customer">
+		<selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into ht_customer
+		(nickname,name,code,sex,birthday,status,phone,addr,head_img,integral,rating,sys_create_time,accout,cardtype,idcard,remarks)
+		values
+		(#{nickname},#{name},#{code},#{sex},#{birthday},#{status},#{phone},#{addr},#{head_img},#{integral},#{rating},#{sys_create_time},#{accout},#{cardtype},#{idcard},#{remarks})
+	</insert>
+	<insert id="register" parameterType="com.yichuang.kyjd.rest.entity.customer.Customer">
+		<selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into ht_customer (name,phone,accout,password,)
+		values (#{name},#{phone},#{phone},#{password})
+	</insert>
+	<delete id="deleteByIds" parameterType="java.util.List">
+		delete from ht_customer where rowid in
+		<foreach collection="array" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	<update id="update" parameterType="com.yichuang.kyjd.rest.entity.customer.Customer">
+		update ht_customer
+		<set>
+			<if test="rowid != null">
+				rowid = #{rowid},
+			</if>
+			<if test="nickname != null">
+				nickname = #{nickname},
+			</if>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="code != null">
+				code = #{code},
+			</if>
+			<if test="sex != null">
+				sex = #{sex},
+			</if>
+			<if test="birthday != null">
+				birthday = #{birthday},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="phone != null">
+				phone = #{phone},
+			</if>
+			<if test="addr != null">
+				addr = #{addr},
+			</if>
+			<if test="head_img != null">
+				head_img = #{head_img},
+			</if>
+			<if test="integral != null">
+				integral = #{integral},
+			</if>
+			<if test="rating != null">
+				rating = #{rating},
+			</if>
+			<if test="sys_create_time != null">
+				sys_create_time = #{sys_create_time},
+			</if>
+			<if test="accout != null">
+				accout = #{accout},
+			</if>
+			<if test="cardtype != null">
+				cardtype = #{cardtype},
+			</if>
+			<if test="idcard != null">
+				idcard = #{idcard},
+			</if>
+			<if test="remarks != null">
+				remarks = #{remarks}
+			</if>
+		</set>
+		where rowid = #{rowid}
+	</update>
+	<select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ht_customer
+		where rowid = #{rowid}
+	</select>
+	<select id="getList" parameterType="com.yichuang.kyjd.rest.entity.customer.Customer"
+		resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ht_customer
+		<where>
+			<if test="name != null and name != ''">
+				name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+
+
+	<select id="getPage" parameterType="com.yichuang.kyjd.rest.entity.customer.Customer"
+		resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ht_customer
+		<where>
+			<if test="name != null and name != ''">
+				name like "%"#{name}"%"
+			</if>
+		</where>
+		LIMIT #{pageStart},#{pageEnd}
+	</select>
+
+	<select id="selectCustomer" parameterType="com.yichuang.kyjd.rest.entity.customer.Customer"
+		resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ht_customer
+	</select>
+	<select id="getCount" parameterType="com.yichuang.kyjd.rest.entity.customer.Customer"
+		resultType="int">
+		select count(*) from ht_customer
+		<where>
+			<if test="name != null and name != ''">
+				name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+	<select id="loginCustomer" parameterType="com.yichuang.kyjd.rest.entity.customer.Customer"
+		resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ht_customer
+		where accout = #{accout} and password = #{password}
+	</select>
+</mapper>

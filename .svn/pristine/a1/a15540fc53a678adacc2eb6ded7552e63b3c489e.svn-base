@@ -1,0 +1,20 @@
+package com.yichuang.kyjd.system.dao.dictionaries.impl;
+
+import java.util.List;
+import org.springframework.stereotype.Repository;
+import com.yichuang.kyjd.system.dao.dictionaries.IDictionariesDao;
+import com.yichuang.kyjd.commnd.base.impl.BaseDaoImpl;
+import com.yichuang.kyjd.system.entity.dictionaries.Dictionaries;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Repository
+public class DictionariesDaoImpl extends BaseDaoImpl<Dictionaries, Integer> implements IDictionariesDao{
+public List<Dictionaries> getList(String statement,Dictionaries t){
+  return super.selectList(statement, t);
+  }
+}

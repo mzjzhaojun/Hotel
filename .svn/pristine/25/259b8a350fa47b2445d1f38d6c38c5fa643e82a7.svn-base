@@ -1,0 +1,136 @@
+package com.yaao.app.system.entity.room;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Room implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Integer rowid;
+  String code;
+  String name;
+  String detail;
+  String instructions;
+  Integer count;
+  Integer surplus;
+  Object price;
+  Object sellprice;
+  Integer isenabled;
+  Integer iscoupon;
+  String remark;
+
+  public Integer getRowid(){
+      return rowid;
+  }
+
+  public void setRowid(Integer rowid) {
+      this.rowid =rowid;
+  }
+
+  public String getCode(){
+      return code;
+  }
+
+  public void setCode(String code) {
+      this.code =code;
+  }
+
+  public String getName(){
+      return name;
+  }
+
+  public void setName(String name) {
+      this.name =name;
+  }
+
+  public String getDetail(){
+      return detail;
+  }
+
+  public void setDetail(String detail) {
+      this.detail =detail;
+  }
+
+  public String getInstructions(){
+      return instructions;
+  }
+
+  public void setInstructions(String instructions) {
+      this.instructions =instructions;
+  }
+
+  public Integer getCount(){
+      return count;
+  }
+
+  public void setCount(Integer count) {
+      this.count =count;
+  }
+
+  public Integer getSurplus(){
+      return surplus;
+  }
+
+  public void setSurplus(Integer surplus) {
+      this.surplus =surplus;
+  }
+
+  public Object getPrice(){
+      return price;
+  }
+
+  public void setPrice(Object price) {
+      this.price =price;
+  }
+
+  public Object getSellprice(){
+      return sellprice;
+  }
+
+  public void setSellprice(Object sellprice) {
+      this.sellprice =sellprice;
+  }
+
+  public Integer getIsenabled(){
+      return isenabled;
+  }
+
+  public void setIsenabled(Integer isenabled) {
+      this.isenabled =isenabled;
+  }
+
+  public Integer getIscoupon(){
+      return iscoupon;
+  }
+
+  public void setIscoupon(Integer iscoupon) {
+      this.iscoupon =iscoupon;
+  }
+
+  public String getRemark(){
+      return remark;
+  }
+
+  public void setRemark(String remark) {
+      this.remark =remark;
+  }
+  public Room(){
+  }
+  public Room(Integer rowid,String code,String name,String detail,String instructions,Integer count,Integer surplus,Object price,Object sellprice,Integer isenabled,Integer iscoupon,String remark){
+      this.rowid=rowid;
+      this.code=code;
+      this.name=name;
+      this.detail=detail;
+      this.instructions=instructions;
+      this.count=count;
+      this.surplus=surplus;
+      this.price=price;
+      this.sellprice=sellprice;
+      this.isenabled=isenabled;
+      this.iscoupon=iscoupon;
+      this.remark=remark;
+  }
+}

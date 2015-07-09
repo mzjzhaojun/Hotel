@@ -1,0 +1,25 @@
+package com.yaao.app.system.service.link.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.yaao.app.system.dao.link.impl.LinkDaoImpl;
+import com.yaao.app.system.service.link.ILinkService;
+import com.yaao.app.commnd.base.impl.BaseServiceImpl;
+import com.yaao.app.system.entity.link.Link;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Service
+public class LinkServiceImpl extends BaseServiceImpl<Link, Integer> implements ILinkService{
+  @Autowired
+  private LinkDaoImpl dao;
+
+  public List<Link> selectLink(Link t){
+       return dao.getList("selectLink", t);
+  }
+}

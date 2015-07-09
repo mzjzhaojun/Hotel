@@ -1,0 +1,39 @@
+package com.yichuang.kyjd.system.service.role_module.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.yichuang.kyjd.system.dao.role_module.impl.Role_moduleDaoImpl;
+import com.yichuang.kyjd.system.service.role_module.IRole_moduleService;
+import com.yichuang.kyjd.commnd.base.impl.BaseServiceImpl;
+import com.yichuang.kyjd.system.entity.role_module.Role_module;
+
+/**
+ * @author zj default
+ * 
+ * @version 1.1
+ */
+
+@Service
+public class Role_moduleServiceImpl extends
+		BaseServiceImpl<Role_module, Integer> implements IRole_moduleService {
+	@Autowired
+	private Role_moduleDaoImpl dao;
+
+	public List<Object> getModuleCode(Role_module t) {
+		return dao.getModuleCode("selectModuleCode",t);
+	}
+	
+	
+	public List<Object> getListParentModuleCode(Role_module t){
+		return dao.getListParentModuleCode("selectParentModuleCode", t);
+	}
+
+
+	@Override
+	public List<Role_module> selectRole_module(Role_module t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

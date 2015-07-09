@@ -1,0 +1,86 @@
+package com.yaao.app.system.entity.message;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Message implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Integer id;
+  String username;
+  String email;
+  Object moblie;
+  Integer display;
+  Integer addtime;
+  Object content;
+
+  public Integer getId(){
+      return id;
+  }
+
+  public void setId(Integer id) {
+      this.id =id;
+  }
+
+  public String getUsername(){
+      return username;
+  }
+
+  public void setUsername(String username) {
+      this.username =username;
+  }
+
+  public String getEmail(){
+      return email;
+  }
+
+  public void setEmail(String email) {
+      this.email =email;
+  }
+
+  public Object getMoblie(){
+      return moblie;
+  }
+
+  public void setMoblie(Object moblie) {
+      this.moblie =moblie;
+  }
+
+  public Integer getDisplay(){
+      return display;
+  }
+
+  public void setDisplay(Integer display) {
+      this.display =display;
+  }
+
+  public Integer getAddtime(){
+      return addtime;
+  }
+
+  public void setAddtime(Integer addtime) {
+      this.addtime =addtime;
+  }
+
+  public Object getContent(){
+      return content;
+  }
+
+  public void setContent(Object content) {
+      this.content =content;
+  }
+  public Message(){
+  }
+  public Message(Integer id,String username,String email,Object moblie,Integer display,Integer addtime,Object content){
+      this.id=id;
+      this.username=username;
+      this.email=email;
+      this.moblie=moblie;
+      this.display=display;
+      this.addtime=addtime;
+      this.content=content;
+  }
+}

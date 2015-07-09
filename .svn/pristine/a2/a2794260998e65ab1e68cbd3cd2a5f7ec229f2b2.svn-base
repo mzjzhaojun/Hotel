@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Member">
+  <sql id="Base_Column_List">
+     uid,weibo_uid,tencent_uid,email,nickname,pwd,reg_date,reg_ip,verify_status,verify_code,verify_time,verify_exp_time,find_fwd_code,find_pwd_time,find_pwd_exp_time,avatar,birthday,sex,address,province,city,intr,mobile,phone,fax,qq,msn,login_ip,login_time
+  </sql>
+  <resultMap id="ResultMap" type="com.yaao.app.system.entity.member.Member">
+         <id property="uid" column="uid" />
+         <id property="weibo_uid" column="weibo_uid" />
+         <id property="tencent_uid" column="tencent_uid" />
+         <id property="email" column="email" />
+         <id property="nickname" column="nickname" />
+         <id property="pwd" column="pwd" />
+         <id property="reg_date" column="reg_date" />
+         <id property="reg_ip" column="reg_ip" />
+         <id property="verify_status" column="verify_status" />
+         <id property="verify_code" column="verify_code" />
+         <id property="verify_time" column="verify_time" />
+         <id property="verify_exp_time" column="verify_exp_time" />
+         <id property="find_fwd_code" column="find_fwd_code" />
+         <id property="find_pwd_time" column="find_pwd_time" />
+         <id property="find_pwd_exp_time" column="find_pwd_exp_time" />
+         <id property="avatar" column="avatar" />
+         <id property="birthday" column="birthday" />
+         <id property="sex" column="sex" />
+         <id property="address" column="address" />
+         <id property="province" column="province" />
+         <id property="city" column="city" />
+         <id property="intr" column="intr" />
+         <id property="mobile" column="mobile" />
+         <id property="phone" column="phone" />
+         <id property="fax" column="fax" />
+         <id property="qq" column="qq" />
+         <id property="msn" column="msn" />
+         <id property="login_ip" column="login_ip" />
+         <id property="login_time" column="login_time" />
+  </resultMap>
+  <insert id="save" parameterType="com.yaao.app.system.entity.member.Member">
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+  	SELECT LAST_INSERT_ID() AS id 
+  </selectKey>
+  insert into co_member (weibo_uid,tencent_uid,email,nickname,pwd,reg_date,reg_ip,verify_status,verify_code,verify_time,verify_exp_time,find_fwd_code,find_pwd_time,find_pwd_exp_time,avatar,birthday,sex,address,province,city,intr,mobile,phone,fax,qq,msn,login_ip,login_time)
+         values (#{weibo_uid},#{tencent_uid},#{email},#{nickname},#{pwd},#{reg_date},#{reg_ip},#{verify_status},#{verify_code},#{verify_time},#{verify_exp_time},#{find_fwd_code},#{find_pwd_time},#{find_pwd_exp_time},#{avatar},#{birthday},#{sex},#{address},#{province},#{city},#{intr},#{mobile},#{phone},#{fax},#{qq},#{msn},#{login_ip},#{login_time})
+  </insert>
+ <delete id="deleteByIds" parameterType="java.util.List">
+     delete from co_member where id in 
+        <foreach collection="array" index="index" item="item" open="("
+          separator="," close=")">
+           #{item}
+        </foreach>
+ </delete>
+ <update id="update" parameterType="com.yaao.app.system.entity.member.Member">
+    update co_member
+         <set>
+             <if test="uid != null">
+                   uid = #{uid},
+             </if>
+             <if test="weibo_uid != null">
+                   weibo_uid = #{weibo_uid},
+             </if>
+             <if test="tencent_uid != null">
+                   tencent_uid = #{tencent_uid},
+             </if>
+             <if test="email != null">
+                   email = #{email},
+             </if>
+             <if test="nickname != null">
+                   nickname = #{nickname},
+             </if>
+             <if test="pwd != null">
+                   pwd = #{pwd},
+             </if>
+             <if test="reg_date != null">
+                   reg_date = #{reg_date},
+             </if>
+             <if test="reg_ip != null">
+                   reg_ip = #{reg_ip},
+             </if>
+             <if test="verify_status != null">
+                   verify_status = #{verify_status},
+             </if>
+             <if test="verify_code != null">
+                   verify_code = #{verify_code},
+             </if>
+             <if test="verify_time != null">
+                   verify_time = #{verify_time},
+             </if>
+             <if test="verify_exp_time != null">
+                   verify_exp_time = #{verify_exp_time},
+             </if>
+             <if test="find_fwd_code != null">
+                   find_fwd_code = #{find_fwd_code},
+             </if>
+             <if test="find_pwd_time != null">
+                   find_pwd_time = #{find_pwd_time},
+             </if>
+             <if test="find_pwd_exp_time != null">
+                   find_pwd_exp_time = #{find_pwd_exp_time},
+             </if>
+             <if test="avatar != null">
+                   avatar = #{avatar},
+             </if>
+             <if test="birthday != null">
+                   birthday = #{birthday},
+             </if>
+             <if test="sex != null">
+                   sex = #{sex},
+             </if>
+             <if test="address != null">
+                   address = #{address},
+             </if>
+             <if test="province != null">
+                   province = #{province},
+             </if>
+             <if test="city != null">
+                   city = #{city},
+             </if>
+             <if test="intr != null">
+                   intr = #{intr},
+             </if>
+             <if test="mobile != null">
+                   mobile = #{mobile},
+             </if>
+             <if test="phone != null">
+                   phone = #{phone},
+             </if>
+             <if test="fax != null">
+                   fax = #{fax},
+             </if>
+             <if test="qq != null">
+                   qq = #{qq},
+             </if>
+             <if test="msn != null">
+                   msn = #{msn},
+             </if>
+             <if test="login_ip != null">
+                   login_ip = #{login_ip},
+             </if>
+             <if test="login_time != null">
+                   login_time = #{login_time}
+             </if>
+          </set>
+     where id = #{id}
+ </update>
+ <select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from co_member 
+        where id = #{id}
+ </select>
+ <select id="getList" parameterType="com.yaao.app.system.entity.member.Member" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_member 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+ <select id="getPage" parameterType="com.yaao.app.system.entity.member.Member" resultMap="ResultMap">
+      select
+       <include refid="Base_Column_List" />
+        from co_member 
+       <where>
+             <if test="name != null and name != ''">
+         		  name like "%"#{name}"%"
+             </if>
+       </where>
+ </select>
+ <select id="getCount" parameterType="com.yaao.app.system.entity.member.Member" resultType="int">
+       select count(*) from co_member 
+         <where>
+             <if test="name != null and name != ''">
+                name like "%"#{name}"%"
+             </if>
+         </where>
+ </select>
+ <select id="selectMember" parameterType="com.yaao.app.system.entity.member.Member" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_member 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+</mapper>

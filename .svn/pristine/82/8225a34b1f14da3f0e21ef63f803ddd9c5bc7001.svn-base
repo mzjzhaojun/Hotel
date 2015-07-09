@@ -1,0 +1,30 @@
+package com.yichuang.kyjd.rest.dao.customer.impl;
+
+import java.util.List;
+import org.springframework.stereotype.Repository;
+import com.yichuang.kyjd.rest.dao.customer.ICustomerDao;
+import com.yichuang.kyjd.commnd.base.impl.BaseDaoImpl;
+import com.yichuang.kyjd.rest.entity.customer.Customer;
+
+/**
+ * @author zj default
+ * 
+ * @version 1.1
+ */
+
+@Repository
+public class CustomerDaoImpl extends BaseDaoImpl<Customer, Integer> implements
+		ICustomerDao {
+	public List<Customer> getList(String statement, Customer t) {
+		return super.selectList(statement, t);
+	}
+	
+	
+	public int register(String statement, Customer t) {
+		return super.insertObject(statement, t);
+	}
+	
+	public Customer loginCustomer(String statement,Customer t){
+		return (Customer)super.selectOne(statement, t);
+	}
+}

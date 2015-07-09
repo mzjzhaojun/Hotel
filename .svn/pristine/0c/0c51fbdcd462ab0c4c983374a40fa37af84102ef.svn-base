@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="User">
+  <sql id="Base_Column_List">
+     rowid,user_code,user_name,password,phone,email,vname,tel,status,sys_create_time,sys_update_time,sys_delete_time,sex,age,cardtype,cardnum,remarks
+  </sql>
+  <resultMap id="ResultMap" type="com.yaao.app.system.entity.user.User">
+         <id property="rowid" column="rowid" />
+         <id property="user_code" column="user_code" />
+         <id property="user_name" column="user_name" />
+         <id property="password" column="password" />
+         <id property="phone" column="phone" />
+         <id property="email" column="email" />
+         <id property="vname" column="vname" />
+         <id property="tel" column="tel" />
+         <id property="status" column="status" />
+         <id property="sys_create_time" column="sys_create_time" />
+         <id property="sys_update_time" column="sys_update_time" />
+         <id property="sys_delete_time" column="sys_delete_time" />
+         <id property="sex" column="sex" />
+         <id property="age" column="age" />
+         <id property="cardtype" column="cardtype" />
+         <id property="cardnum" column="cardnum" />
+         <id property="remarks" column="remarks" />
+  </resultMap>
+  <insert id="save" parameterType="com.yaao.app.system.entity.user.User">
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="rowid">
+  	SELECT LAST_INSERT_ID() AS id 
+  </selectKey>
+  insert into ht_user (user_code,user_name,password,phone,email,vname,tel,status,sys_create_time,sys_update_time,sys_delete_time,sex,age,cardtype,cardnum,remarks)
+         values (#{user_code},#{user_name},#{password},#{phone},#{email},#{vname},#{tel},#{status},Now(),#{sys_update_time},#{sys_delete_time},#{sex},#{age},#{cardtype},#{cardnum},#{remarks})
+  </insert>
+ <delete id="deleteByIds" parameterType="java.util.List">
+     delete from ht_user where rowid in 
+        <foreach collection="array" index="index" item="item" open="("
+          separator="," close=")">
+           #{item}
+        </foreach>
+ </delete>
+ <update id="update" parameterType="com.yaao.app.system.entity.user.User">
+    update ht_user
+         <set>
+             <if test="user_code != null">
+                   user_code = #{user_code},
+             </if>
+             <if test="user_name != null">
+                   user_name = #{user_name},
+             </if>
+             <if test="password != null">
+                   password = #{password},
+             </if>
+             <if test="phone != null">
+                   phone = #{phone},
+             </if>
+             <if test="email != null">
+                   email = #{email},
+             </if>
+             <if test="vname != null">
+                   vname = #{vname},
+             </if>
+             <if test="tel != null">
+                   tel = #{tel},
+             </if>
+             <if test="status != null">
+                   status = #{status},
+             </if>
+             <if test="sys_create_time != null">
+                   sys_create_time = #{sys_create_time},
+             </if>
+             <if test="sys_update_time != null">
+                   sys_update_time = #{sys_update_time},
+             </if>
+             <if test="sys_delete_time != null">
+                   sys_delete_time = #{sys_delete_time},
+             </if>
+             <if test="sex != null">
+                   sex = #{sex},
+             </if>
+             <if test="age != null">
+                   age = #{age},
+             </if>
+             <if test="cardtype != null">
+                   cardtype = #{cardtype},
+             </if>
+             <if test="cardnum != null">
+                   cardnum = #{cardnum},
+             </if>
+             <if test="remarks != null">
+                   remarks = #{remarks}
+             </if>
+          </set>
+     where rowid = #{rowid}
+ </update>
+ <select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from ht_user 
+        where rowid = #{rowid}
+ </select>
+ <select id="getList" parameterType="com.yaao.app.system.entity.user.User" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from ht_user 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+ <select id="getPage" parameterType="com.yaao.app.system.entity.user.User" resultMap="ResultMap">
+      select
+       <include refid="Base_Column_List" />
+        from ht_user 
+       <where>
+             <if test="user_name != null and user_name != ''">
+         		  user_name like "%"#{user_name}"%"
+             </if>
+       </where>
+       LIMIT #{pageStart},#{pageEnd}
+ </select>
+ <select id="getCount" parameterType="com.yaao.app.system.entity.user.User" resultType="int">
+       select count(*) from ht_user 
+         <where>
+             <if test="name != null and name != ''">
+                name like "%"#{name}"%"
+             </if>
+         </where>
+ </select>
+ <select id="selectUser" parameterType="com.yaao.app.system.entity.user.User" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from ht_user 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+ <select id="getUser" parameterType="com.yaao.app.system.entity.user.User" resultMap="ResultMap">
+      select
+        <include refid="Base_Column_List" />
+        from ht_user 
+        where user_name = #{user_name} and password = #{password}
+ </select>
+ 
+ <select id="getUserName" parameterType="com.yaao.app.system.entity.user.User" resultMap="ResultMap">
+      select
+        <include refid="Base_Column_List" />
+        from ht_user 
+        where user_name = #{user_name}
+ </select>
+ 
+ <select id="getUserPwd" parameterType="com.yaao.app.system.entity.user.User" resultMap="ResultMap">
+      select
+        <include refid="Base_Column_List" />
+        from ht_user 
+        where password = #{password}
+ </select>
+</mapper>

@@ -1,0 +1,20 @@
+package com.yaao.app.system.dao.attribute.impl;
+
+import java.util.List;
+import org.springframework.stereotype.Repository;
+import com.yaao.app.system.dao.attribute.IAttributeDao;
+import com.yaao.app.commnd.base.impl.BaseDaoImpl;
+import com.yaao.app.system.entity.attribute.Attribute;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Repository
+public class AttributeDaoImpl extends BaseDaoImpl<Attribute, Integer> implements IAttributeDao{
+public List<Attribute> getList(String statement,Attribute t){
+  return super.selectList(statement, t);
+  }
+}

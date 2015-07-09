@@ -1,0 +1,96 @@
+package com.yaao.app.system.entity.shoppay;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Shoppay implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Integer payid;
+  String payname;
+  String payurl;
+  Object paysay;
+  Integer userpay;
+  Integer userfen;
+  Integer isclose;
+  Integer isdefault;
+
+  public Integer getPayid(){
+      return payid;
+  }
+
+  public void setPayid(Integer payid) {
+      this.payid =payid;
+  }
+
+  public String getPayname(){
+      return payname;
+  }
+
+  public void setPayname(String payname) {
+      this.payname =payname;
+  }
+
+  public String getPayurl(){
+      return payurl;
+  }
+
+  public void setPayurl(String payurl) {
+      this.payurl =payurl;
+  }
+
+  public Object getPaysay(){
+      return paysay;
+  }
+
+  public void setPaysay(Object paysay) {
+      this.paysay =paysay;
+  }
+
+  public Integer getUserpay(){
+      return userpay;
+  }
+
+  public void setUserpay(Integer userpay) {
+      this.userpay =userpay;
+  }
+
+  public Integer getUserfen(){
+      return userfen;
+  }
+
+  public void setUserfen(Integer userfen) {
+      this.userfen =userfen;
+  }
+
+  public Integer getIsclose(){
+      return isclose;
+  }
+
+  public void setIsclose(Integer isclose) {
+      this.isclose =isclose;
+  }
+
+  public Integer getIsdefault(){
+      return isdefault;
+  }
+
+  public void setIsdefault(Integer isdefault) {
+      this.isdefault =isdefault;
+  }
+  public Shoppay(){
+  }
+  public Shoppay(Integer payid,String payname,String payurl,Object paysay,Integer userpay,Integer userfen,Integer isclose,Integer isdefault){
+      this.payid=payid;
+      this.payname=payname;
+      this.payurl=payurl;
+      this.paysay=paysay;
+      this.userpay=userpay;
+      this.userfen=userfen;
+      this.isclose=isclose;
+      this.isdefault=isdefault;
+  }
+}

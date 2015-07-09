@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Role">
+  <sql id="Base_Column_List">
+     rowid,role_code,role_name,sys_create_time,remarks
+  </sql>
+  <resultMap id="ResultMap" type="com.yichuang.kyjd.rest.entity.role.Role">
+         <id property="rowid" column="rowid" />
+         <id property="role_code" column="role_code" />
+         <id property="role_name" column="role_name" />
+         <id property="sys_create_time" column="sys_create_time" />
+         <id property="remarks" column="remarks" />
+  </resultMap>
+  <insert id="save" parameterType="com.yichuang.kyjd.rest.entity.role.Role">
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+  	SELECT LAST_INSERT_ID() AS id 
+  </selectKey>
+  insert into ht_role (role_code,role_name,sys_create_time,remarks)
+         values (#{role_code},#{role_name},#{sys_create_time},#{remarks})
+  </insert>
+ <delete id="deleteByIds" parameterType="java.util.List">
+     delete from ht_role where rowid in 
+        <foreach collection="array" index="index" item="item" open="("
+          separator="," close=")">
+           #{item}
+        </foreach>
+ </delete>
+ <update id="update" parameterType="com.yichuang.kyjd.rest.entity.role.Role">
+    update ht_role
+         <set>
+             <if test="rowid != null">
+                   rowid = #{rowid},
+             </if>
+             <if test="role_code != null">
+                   role_code = #{role_code},
+             </if>
+             <if test="role_name != null">
+                   role_name = #{role_name},
+             </if>
+             <if test="sys_create_time != null">
+                   sys_create_time = #{sys_create_time},
+             </if>
+             <if test="remarks != null">
+                   remarks = #{remarks}
+             </if>
+          </set>
+     where rowid = #{rowid}
+ </update>
+ <select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from ht_role 
+        where rowid = #{rowid}
+ </select>
+ <select id="getList" parameterType="com.yichuang.kyjd.rest.entity.role.Role" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from ht_role 
+        <where>
+             <if test="role_name != null and role_name != ''">
+           		role_name like "%"#{role_name}"%"
+             </if>
+        </where>
+ </select>
+ <select id="getPage" parameterType="com.yichuang.kyjd.rest.entity.role.Role" resultMap="ResultMap">
+      select
+       <include refid="Base_Column_List" />
+        from ht_role 
+       <where>
+             <if test="role_name != null and role_name != ''">
+         		  role_name like "%"#{role_name}"%"
+             </if>
+       </where>
+       LIMIT #{pageStart},#{pageEnd}
+ </select>
+ <select id="getCount" parameterType="com.yichuang.kyjd.rest.entity.role.Role" resultType="int">
+       select count(*) from ht_role 
+         <where>
+             <if test="role_name != null and role_name != ''">
+                role_name like "%"#{role_name}"%"
+             </if>
+         </where>
+ </select>
+ <select id="selectRole" parameterType="com.yichuang.kyjd.rest.entity.role.Role" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from ht_role 
+        <where>
+             <if test="role_name != null and role_name != ''">
+           		role_name like "%"#{role_name}"%"
+             </if>
+        </where>
+ </select>
+ 
+ <select id="getRoleName" parameterType="com.yichuang.kyjd.rest.entity.role.Role" resultMap="ResultMap">
+      select
+        <include refid="Base_Column_List" />
+        from ht_role 
+        where role_name = #{role_name}
+ </select>
+ 
+</mapper>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Order_info">
+  <sql id="Base_Column_List">
+     rowid,title,no,status,order_id,sumamounts,add_date,add_user,remark
+  </sql>
+  <resultMap id="ResultMap" type="com.yichuang.kyjd.rest.entity.order_info.Order_info">
+         <id property="rowid" column="rowid" />
+         <id property="title" column="title" />
+         <id property="no" column="no" />
+         <id property="status" column="status" />
+         <id property="order_id" column="order_id" />
+         <id property="sumamounts" column="sumamounts" />
+         <id property="add_date" column="add_date" />
+         <id property="add_user" column="add_user" />
+         <id property="remark" column="remark" />
+  </resultMap>
+  <insert id="save" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order_info">
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+  	SELECT LAST_INSERT_ID() AS id 
+  </selectKey>
+  insert into ht_order_info (title,no,status,order_id,sumamounts,add_date,add_user,remark)
+         values (#{title},#{no},#{status},#{order_id},#{sumamounts},#{add_date},#{add_user},#{remark})
+  </insert>
+ <delete id="deleteByIds" parameterType="java.util.List">
+     delete from ht_order_info where id in 
+        <foreach collection="array" index="index" item="item" open="("
+          separator="," close=")">
+           #{item}
+        </foreach>
+ </delete>
+ <update id="update" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order_info">
+    update ht_order_info
+         <set>
+             <if test="rowid != null">
+                   rowid = #{rowid},
+             </if>
+             <if test="title != null">
+                   title = #{title},
+             </if>
+             <if test="no != null">
+                   no = #{no},
+             </if>
+             <if test="status != null">
+                   status = #{status},
+             </if>
+             <if test="order_id != null">
+                   order_id = #{order_id},
+             </if>
+             <if test="sumamounts != null">
+                   sumamounts = #{sumamounts},
+             </if>
+             <if test="add_date != null">
+                   add_date = #{add_date},
+             </if>
+             <if test="add_user != null">
+                   add_user = #{add_user},
+             </if>
+             <if test="remark != null">
+                   remark = #{remark}
+             </if>
+          </set>
+     where id = #{id}
+ </update>
+ <select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from ht_order_info 
+        where id = #{id}
+ </select>
+ <select id="getList" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order_info" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from ht_order_info 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+ <select id="getPage" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order_info" resultMap="ResultMap">
+      select
+       <include refid="Base_Column_List" />
+        from ht_order_info 
+       <where>
+             <if test="name != null and name != ''">
+         		  name like "%"#{name}"%"
+             </if>
+       </where>
+       LIMIT #{pageStart},#{pageEnd}
+ </select>
+ <select id="getCount" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order_info" resultType="int">
+       select count(*) from ht_order_info 
+         <where>
+             <if test="name != null and name != ''">
+                name like "%"#{name}"%"
+             </if>
+         </where>
+ </select>
+ <select id="selectOrder_info" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order_info" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from ht_order_info 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+</mapper>

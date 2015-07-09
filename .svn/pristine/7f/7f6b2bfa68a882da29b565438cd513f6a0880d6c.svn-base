@@ -1,0 +1,25 @@
+package com.yaao.app.system.service.ad.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.yaao.app.system.dao.ad.impl.AdDaoImpl;
+import com.yaao.app.system.service.ad.IAdService;
+import com.yaao.app.commnd.base.impl.BaseServiceImpl;
+import com.yaao.app.system.entity.ad.Ad;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Service
+public class AdServiceImpl extends BaseServiceImpl<Ad, Integer> implements IAdService{
+  @Autowired
+  private AdDaoImpl dao;
+
+  public List<Ad> selectAd(Ad t){
+       return dao.getList("selectAd", t);
+  }
+}

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Shoppay">
+  <sql id="Base_Column_List">
+     payid,payname,payurl,paysay,userpay,userfen,isclose,isdefault
+  </sql>
+  <resultMap id="ResultMap" type="com.yaao.app.system.entity.shoppay.Shoppay">
+         <id property="payid" column="payid" />
+         <id property="payname" column="payname" />
+         <id property="payurl" column="payurl" />
+         <id property="paysay" column="paysay" />
+         <id property="userpay" column="userpay" />
+         <id property="userfen" column="userfen" />
+         <id property="isclose" column="isclose" />
+         <id property="isdefault" column="isdefault" />
+  </resultMap>
+  <insert id="save" parameterType="com.yaao.app.system.entity.shoppay.Shoppay">
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+  	SELECT LAST_INSERT_ID() AS id 
+  </selectKey>
+  insert into co_shoppay (payname,payurl,paysay,userpay,userfen,isclose,isdefault)
+         values (#{payname},#{payurl},#{paysay},#{userpay},#{userfen},#{isclose},#{isdefault})
+  </insert>
+ <delete id="deleteByIds" parameterType="java.util.List">
+     delete from co_shoppay where id in 
+        <foreach collection="array" index="index" item="item" open="("
+          separator="," close=")">
+           #{item}
+        </foreach>
+ </delete>
+ <update id="update" parameterType="com.yaao.app.system.entity.shoppay.Shoppay">
+    update co_shoppay
+         <set>
+             <if test="payid != null">
+                   payid = #{payid},
+             </if>
+             <if test="payname != null">
+                   payname = #{payname},
+             </if>
+             <if test="payurl != null">
+                   payurl = #{payurl},
+             </if>
+             <if test="paysay != null">
+                   paysay = #{paysay},
+             </if>
+             <if test="userpay != null">
+                   userpay = #{userpay},
+             </if>
+             <if test="userfen != null">
+                   userfen = #{userfen},
+             </if>
+             <if test="isclose != null">
+                   isclose = #{isclose},
+             </if>
+             <if test="isdefault != null">
+                   isdefault = #{isdefault}
+             </if>
+          </set>
+     where id = #{id}
+ </update>
+ <select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from co_shoppay 
+        where id = #{id}
+ </select>
+ <select id="getList" parameterType="com.yaao.app.system.entity.shoppay.Shoppay" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_shoppay 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+ <select id="getPage" parameterType="com.yaao.app.system.entity.shoppay.Shoppay" resultMap="ResultMap">
+      select
+       <include refid="Base_Column_List" />
+        from co_shoppay 
+       <where>
+             <if test="name != null and name != ''">
+         		  name like "%"#{name}"%"
+             </if>
+       </where>
+ </select>
+ <select id="getCount" parameterType="com.yaao.app.system.entity.shoppay.Shoppay" resultType="int">
+       select count(*) from co_shoppay 
+         <where>
+             <if test="name != null and name != ''">
+                name like "%"#{name}"%"
+             </if>
+         </where>
+ </select>
+ <select id="selectShoppay" parameterType="com.yaao.app.system.entity.shoppay.Shoppay" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_shoppay 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+</mapper>

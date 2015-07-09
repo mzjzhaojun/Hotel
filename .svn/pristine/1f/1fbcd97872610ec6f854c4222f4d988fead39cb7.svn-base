@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Order_info">
+	<sql id="Base_Column_List">
+		rowid,type,no,status,sumamounts,add_date,add_user,mobile_phone,remark
+	</sql>
+	<resultMap id="ResultMap"
+		type="com.yichuang.kyjd.rest.entity.order_info.Order_info">
+		<id property="rowid" column="rowid" />
+		<id property="type" column="type" />
+		<id property="no" column="no" />
+		<id property="status" column="status" />
+		<id property="sumamounts" column="sumamounts" />
+		<id property="add_date" column="add_date" />
+		<id property="add_user" column="add_user" />
+		<id property="remark" column="remark" />
+	</resultMap>
+
+	<resultMap id="ResultMap1"
+		type="com.yichuang.kyjd.rest.entity.order_info.Order">
+		<id property="rowid" column="rowid" />
+		<id property="commodityrowid" column="commodity_rowid" />
+		<id property="type" column="type" />
+		<id property="no" column="no" />
+		<id property="status" column="status" />
+		<id property="statusname" column="statusname" />
+		<id property="sumamounts" column="sumamounts" />
+		<id property="createdate" column="createdate" />
+		<id property="custname" column="custname" />
+		<id property="mobilephone" column="mobilephone" />
+		<id property="title" column="title" />
+		<id property="count" column="count" />
+		<id property="price" column="price" />
+		<id property="newprice" column="newprice" />
+		<id property="indatetime" column="indatetime" />
+		<id property="outdatetime" column="outdatetime" />
+		<id property="subnum" column="subnum" />
+		<id property="need" column="need" />
+		<id property="otherneed" column="otherneed" />
+		<id property="predict" column="predict" />
+		<id property="address" column="address" />
+	</resultMap>
+
+	<resultMap id="ResultMap2"
+		type="com.yichuang.kyjd.rest.entity.order_info.Order_info">
+		<id property="rowid" column="rowid" />
+		<result property="type" column="type" />
+		<result property="no" column="no" />
+		<result property="status" column="status" />
+		<result property="statusname" column="statusname" />
+		<result property="sumamounts" column="sumamounts" />
+		<result property="add_date" column="add_date" />
+		<result property="add_user" column="add_user" />
+		<result property="mobile_phone" column="mobile_phone" />
+		<result property="remark" column="remark" />
+
+		<association property="orderdetail"
+			javaType="com.yichuang.kyjd.rest.entity.order_detail.Order_detail">
+			<id column="rowid" property="rowid" />
+			<result property="title" column="title" />
+			<result property="count" column="count" />
+			<result property="price" column="price" />
+			<result property="new_price" column="new_price" />
+			<result property="inperson" column="inperson" />
+			<result property="name" column="name" />
+			<result property="is_coupon" column="is_coupon" />
+			<result property="remark" column="remark" />
+			<result property="indatetime" column="indatetime" />
+			<result property="outdatetime" column="outdatetime" />
+			<result property="card" column="card" />
+			<result property="subnum" column="subnum" />
+		</association>
+
+	</resultMap>
+
+	<insert id="save" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order_info">
+		<selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into ht_order_info
+		(type,no,status,sumamounts,add_date,add_user,remark)
+		values
+		(#{type},#{no},#{status},#{sumamounts},#{add_date},#{add_user},#{remark})
+	</insert>
+	<insert id="insertorderinfo" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order">
+		<selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="rowid">
+			SELECT LAST_INSERT_ID() AS rowid
+		</selectKey>
+		insert into ht_order_info
+		(type,no,status,sumamounts,add_date,add_user,cust_name,mobile_phone,remark)
+		values
+		(#{type},#{no},#{status},#{sumamounts},Now(),#{account},#{custname},#{mobilephone},#{remark})
+	</insert>
+	<delete id="deleteByIds" parameterType="java.util.List">
+		delete from ht_order_info where rowid in
+		<foreach collection="array" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	<delete id="deleteid" parameterType="java.lang.String" >
+		delete from ht_order_info where rowid = #{rowid}
+	</delete>
+	<update id="update" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order_info">
+		update ht_order_info
+		<set>
+
+			<if test="status != null">
+				status = #{status},
+			</if>
+
+			<if test="remark != null">
+				remark = #{remark}
+			</if>
+		</set>
+		where rowid = #{rowid}
+	</update>
+	<select id="getById" parameterType="java.lang.String" resultMap="ResultMap2">
+		select o.*, d.* from ht_order_info o, ht_order_detail d
+		where o.rowid =
+		d.order_rowid and o.rowid = #{rowid}
+	</select>
+	<select id="getList" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order_info"
+		resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ht_order_info
+		<where>
+			<if test="name != null and name != ''">
+				name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+	<select id="getPage" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order_info"
+		resultMap="ResultMap2">
+		select o.*, d.*,(SELECT
+		NAME FROM ht_dictionaries WHERE CODE = status)
+		AS statusname from ht_order_info o, ht_order_detail d
+		<where>
+			o.rowid = d.order_rowid
+			<if test="type != null and type != ''">
+				and o.type = #{type}
+			</if>
+			<if test="title != null and title != ''">
+				AND (o.NO like "%"#{title}"%" OR o.MOBILE_PHONE = #{title} OR d.title like "%"#{title}"%")
+			</if>
+			<if test="status != null and status != ''">
+				and o.status = #{status}
+			</if>
+			<if test="subnum != null and subnum != ''">
+				and d.subnum = #{subnum}
+			</if>
+		</where>
+		ORDER BY o.add_date DESC
+		LIMIT #{pageStart},#{pageEnd}
+	</select>
+	<select id="getCount" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order_info"
+		resultType="int">
+		select count(*) from ht_order_info o, ht_order_detail d
+		<where>
+			o.rowid = d.order_rowid
+			<if test="type != null and type != ''">
+				and o.type = #{type}
+			</if>
+			<if test="title != null and title != ''">
+				AND (o.NO like "%"#{title}"%" OR o.MOBILE_PHONE = #{title} OR d.title like "%"#{title}"%")
+			</if>
+			<if test="status != null and status != ''">
+				and o.status = #{status}
+			</if>
+			<if test="subnum != null and subnum != ''">
+				and d.subnum = #{subnum}
+			</if>
+		</where>
+	</select>
+	<select id="selectOrderRoom" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order"
+		resultMap="ResultMap1">
+		SELECT fo.rowid,fo.type,fo.no,fo.status,(SELECT
+		NAME FROM
+		ht_dictionaries WHERE CODE = fo.status) AS
+		statusname,fo.sumamounts,DATE_FORMAT(fo.add_date,'%Y-%m-%d') as
+		createdate,fo.CUST_NAME as custname,fo.mobile_phone as mobilephone,
+		il.title,il.count,il.price,il.commodity_rowid,il.new_price as
+		newprice,il.inperson,DATE_FORMAT(il.indatetime,'%Y-%m-%d')
+		as
+		indatetime,DATE_FORMAT(il.outdatetime,'%Y-%m-%d')
+		as
+		outdatetime,il.subnum,il.predict
+		FROM ht_order_info fo LEFT JOIN
+		ht_order_detail il ON fo.ROWID =
+		il.ORDER_ROWID
+		WHERE fo.TYPE = #{type}
+		AND fo.ADD_USER = #{account} ORDER BY createdate DESC
+	</select>
+
+	<select id="selectOrder" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order"
+		resultMap="ResultMap1">
+		SELECT fo.rowid,fo.type,fo.no,fo.status,fo.add_user as
+		account,il.card,il.passport,il.remark,(SELECT
+		NAME FROM
+		ht_dictionaries
+		WHERE CODE = fo.status) AS
+		statusname,fo.sumamounts,DATE_FORMAT(fo.add_date,'%Y-%m-%d') as
+		createdate,fo.CUST_NAME as custname,fo.mobile_phone as mobilephone,
+		il.title,il.count,il.price,il.commodity_rowid,il.new_price as
+		newprice,il.inperson,DATE_FORMAT(il.indatetime,'%Y-%m-%d')
+		as
+		indatetime,DATE_FORMAT(il.outdatetime,'%Y-%m-%d')
+		as
+		outdatetime,il.subnum,il.predict,(SELECT
+		NAME FROM
+		ht_dictionaries
+		WHERE CODE = il.predict) AS
+		predictname,il.address,il.otherneed
+		FROM ht_order_info fo LEFT JOIN
+		ht_order_detail il ON fo.ROWID =
+		il.ORDER_ROWID
+		WHERE fo.rowid =
+		#{rowid}
+	</select>
+
+	<select id="selectOrderInfo" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order"
+		resultMap="ResultMap1">
+		SELECT fo.rowid,fo.type,fo.no,fo.status,fo.add_user as
+		account,(SELECT
+		NAME FROM
+		ht_dictionaries
+		WHERE CODE = fo.status) AS
+		statusname,DATE_FORMAT(fo.add_date,'%Y-%m-%d') as
+		createdate,il.card,il.passport,il.remark,fo.sumamounts,fo.CUST_NAME as
+		custname,fo.mobile_phone as mobilephone,
+		il.title,il.count,il.commodity_rowid,il.price,il.new_price as
+		newprice,DATE_FORMAT(il.indatetime,'%Y-%m-%d')
+		as
+		indatetime,DATE_FORMAT(il.outdatetime,'%Y-%m-%d')
+		as
+		outdatetime,il.inperson,il.address,il.subnum,il.predict,il.trade_no as tradeno
+		FROM ht_order_info fo LEFT
+		JOIN ht_order_detail il ON fo.ROWID =
+		il.ORDER_ROWID
+		WHERE fo.no = #{no}
+	</select>
+
+	<update id="updateOrder" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order">
+		update ht_order_info
+		<set>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="sumamounts != null">
+				sumamounts = #{sumamounts},
+			</if>
+			<if test="account != null">
+				add_user = #{account},
+			</if>
+			<if test="custname != null">
+				cust_name = #{custname},
+			</if>
+			<if test="mobilephone != null">
+				mobile_phone = #{mobilephone},
+			</if>
+			<if test="remark != null">
+				remark = #{remark}
+			</if>
+		</set>
+		where rowid = #{rowid}
+	</update>
+
+	<update id="updateOrderPay" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order">
+		update ht_order_info
+		<set>
+			<if test="no != null and no != ''">
+				no = #{no},
+			</if>
+			<if test="status != null and status != ''">
+				status = #{status}
+			</if>
+		</set>
+		where rowid = #{rowid}
+	</update>
+
+	<update id="updateOrderDetail" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order">
+		update ht_order_detail
+		<set>
+			<if test="tradeno != null">
+				trade_no = #{tradeno}
+			</if>
+		</set>
+		where order_rowid = #{rowid}
+	</update>
+</mapper>

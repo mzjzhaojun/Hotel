@@ -1,0 +1,54 @@
+package com.yichuang.kyjd.commnd.orm.exception;
+
+import com.yichuang.kyjd.commnd.orm.log.ExceptionLogger;
+
+
+
+/**
+ * 
+ * @author zjma
+ *
+ */
+public class BaseDaoException extends BaseException{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 构造一个DAO数据访问层异常对象.
+	 * @param message 信息描述
+	 */
+	public BaseDaoException(String message) {
+		super(message);
+	}
+
+	/**
+	 * 构造一个DAO数据访问层异常对象.
+	 * @param errorCode 错误编码
+	 * @param message 信息描述
+	 */
+	public BaseDaoException(Integer errorCode,String message) {
+		super(errorCode,message,true);
+		ExceptionLogger.LoggerError(message);
+	}
+	
+	/**
+	 * 构造一个DAO数据访问层异常对象.
+	 * @param errorCode 错误编码
+	 * @param message 信息描述
+	 * @param propertiesKey 消息是否为属性文件中的Key
+	 */
+	public BaseDaoException(Integer errorCode,String message,boolean propertiesKey) {
+		super(errorCode,message,propertiesKey);
+		ExceptionLogger.LoggerError(message);
+	}
+	/**
+	 * 构造一个DAO数据访问层异常对象.
+	 * @param message 信息描述
+	 * @param cause 根异常类（可以存入任何异常）
+	 */
+	public BaseDaoException(String message, Throwable cause) {
+		super(message, cause);
+		ExceptionLogger.LoggerError(message, cause);
+	}
+}

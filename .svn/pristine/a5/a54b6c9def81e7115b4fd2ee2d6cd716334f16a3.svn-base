@@ -1,0 +1,25 @@
+package com.yaao.app.system.service.nav.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.yaao.app.system.dao.nav.impl.NavDaoImpl;
+import com.yaao.app.system.service.nav.INavService;
+import com.yaao.app.commnd.base.impl.BaseServiceImpl;
+import com.yaao.app.system.entity.nav.Nav;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Service
+public class NavServiceImpl extends BaseServiceImpl<Nav, Integer> implements INavService{
+  @Autowired
+  private NavDaoImpl dao;
+
+  public List<Nav> selectNav(Nav t){
+       return dao.getList("selectNav", t);
+  }
+}

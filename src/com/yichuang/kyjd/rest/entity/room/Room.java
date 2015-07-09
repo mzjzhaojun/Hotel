@@ -1,0 +1,283 @@
+package com.yichuang.kyjd.rest.entity.room;
+
+/**
+ * @author zj default
+ * 
+ * @version 1.1
+ */
+public class Room implements java.io.Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	Integer rowid;
+	String code;
+	String name;
+	String detail;
+	String instructions;
+	Integer count;
+	Integer surplus;
+	float price;
+	float sellprice;
+	Integer isenabled;
+	Integer iscoupon;
+	String floor;
+	String provide;
+	String breakfast;
+	String wifi;
+	String badtype;
+	String badtype_name;
+	String area;
+	String status;
+	String status_name;
+	String create_time;
+	String create_user;
+	String roomimg;
+	String sdatetime;
+	String edatetime;
+	String remark;
+
+	public String getRoomimg() {
+		return roomimg;
+	}
+
+	public void setRoomimg(String roomimg) {
+		this.roomimg = roomimg;
+	}
+
+	public String getSdatetime() {
+		return sdatetime;
+	}
+
+	public void setSdatetime(String sdatetime) {
+		this.sdatetime = sdatetime;
+	}
+
+	public String getEdatetime() {
+		return edatetime;
+	}
+
+	public void setEdatetime(String edatetime) {
+		this.edatetime = edatetime;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Integer getRowid() {
+		return rowid;
+	}
+
+	public void setRowid(Integer rowid) {
+		this.rowid = rowid;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDetail() {
+		return detail;
+	}
+
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
+
+	public String getInstructions() {
+		return instructions;
+	}
+
+	public void setInstructions(String instructions) {
+		this.instructions = instructions;
+	}
+
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+
+	public Integer getSurplus() {
+		return surplus;
+	}
+
+	public void setSurplus(Integer surplus) {
+		this.surplus = surplus;
+	}
+
+	public Integer getIsenabled() {
+		return isenabled;
+	}
+
+	public void setIsenabled(Integer isenabled) {
+		this.isenabled = isenabled;
+	}
+
+	public Integer getIscoupon() {
+		return iscoupon;
+	}
+
+	public void setIscoupon(Integer iscoupon) {
+		this.iscoupon = iscoupon;
+	}
+
+	public String getFloor() {
+		return floor;
+	}
+
+	public void setFloor(String floor) {
+		this.floor = floor;
+	}
+
+	public String getProvide() {
+		return provide;
+	}
+
+	public void setProvide(String provide) {
+		this.provide = provide;
+	}
+
+	public String getWifi() {
+		return wifi;
+	}
+
+	public void setWifi(String wifi) {
+		this.wifi = wifi;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public Room() {
+	}
+
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
+	}
+
+	public float getSellprice() {
+		return sellprice;
+	}
+
+	public void setSellprice(float sellprice) {
+		this.sellprice = sellprice;
+	}
+
+	public String getBreakfast() {
+		return breakfast;
+	}
+
+	public void setBreakfast(String breakfast) {
+		this.breakfast = breakfast;
+	}
+
+	public String getBadtype() {
+		return badtype;
+	}
+
+	public void setBadtype(String badtype) {
+		this.badtype = badtype;
+	}
+
+	public String getBadtype_name() {
+		return badtype_name;
+	}
+
+	public void setBadtype_name(String badtype_name) {
+		this.badtype_name = badtype_name;
+	}
+
+	public String getStatus_name() {
+		return status_name;
+	}
+
+	public void setStatus_name(String status_name) {
+		this.status_name = status_name;
+	}
+
+	public String getCreate_time() {
+		return create_time;
+	}
+
+	public void setCreate_time(String create_time) {
+		this.create_time = create_time;
+	}
+
+	public String getCreate_user() {
+		return create_user;
+	}
+
+	public void setCreate_user(String create_user) {
+		this.create_user = create_user;
+	}
+
+	public Room(Integer rowid, String code, String name, String detail,
+			String instructions, Integer count, Integer surplus, float price,
+			float sellprice, Integer isenabled, Integer iscoupon, String floor,
+			String provide, String breakfast, String wifi, String badtype,
+			String badtype_name, String area, String status,
+			String status_name, String create_time, String create_user,
+			String remark) {
+		super();
+		this.rowid = rowid;
+		this.code = code;
+		this.name = name;
+		this.detail = detail;
+		this.instructions = instructions;
+		this.count = count;
+		this.surplus = surplus;
+		this.price = price;
+		this.sellprice = sellprice;
+		this.isenabled = isenabled;
+		this.iscoupon = iscoupon;
+		this.floor = floor;
+		this.provide = provide;
+		this.breakfast = breakfast;
+		this.wifi = wifi;
+		this.badtype = badtype;
+		this.badtype_name = badtype_name;
+		this.area = area;
+		this.status = status;
+		this.status_name = status_name;
+		this.create_time = create_time;
+		this.create_user = create_user;
+		this.remark = remark;
+	}
+
+}

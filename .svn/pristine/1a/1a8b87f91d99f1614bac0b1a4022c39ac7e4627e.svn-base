@@ -1,0 +1,25 @@
+package com.yaao.app.system.service.spec.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.yaao.app.system.dao.spec.impl.SpecDaoImpl;
+import com.yaao.app.system.service.spec.ISpecService;
+import com.yaao.app.commnd.base.impl.BaseServiceImpl;
+import com.yaao.app.system.entity.spec.Spec;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Service
+public class SpecServiceImpl extends BaseServiceImpl<Spec, Integer> implements ISpecService{
+  @Autowired
+  private SpecDaoImpl dao;
+
+  public List<Spec> selectSpec(Spec t){
+       return dao.getList("selectSpec", t);
+  }
+}

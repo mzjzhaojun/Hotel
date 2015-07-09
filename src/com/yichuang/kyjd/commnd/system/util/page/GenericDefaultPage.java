@@ -1,0 +1,108 @@
+package com.yichuang.kyjd.commnd.system.util.page;
+
+
+
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * 
+ * @author zjma
+ */
+@SuppressWarnings("unchecked")
+public class GenericDefaultPage<T> implements IGenericPage<T> {
+
+	/** 当前页数据列表 */
+	private List<T> elements;
+
+	/** 页大小（每页数据个数） */
+	private int pageSize;
+
+	/** 当前页号 */
+	private int pageNo;
+
+	/** 数据总个数 */
+	private int totalCount = 0;
+	
+	public GenericDefaultPage(
+			int pageNo, int pageSize, List<T> elements, int totalCount) {
+		this.pageNo = pageNo;
+		this.pageSize = pageSize;
+		this.elements = elements;
+		this.totalCount = totalCount;
+	}
+	
+    /**
+     * 定义一空页
+     *
+     * @see #emptyPage()
+     */
+	@SuppressWarnings("rawtypes")
+	public static final GenericDefaultPage EMPTY_PAGE = new GenericDefaultPage(
+			1, 1, Collections.emptyList(), 1);
+
+    /**
+     * 获取一空页
+     */
+	public static <E> GenericDefaultPage<E> emptyPage() {
+		return (GenericDefaultPage<E>) EMPTY_PAGE;
+	}
+
+	public boolean isFirstPage() {
+		return getPageNo() == 0;
+	}
+
+	public boolean isLastPage() {
+		return getPageNo() >= getLastPageNo();
+	}
+
+	public boolean hasNextPage() {
+		return elements == null ? false : elements.size() > getPageSize();
+	}
+
+	public boolean hasPreviousPage() {
+		return getPageNo() > 0;
+	}
+
+	public int getLastPageNo() {
+		double totalResults = new Integer(getTotalCount())
+				.doubleValue();
+		return (totalResults % getPageSize()==0)?new Double(Math.floor(totalResults / getPageSize())).intValue():(new Double(Math.floor(totalResults / getPageSize())).intValue()+1);
+	}
+
+	public List<T> getPageElements() {
+		return hasNextPage() ? elements.subList(0, getPageSize()) : elements;
+	}
+
+	public int getTotalCount() {
+		return totalCount;
+	}
+
+	public int getNextPageNo() {
+		return getPageNo() + 1;
+	}
+
+	public int getPreviousPageNo() {
+		return getPageNo() - 1;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public int getPageNo() {
+		return pageNo;
+	}
+	
+	public int getPageCount() {
+		return (totalCount/pageSize)+1;
+	}
+	
+    public static int getStartOfPage(int pageNo, int pageSize) {
+        int startIndex = (pageNo - 1) * pageSize + 1;
+        if (startIndex < 1) startIndex = 1;
+        return startIndex;
+    }
+    
+
+}

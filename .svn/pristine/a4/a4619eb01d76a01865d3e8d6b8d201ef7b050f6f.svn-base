@@ -1,0 +1,96 @@
+package com.yaao.app.system.entity.admin;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Admin implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Integer aid;
+  String nickname;
+  String email;
+  Object pwd;
+  Integer status;
+  String remark;
+  Object find_code;
+  Integer time;
+
+  public Integer getAid(){
+      return aid;
+  }
+
+  public void setAid(Integer aid) {
+      this.aid =aid;
+  }
+
+  public String getNickname(){
+      return nickname;
+  }
+
+  public void setNickname(String nickname) {
+      this.nickname =nickname;
+  }
+
+  public String getEmail(){
+      return email;
+  }
+
+  public void setEmail(String email) {
+      this.email =email;
+  }
+
+  public Object getPwd(){
+      return pwd;
+  }
+
+  public void setPwd(Object pwd) {
+      this.pwd =pwd;
+  }
+
+  public Integer getStatus(){
+      return status;
+  }
+
+  public void setStatus(Integer status) {
+      this.status =status;
+  }
+
+  public String getRemark(){
+      return remark;
+  }
+
+  public void setRemark(String remark) {
+      this.remark =remark;
+  }
+
+  public Object getFind_code(){
+      return find_code;
+  }
+
+  public void setFind_code(Object find_code) {
+      this.find_code =find_code;
+  }
+
+  public Integer getTime(){
+      return time;
+  }
+
+  public void setTime(Integer time) {
+      this.time =time;
+  }
+  public Admin(){
+  }
+  public Admin(Integer aid,String nickname,String email,Object pwd,Integer status,String remark,Object find_code,Integer time){
+      this.aid=aid;
+      this.nickname=nickname;
+      this.email=email;
+      this.pwd=pwd;
+      this.status=status;
+      this.remark=remark;
+      this.find_code=find_code;
+      this.time=time;
+  }
+}

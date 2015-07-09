@@ -1,0 +1,106 @@
+package com.yaao.app.system.entity.order_info;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Order_info implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Integer rowid;
+  Object title;
+  String no;
+  Object status;
+  Integer order_id;
+  Object sumamounts;
+  String add_date;
+  String add_user;
+  String remark;
+
+  public Integer getRowid(){
+      return rowid;
+  }
+
+  public void setRowid(Integer rowid) {
+      this.rowid =rowid;
+  }
+
+  public Object getTitle(){
+      return title;
+  }
+
+  public void setTitle(Object title) {
+      this.title =title;
+  }
+
+  public String getNo(){
+      return no;
+  }
+
+  public void setNo(String no) {
+      this.no =no;
+  }
+
+  public Object getStatus(){
+      return status;
+  }
+
+  public void setStatus(Object status) {
+      this.status =status;
+  }
+
+  public Integer getOrder_id(){
+      return order_id;
+  }
+
+  public void setOrder_id(Integer order_id) {
+      this.order_id =order_id;
+  }
+
+  public Object getSumamounts(){
+      return sumamounts;
+  }
+
+  public void setSumamounts(Object sumamounts) {
+      this.sumamounts =sumamounts;
+  }
+
+  public String getAdd_date(){
+      return add_date;
+  }
+
+  public void setAdd_date(String add_date) {
+      this.add_date =add_date;
+  }
+
+  public String getAdd_user(){
+      return add_user;
+  }
+
+  public void setAdd_user(String add_user) {
+      this.add_user =add_user;
+  }
+
+  public String getRemark(){
+      return remark;
+  }
+
+  public void setRemark(String remark) {
+      this.remark =remark;
+  }
+  public Order_info(){
+  }
+  public Order_info(Integer rowid,Object title,String no,Object status,Integer order_id,Object sumamounts,String add_date,String add_user,String remark){
+      this.rowid=rowid;
+      this.title=title;
+      this.no=no;
+      this.status=status;
+      this.order_id=order_id;
+      this.sumamounts=sumamounts;
+      this.add_date=add_date;
+      this.add_user=add_user;
+      this.remark=remark;
+  }
+}

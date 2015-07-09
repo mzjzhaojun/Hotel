@@ -1,0 +1,25 @@
+package com.yaao.app.system.service.page.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.yaao.app.system.dao.page.impl.PageDaoImpl;
+import com.yaao.app.system.service.page.IPageService;
+import com.yaao.app.commnd.base.impl.BaseServiceImpl;
+import com.yaao.app.system.entity.page.Page;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Service
+public class PageServiceImpl extends BaseServiceImpl<Page, Integer> implements IPageService{
+  @Autowired
+  private PageDaoImpl dao;
+
+  public List<Page> selectPage(Page t){
+       return dao.getList("selectPage", t);
+  }
+}

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Message">
+	<sql id="Base_Column_List">
+		rowid,account,type,no,content,request_time,request_message,response_message,status,response_time,sendtype,code,total
+	</sql>
+	<resultMap id="ResultMap" type="com.yichuang.kyjd.rest.entity.message.Message">
+		<id property="rowid" column="rowid" />
+		<id property="account" column="account" />
+		<id property="type" column="type" />
+		<id property="no" column="no" />
+		<id property="content" column="content" />
+		<id property="request_time" column="request_time" />
+		<id property="request_message" column="request_message" />
+		<id property="response_message" column="response_message" />
+		<id property="status" column="status" />
+		<id property="response_time" column="response_time" />
+		<id property="sendtype" column="sendtype" />
+		<id property="total" column="total" />
+		<id property="code" column="code" />
+	</resultMap>
+	<insert id="save" parameterType="com.yichuang.kyjd.rest.entity.message.Message">
+		insert into ht_message
+		(account,type,no,content,request_time,request_message,response_message,status,response_time,sendtype,total,code)
+		values
+		(#{account},#{type},#{no},#{content},Now(),#{request_message},#{response_message},#{status},Now(),#{sendtype},#{total},#{code})
+	</insert>
+	<delete id="deleteByIds" parameterType="java.util.List">
+		delete from ht_message where rowid in
+		<foreach collection="array" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	<update id="update" parameterType="com.yichuang.kyjd.rest.entity.message.Message">
+		update ht_message
+		<set>
+			<if test="rowid != null">
+				rowid = #{rowid},
+			</if>
+			<if test="account != null">
+				account = #{account},
+			</if>
+			<if test="type != null">
+				type = #{type},
+			</if>
+			<if test="no != null">
+				no = #{no},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			<if test="request_time != null">
+				request_time = #{request_time},
+			</if>
+			<if test="request_message != null">
+				request_message = #{request_message},
+			</if>
+			<if test="response_message != null">
+				response_message = #{response_message},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="response_time != null">
+				response_time = #{response_time},
+			</if>
+			<if test="sendtype != null">
+				sendtype = #{sendtype},
+			</if>
+			<if test="total != null">
+				total = #{total}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	<select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ht_message
+		where rowid = #{rowid}
+	</select>
+	<select id="getList" parameterType="com.yichuang.kyjd.rest.entity.message.Message"
+		resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ht_message
+		<where>
+			<if test="no != null and no != ''">
+				no like "%"#{no}"%"
+			</if>
+		</where>
+	</select>
+	<select id="getPage" parameterType="com.yichuang.kyjd.rest.entity.message.Message"
+		resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ht_message
+		<where>
+			<if test="no != null and no != ''">
+				no like "%"#{no}"%"
+			</if>
+		</where>
+		LIMIT #{pageStart},#{pageEnd}
+	</select>
+	<select id="getCount" parameterType="com.yichuang.kyjd.rest.entity.message.Message"
+		resultType="int">
+		select count(*) from ht_message
+		<where>
+			<if test="no != null and no != ''">
+				no like "%"#{no}"%"
+			</if>
+		</where>
+	</select>
+	<select id="selectMessage" parameterType="com.yichuang.kyjd.rest.entity.message.Message"
+		resultType="java.util.HashMap">
+		select
+		<include refid="Base_Column_List" />
+		from ht_message
+		<where>
+			<if test="name != null and name != ''">
+				name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+
+	<select id="checkMsgAccout" parameterType="com.yichuang.kyjd.rest.entity.message.Message"
+		resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ht_message
+		<where>
+			<if test="no != null and no != ''">
+				NO = #{no} AND STATUS = '1' AND code = #{code}
+			</if>
+		</where>
+		AND request_time >  SUBTIME(NOW(), '00:10')
+	</select>
+</mapper>

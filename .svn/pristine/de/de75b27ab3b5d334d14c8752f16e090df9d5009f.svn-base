@@ -1,0 +1,5 @@
+package com.yaao.app.commnd.base;
+
+public class BaseEntity {
+	
+}

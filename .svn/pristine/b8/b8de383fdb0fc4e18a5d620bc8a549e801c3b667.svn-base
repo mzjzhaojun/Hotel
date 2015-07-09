@@ -1,0 +1,106 @@
+package com.yaao.app.system.entity.page;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Page implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Object id;
+  String unique_id;
+  Integer parent_id;
+  String page_name;
+  Object content;
+  Integer display;
+  String keywords;
+  String description;
+  String lang;
+
+  public Object getId(){
+      return id;
+  }
+
+  public void setId(Object id) {
+      this.id =id;
+  }
+
+  public String getUnique_id(){
+      return unique_id;
+  }
+
+  public void setUnique_id(String unique_id) {
+      this.unique_id =unique_id;
+  }
+
+  public Integer getParent_id(){
+      return parent_id;
+  }
+
+  public void setParent_id(Integer parent_id) {
+      this.parent_id =parent_id;
+  }
+
+  public String getPage_name(){
+      return page_name;
+  }
+
+  public void setPage_name(String page_name) {
+      this.page_name =page_name;
+  }
+
+  public Object getContent(){
+      return content;
+  }
+
+  public void setContent(Object content) {
+      this.content =content;
+  }
+
+  public Integer getDisplay(){
+      return display;
+  }
+
+  public void setDisplay(Integer display) {
+      this.display =display;
+  }
+
+  public String getKeywords(){
+      return keywords;
+  }
+
+  public void setKeywords(String keywords) {
+      this.keywords =keywords;
+  }
+
+  public String getDescription(){
+      return description;
+  }
+
+  public void setDescription(String description) {
+      this.description =description;
+  }
+
+  public String getLang(){
+      return lang;
+  }
+
+  public void setLang(String lang) {
+      this.lang =lang;
+  }
+  public Page(){
+  }
+  public Page(Object id,String unique_id,Integer parent_id,String page_name,Object content,Integer display,String keywords,String description,String lang){
+      this.id=id;
+      this.unique_id=unique_id;
+      this.parent_id=parent_id;
+      this.page_name=page_name;
+      this.content=content;
+      this.display=display;
+      this.keywords=keywords;
+      this.description=description;
+      this.lang=lang;
+  }
+}

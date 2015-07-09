@@ -1,0 +1,14 @@
+package com.yichuang.kyjd.commnd.base.impl;
+
+
+import org.apache.ibatis.session.SqlSessionFactory;
+
+import com.yichuang.kyjd.commnd.base.BaseEntity;
+
+public class BaseCommonDao extends BaseDaoImpl<BaseEntity, Integer> {
+
+	public BaseCommonDao(SqlSessionFactory sqlSessionFactory) {
+		this.setSqlSessionFactory(sqlSessionFactory);
+	}
+
+}

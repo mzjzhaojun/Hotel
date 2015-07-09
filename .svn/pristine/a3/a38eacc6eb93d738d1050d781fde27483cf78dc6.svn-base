@@ -1,0 +1,14 @@
+package com.yaao.app.system.dao.role;
+
+import java.util.List;
+import com.yaao.app.system.entity.role.Role;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface IRoleDao {
+  public List<Role> getList(String statement,Role t);
+}

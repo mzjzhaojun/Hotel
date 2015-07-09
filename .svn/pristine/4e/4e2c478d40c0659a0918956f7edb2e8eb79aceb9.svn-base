@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Ad">
+  <sql id="Base_Column_List">
+     id,ad_name,ad_link,ad_img,position,sort,lang
+  </sql>
+  <resultMap id="ResultMap" type="com.yaao.app.system.entity.ad.Ad">
+         <id property="id" column="id" />
+         <id property="ad_name" column="ad_name" />
+         <id property="ad_link" column="ad_link" />
+         <id property="ad_img" column="ad_img" />
+         <id property="position" column="position" />
+         <id property="sort" column="sort" />
+         <id property="lang" column="lang" />
+  </resultMap>
+  <insert id="save" parameterType="com.yaao.app.system.entity.ad.Ad">
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+  	SELECT LAST_INSERT_ID() AS id 
+  </selectKey>
+  insert into co_ad (ad_name,ad_link,ad_img,position,sort,lang)
+         values (#{ad_name},#{ad_link},#{ad_img},#{position},#{sort},#{lang})
+  </insert>
+ <delete id="deleteByIds" parameterType="java.util.List">
+     delete from co_ad where id in 
+        <foreach collection="array" index="index" item="item" open="("
+          separator="," close=")">
+           #{item}
+        </foreach>
+ </delete>
+ <update id="update" parameterType="com.yaao.app.system.entity.ad.Ad">
+    update co_ad
+         <set>
+             <if test="id != null">
+                   id = #{id},
+             </if>
+             <if test="ad_name != null">
+                   ad_name = #{ad_name},
+             </if>
+             <if test="ad_link != null">
+                   ad_link = #{ad_link},
+             </if>
+             <if test="ad_img != null">
+                   ad_img = #{ad_img},
+             </if>
+             <if test="position != null">
+                   position = #{position},
+             </if>
+             <if test="sort != null">
+                   sort = #{sort},
+             </if>
+             <if test="lang != null">
+                   lang = #{lang}
+             </if>
+          </set>
+     where id = #{id}
+ </update>
+ <select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from co_ad 
+        where id = #{id}
+ </select>
+ <select id="getList" parameterType="com.yaao.app.system.entity.ad.Ad" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_ad 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+ <select id="getPage" parameterType="com.yaao.app.system.entity.ad.Ad" resultMap="ResultMap">
+      select
+       <include refid="Base_Column_List" />
+        from co_ad 
+       <where>
+             <if test="name != null and name != ''">
+         		  name like "%"#{name}"%"
+             </if>
+       </where>
+ </select>
+ <select id="getCount" parameterType="com.yaao.app.system.entity.ad.Ad" resultType="int">
+       select count(*) from co_ad 
+         <where>
+             <if test="name != null and name != ''">
+                name like "%"#{name}"%"
+             </if>
+         </where>
+ </select>
+ <select id="selectAd" parameterType="com.yaao.app.system.entity.ad.Ad" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_ad 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+</mapper>

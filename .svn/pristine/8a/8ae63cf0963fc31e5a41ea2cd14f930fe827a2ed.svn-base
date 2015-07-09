@@ -1,0 +1,202 @@
+package com.yichuang.kyjd.rest.controller.customer;
+
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import com.yichuang.kyjd.commnd.base.impl.BaseController;
+import com.yichuang.kyjd.commnd.web.StaticSources;
+import net.sf.json.JSONObject;
+import com.yichuang.kyjd.rest.service.customer.impl.CustomerServiceImpl;
+import com.yichuang.kyjd.rest.entity.customer.Customer;
+
+/**
+ * @author zj default test
+ * 
+ * @version 1.1
+ */
+
+@Controller
+@RequestMapping("/rest/customer")
+public class CustomerController extends BaseController<Customer, Integer> {
+
+	@Autowired
+	private CustomerServiceImpl service;
+
+	@Autowired
+	public void setBaseService() {
+		setBaseService(service);
+	}
+
+	/**
+	 * custom
+	 * 
+	 * @version 1.1
+	 */
+	@RequestMapping(value = "/param1", method = RequestMethod.GET)
+	public void customSelect(HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			String json = request.getParameter(StaticSources.JSONVO);
+			Customer u = null;
+			if (json != null) {
+				u = (Customer) JSONObject.toBean(JSONObject.fromObject(json),
+						Customer.class);
+			}
+			List<Customer> list = service.selectCustomer(u);
+			super.setSuccess(list);
+		} catch (Exception e) {
+			super.setError(e.getMessage());
+		}
+		super.ResponseJson(response);
+	}
+
+	/**
+	 * custom
+	 * 
+	 * @version 1.1
+	 */
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public void register(HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			String json = request.getParameter(StaticSources.JSONVO);
+			Customer u = null;
+			if (json != null) {
+				u = (Customer) JSONObject.toBean(JSONObject.fromObject(json),
+						Customer.class);
+			}
+			u.setName("jmky_" + u.getPhone());
+			Customer cust = (Customer) service.register(u);
+			if (cust.getRowid() > 0) {
+				u.setAccout(u.getPhone());
+				cust = service.loginCustomer(u);
+				if (cust != null) {
+					HttpSession session = request.getSession();
+					session.setAttribute("cust", cust);
+					super.setSuccess(cust);
+				}
+			}
+			super.setSuccess(cust);
+		} catch (Exception e) {
+			super.setError(e.getMessage());
+		}
+		super.ResponseJson(response);
+	}
+
+	/**
+	 * custom
+	 * 
+	 * @version 1.1
+	 */
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public void loginCustomer(HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			String json = request.getParameter(StaticSources.JSONVO);
+			Customer u = null;
+			if (json != null) {
+				u = (Customer) JSONObject.toBean(JSONObject.fromObject(json),
+						Customer.class);
+			}
+			u = service.loginCustomer(u);
+			if (u != null) {
+				HttpSession session = request.getSession();
+				session.setAttribute("cust", u);
+			}
+			super.setSuccess(u);
+		} catch (Exception e) {
+			super.setError(e.getMessage());
+		}
+		super.ResponseJson(response);
+	}
+
+	/**
+	 * custom
+	 * 
+	 * @version 1.1
+	 */
+	@RequestMapping(value = "/checkCustomer", method = RequestMethod.GET)
+	public void checkCustomer(HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			String json = request.getParameter(StaticSources.JSONVO);
+			Customer u = null;
+			if (json != null) {
+				u = (Customer) JSONObject.toBean(JSONObject.fromObject(json),
+						Customer.class);
+			}
+			super.setSuccess(service.checkCustomer(u));
+		} catch (Exception e) {
+			super.setError(e.getMessage());
+		}
+		super.ResponseJson(response);
+
+	}
+
+	/**
+	 * custom
+	 * 
+	 * @version 1.1
+	 */
+	@RequestMapping(value = "/loginOut", method = RequestMethod.GET)
+	public void loginOutCustomer(HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			HttpSession session = request.getSession();
+			session.removeAttribute("cust");
+			super.setSuccess("loginOut");
+		} catch (Exception e) {
+			super.setError(e.getMessage());
+		}
+		super.ResponseJson(response);
+
+	}
+
+	/**
+	 * custom
+	 * 
+	 * @version 1.1
+	 */
+	@RequestMapping(value = "/getlogincustomer", method = RequestMethod.GET)
+	public void getCustomer(HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			HttpSession session = request.getSession();
+			Customer cust = (Customer) session.getAttribute("cust");
+			super.setSuccess(cust);
+		} catch (Exception e) {
+			super.setError(e.getMessage());
+		}
+		super.ResponseJson(response);
+
+	}
+	
+	/**
+	 * custom
+	 * 
+	 * @version 1.1
+	 */
+	@RequestMapping(value = "/retrievePassword", method = RequestMethod.GET)
+	public void retrievePassword(HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			String json = request.getParameter(StaticSources.JSONVO);
+			Customer u = null;
+			if (json != null) {
+				u = (Customer) JSONObject.toBean(JSONObject.fromObject(json),
+						Customer.class);
+			}
+			super.setSuccess(service.retrievePassword(u));
+		} catch (Exception e) {
+			super.setError(e.getMessage());
+		}
+		super.ResponseJson(response);
+	}
+	
+}

@@ -1,0 +1,14 @@
+package com.yaao.app.system.service.module;
+
+import java.util.List;
+import com.yaao.app.system.entity.module.Module;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface IModuleService {
+  public List<Module> selectModule(Module t);
+}

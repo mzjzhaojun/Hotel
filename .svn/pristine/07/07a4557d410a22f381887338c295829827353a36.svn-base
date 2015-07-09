@@ -1,0 +1,14 @@
+package com.yaao.app.system.service.restaurant;
+
+import java.util.List;
+import com.yaao.app.system.entity.restaurant.Restaurant;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface IRestaurantService {
+  public List<Restaurant> selectRestaurant(Restaurant t);
+}

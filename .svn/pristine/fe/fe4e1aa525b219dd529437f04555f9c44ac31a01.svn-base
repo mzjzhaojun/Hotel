@@ -1,0 +1,186 @@
+package com.yichuang.kyjd.system.entity.customer;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Customer implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Integer rowid;
+  Object nickname;
+  Object name;
+  Object code;
+  Object sex;
+  Object birthday;
+  Object status;
+  Object phone;
+  Object addr;
+  Object head_img;
+  Object integral;
+  Object rating;
+  Object sys_create_time;
+  Object accout;
+  Object cardtype;
+  Object idcard;
+  Object remarks;
+
+  public Integer getRowid(){
+      return rowid;
+  }
+
+  public void setRowid(Integer rowid) {
+      this.rowid =rowid;
+  }
+
+  public Object getNickname(){
+      return nickname;
+  }
+
+  public void setNickname(Object nickname) {
+      this.nickname =nickname;
+  }
+
+  public Object getName(){
+      return name;
+  }
+
+  public void setName(Object name) {
+      this.name =name;
+  }
+
+  public Object getCode(){
+      return code;
+  }
+
+  public void setCode(Object code) {
+      this.code =code;
+  }
+
+  public Object getSex(){
+      return sex;
+  }
+
+  public void setSex(Object sex) {
+      this.sex =sex;
+  }
+
+  public Object getBirthday(){
+      return birthday;
+  }
+
+  public void setBirthday(Object birthday) {
+      this.birthday =birthday;
+  }
+
+  public Object getStatus(){
+      return status;
+  }
+
+  public void setStatus(Object status) {
+      this.status =status;
+  }
+
+  public Object getPhone(){
+      return phone;
+  }
+
+  public void setPhone(Object phone) {
+      this.phone =phone;
+  }
+
+  public Object getAddr(){
+      return addr;
+  }
+
+  public void setAddr(Object addr) {
+      this.addr =addr;
+  }
+
+  public Object getHead_img(){
+      return head_img;
+  }
+
+  public void setHead_img(Object head_img) {
+      this.head_img =head_img;
+  }
+
+  public Object getIntegral(){
+      return integral;
+  }
+
+  public void setIntegral(Object integral) {
+      this.integral =integral;
+  }
+
+  public Object getRating(){
+      return rating;
+  }
+
+  public void setRating(Object rating) {
+      this.rating =rating;
+  }
+
+  public Object getSys_create_time(){
+      return sys_create_time;
+  }
+
+  public void setSys_create_time(Object sys_create_time) {
+      this.sys_create_time =sys_create_time;
+  }
+
+  public Object getAccout(){
+      return accout;
+  }
+
+  public void setAccout(Object accout) {
+      this.accout =accout;
+  }
+
+  public Object getCardtype(){
+      return cardtype;
+  }
+
+  public void setCardtype(Object cardtype) {
+      this.cardtype =cardtype;
+  }
+
+  public Object getIdcard(){
+      return idcard;
+  }
+
+  public void setIdcard(Object idcard) {
+      this.idcard =idcard;
+  }
+
+  public Object getRemarks(){
+      return remarks;
+  }
+
+  public void setRemarks(Object remarks) {
+      this.remarks =remarks;
+  }
+  public Customer(){
+  }
+  public Customer(Integer rowid,Object nickname,Object name,Object code,Object sex,Object birthday,Object status,Object phone,Object addr,Object head_img,Object integral,Object rating,Object sys_create_time,Object accout,Object cardtype,Object idcard,Object remarks){
+      this.rowid=rowid;
+      this.nickname=nickname;
+      this.name=name;
+      this.code=code;
+      this.sex=sex;
+      this.birthday=birthday;
+      this.status=status;
+      this.phone=phone;
+      this.addr=addr;
+      this.head_img=head_img;
+      this.integral=integral;
+      this.rating=rating;
+      this.sys_create_time=sys_create_time;
+      this.accout=accout;
+      this.cardtype=cardtype;
+      this.idcard=idcard;
+      this.remarks=remarks;
+  }
+}

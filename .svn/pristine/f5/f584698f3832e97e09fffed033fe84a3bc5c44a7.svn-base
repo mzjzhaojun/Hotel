@@ -1,0 +1,36 @@
+package com.yaao.app.system.entity.role_user;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Role_user implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Object role_id;
+  Object user_id;
+
+  public Object getRole_id(){
+      return role_id;
+  }
+
+  public void setRole_id(Object role_id) {
+      this.role_id =role_id;
+  }
+
+  public Object getUser_id(){
+      return user_id;
+  }
+
+  public void setUser_id(Object user_id) {
+      this.user_id =user_id;
+  }
+  public Role_user(){
+  }
+  public Role_user(Object role_id,Object user_id){
+      this.role_id=role_id;
+      this.user_id=user_id;
+  }
+}

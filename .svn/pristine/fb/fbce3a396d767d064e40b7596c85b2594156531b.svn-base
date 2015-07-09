@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Module">
+  <sql id="Base_Column_List">
+     rowid,module_code,module_name,module_desc,parent_module_code,url,level,icon,descs,remarks
+  </sql>
+  <resultMap id="ResultMap" type="com.yichuang.kyjd.rest.entity.module.Module">
+         <id property="rowid" column="rowid" />
+         <id property="module_code" column="module_code" />
+         <id property="module_name" column="module_name" />
+         <id property="module_desc" column="module_desc" />
+         <id property="parent_module_code" column="parent_module_code" />
+         <id property="url" column="url" />
+         <id property="level" column="level" />
+         <id property="icon" column="icon" />
+         <id property="descs" column="descs" />
+         <id property="remarks" column="remarks" />
+  </resultMap>
+  <insert id="save" parameterType="com.yichuang.kyjd.rest.entity.module.Module">
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+  	SELECT LAST_INSERT_ID() AS id 
+  </selectKey>
+  insert into ht_module (module_code,module_name,module_desc,parent_module_code,url,level,icon,descs,remarks)
+         values (#{module_code},#{module_name},#{module_desc},#{parent_module_code},#{url},#{level},#{icon},#{descs},#{remarks})
+  </insert>
+ <delete id="deleteByIds" parameterType="java.util.List">
+     delete from ht_module where id in 
+        <foreach collection="array" index="index" item="item" open="("
+          separator="," close=")">
+           #{item}
+        </foreach>
+ </delete>
+ <update id="update" parameterType="com.yichuang.kyjd.rest.entity.module.Module">
+    update ht_module
+         <set>
+             <if test="rowid != null">
+                   rowid = #{rowid},
+             </if>
+             <if test="module_code != null">
+                   module_code = #{module_code},
+             </if>
+             <if test="module_name != null">
+                   module_name = #{module_name},
+             </if>
+             <if test="module_desc != null">
+                   module_desc = #{module_desc},
+             </if>
+             <if test="parent_module_code != null">
+                   parent_module_code = #{parent_module_code},
+             </if>
+             <if test="url != null">
+                   url = #{url},
+             </if>
+             <if test="level != null">
+                   level = #{level},
+             </if>
+             <if test="icon != null">
+                   icon = #{icon},
+             </if>
+             <if test="descs != null">
+                   descs = #{descs},
+             </if>
+             <if test="remarks != null">
+                   remarks = #{remarks}
+             </if>
+          </set>
+     where id = #{id}
+ </update>
+ <select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from ht_module 
+        where id = #{id}
+ </select>
+ <select id="getList" parameterType="com.yichuang.kyjd.rest.entity.module.Module" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from ht_module 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+ <select id="getPage" parameterType="com.yichuang.kyjd.rest.entity.module.Module" resultMap="ResultMap">
+      select
+       <include refid="Base_Column_List" />
+        from ht_module 
+       <where>
+             <if test="name != null and name != ''">
+         		  name like "%"#{name}"%"
+             </if>
+       </where>
+       LIMIT #{pageStart},#{pageEnd}
+ </select>
+ <select id="getCount" parameterType="com.yichuang.kyjd.rest.entity.module.Module" resultType="int">
+       select count(*) from ht_module 
+         <where>
+             <if test="name != null and name != ''">
+                name like "%"#{name}"%"
+             </if>
+         </where>
+ </select>
+ <select id="selectModule" parameterType="com.yichuang.kyjd.rest.entity.module.Module" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from ht_module 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+</mapper>

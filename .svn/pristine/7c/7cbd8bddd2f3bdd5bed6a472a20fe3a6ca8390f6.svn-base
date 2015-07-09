@@ -1,0 +1,196 @@
+package com.yichuang.kyjd.system.entity.room;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Room implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Integer rowid;
+  String code;
+  String name;
+  String detail;
+  String instructions;
+  Integer count;
+  Integer surplus;
+  Object price;
+  Object sellprice;
+  Integer isenabled;
+  Integer iscoupon;
+  String floor;
+  String provide;
+  Object breakfast;
+  String wifi;
+  Object badtype;
+  String area;
+  String remark;
+
+  public Integer getRowid(){
+      return rowid;
+  }
+
+  public void setRowid(Integer rowid) {
+      this.rowid =rowid;
+  }
+
+  public String getCode(){
+      return code;
+  }
+
+  public void setCode(String code) {
+      this.code =code;
+  }
+
+  public String getName(){
+      return name;
+  }
+
+  public void setName(String name) {
+      this.name =name;
+  }
+
+  public String getDetail(){
+      return detail;
+  }
+
+  public void setDetail(String detail) {
+      this.detail =detail;
+  }
+
+  public String getInstructions(){
+      return instructions;
+  }
+
+  public void setInstructions(String instructions) {
+      this.instructions =instructions;
+  }
+
+  public Integer getCount(){
+      return count;
+  }
+
+  public void setCount(Integer count) {
+      this.count =count;
+  }
+
+  public Integer getSurplus(){
+      return surplus;
+  }
+
+  public void setSurplus(Integer surplus) {
+      this.surplus =surplus;
+  }
+
+  public Object getPrice(){
+      return price;
+  }
+
+  public void setPrice(Object price) {
+      this.price =price;
+  }
+
+  public Object getSellprice(){
+      return sellprice;
+  }
+
+  public void setSellprice(Object sellprice) {
+      this.sellprice =sellprice;
+  }
+
+  public Integer getIsenabled(){
+      return isenabled;
+  }
+
+  public void setIsenabled(Integer isenabled) {
+      this.isenabled =isenabled;
+  }
+
+  public Integer getIscoupon(){
+      return iscoupon;
+  }
+
+  public void setIscoupon(Integer iscoupon) {
+      this.iscoupon =iscoupon;
+  }
+
+  public String getFloor(){
+      return floor;
+  }
+
+  public void setFloor(String floor) {
+      this.floor =floor;
+  }
+
+  public String getProvide(){
+      return provide;
+  }
+
+  public void setProvide(String provide) {
+      this.provide =provide;
+  }
+
+  public Object getBreakfast(){
+      return breakfast;
+  }
+
+  public void setBreakfast(Object breakfast) {
+      this.breakfast =breakfast;
+  }
+
+  public String getWifi(){
+      return wifi;
+  }
+
+  public void setWifi(String wifi) {
+      this.wifi =wifi;
+  }
+
+  public Object getBadtype(){
+      return badtype;
+  }
+
+  public void setBadtype(Object badtype) {
+      this.badtype =badtype;
+  }
+
+  public String getArea(){
+      return area;
+  }
+
+  public void setArea(String area) {
+      this.area =area;
+  }
+
+  public String getRemark(){
+      return remark;
+  }
+
+  public void setRemark(String remark) {
+      this.remark =remark;
+  }
+  public Room(){
+  }
+  public Room(Integer rowid,String code,String name,String detail,String instructions,Integer count,Integer surplus,Object price,Object sellprice,Integer isenabled,Integer iscoupon,String floor,String provide,Object breakfast,String wifi,Object badtype,String area,String remark){
+      this.rowid=rowid;
+      this.code=code;
+      this.name=name;
+      this.detail=detail;
+      this.instructions=instructions;
+      this.count=count;
+      this.surplus=surplus;
+      this.price=price;
+      this.sellprice=sellprice;
+      this.isenabled=isenabled;
+      this.iscoupon=iscoupon;
+      this.floor=floor;
+      this.provide=provide;
+      this.breakfast=breakfast;
+      this.wifi=wifi;
+      this.badtype=badtype;
+      this.area=area;
+      this.remark=remark;
+  }
+}

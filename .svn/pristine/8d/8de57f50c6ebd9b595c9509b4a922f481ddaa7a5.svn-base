@@ -1,0 +1,14 @@
+package com.yaao.app.system.dao.sellcoupon;
+
+import java.util.List;
+import com.yaao.app.system.entity.sellcoupon.Sellcoupon;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface ISellcouponDao {
+  public List<Sellcoupon> getList(String statement,Sellcoupon t);
+}

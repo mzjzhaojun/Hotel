@@ -1,0 +1,20 @@
+package com.yaao.app.system.dao.role.impl;
+
+import java.util.List;
+import org.springframework.stereotype.Repository;
+import com.yaao.app.system.dao.role.IRoleDao;
+import com.yaao.app.commnd.base.impl.BaseDaoImpl;
+import com.yaao.app.system.entity.role.Role;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Repository
+public class RoleDaoImpl extends BaseDaoImpl<Role, Integer> implements IRoleDao{
+public List<Role> getList(String statement,Role t){
+  return super.selectList(statement, t);
+  }
+}

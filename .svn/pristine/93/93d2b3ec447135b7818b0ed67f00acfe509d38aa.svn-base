@@ -1,0 +1,56 @@
+package com.yaao.app.system.entity.model;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Model implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Integer id;
+  String name;
+  String remark;
+  Object spec_ids;
+
+  public Integer getId(){
+      return id;
+  }
+
+  public void setId(Integer id) {
+      this.id =id;
+  }
+
+  public String getName(){
+      return name;
+  }
+
+  public void setName(String name) {
+      this.name =name;
+  }
+
+  public String getRemark(){
+      return remark;
+  }
+
+  public void setRemark(String remark) {
+      this.remark =remark;
+  }
+
+  public Object getSpec_ids(){
+      return spec_ids;
+  }
+
+  public void setSpec_ids(Object spec_ids) {
+      this.spec_ids =spec_ids;
+  }
+  public Model(){
+  }
+  public Model(Integer id,String name,String remark,Object spec_ids){
+      this.id=id;
+      this.name=name;
+      this.remark=remark;
+      this.spec_ids=spec_ids;
+  }
+}

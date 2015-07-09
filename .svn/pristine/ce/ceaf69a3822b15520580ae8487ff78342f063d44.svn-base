@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Category">
+  <sql id="Base_Column_List">
+     id,name,pid,sort,isshow,model_id,keywords,description,title
+  </sql>
+  <resultMap id="ResultMap" type="com.yaao.app.system.entity.category.Category">
+         <id property="id" column="id" />
+         <id property="name" column="name" />
+         <id property="pid" column="pid" />
+         <id property="sort" column="sort" />
+         <id property="isshow" column="isshow" />
+         <id property="model_id" column="model_id" />
+         <id property="keywords" column="keywords" />
+         <id property="description" column="description" />
+         <id property="title" column="title" />
+  </resultMap>
+  <insert id="save" parameterType="com.yaao.app.system.entity.category.Category">
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+  	SELECT LAST_INSERT_ID() AS id 
+  </selectKey>
+  insert into co_category (name,pid,sort,isshow,model_id,keywords,description,title)
+         values (#{name},#{pid},#{sort},#{isshow},#{model_id},#{keywords},#{description},#{title})
+  </insert>
+ <delete id="deleteByIds" parameterType="java.util.List">
+     delete from co_category where id in 
+        <foreach collection="array" index="index" item="item" open="("
+          separator="," close=")">
+           #{item}
+        </foreach>
+ </delete>
+ <update id="update" parameterType="com.yaao.app.system.entity.category.Category">
+    update co_category
+         <set>
+             <if test="id != null">
+                   id = #{id},
+             </if>
+             <if test="name != null">
+                   name = #{name},
+             </if>
+             <if test="pid != null">
+                   pid = #{pid},
+             </if>
+             <if test="sort != null">
+                   sort = #{sort},
+             </if>
+             <if test="isshow != null">
+                   isshow = #{isshow},
+             </if>
+             <if test="model_id != null">
+                   model_id = #{model_id},
+             </if>
+             <if test="keywords != null">
+                   keywords = #{keywords},
+             </if>
+             <if test="description != null">
+                   description = #{description},
+             </if>
+             <if test="title != null">
+                   title = #{title}
+             </if>
+          </set>
+     where id = #{id}
+ </update>
+ <select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from co_category 
+        where id = #{id}
+ </select>
+ <select id="getList" parameterType="com.yaao.app.system.entity.category.Category" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_category 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+ <select id="getPage" parameterType="com.yaao.app.system.entity.category.Category" resultMap="ResultMap">
+      select
+       <include refid="Base_Column_List" />
+        from co_category 
+       <where>
+             <if test="name != null and name != ''">
+         		  name like "%"#{name}"%"
+             </if>
+       </where>
+ </select>
+ <select id="getCount" parameterType="com.yaao.app.system.entity.category.Category" resultType="int">
+       select count(*) from co_category 
+         <where>
+             <if test="name != null and name != ''">
+                name like "%"#{name}"%"
+             </if>
+         </where>
+ </select>
+ <select id="selectCategory" parameterType="com.yaao.app.system.entity.category.Category" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_category 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+</mapper>

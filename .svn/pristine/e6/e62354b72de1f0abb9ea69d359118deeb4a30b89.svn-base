@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Message">
+  <sql id="Base_Column_List">
+     id,username,email,moblie,display,addtime,content
+  </sql>
+  <resultMap id="ResultMap" type="com.yaao.app.system.entity.message.Message">
+         <id property="id" column="id" />
+         <id property="username" column="username" />
+         <id property="email" column="email" />
+         <id property="moblie" column="moblie" />
+         <id property="display" column="display" />
+         <id property="addtime" column="addtime" />
+         <id property="content" column="content" />
+  </resultMap>
+  <insert id="save" parameterType="com.yaao.app.system.entity.message.Message">
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+  	SELECT LAST_INSERT_ID() AS id 
+  </selectKey>
+  insert into co_message (username,email,moblie,display,addtime,content)
+         values (#{username},#{email},#{moblie},#{display},#{addtime},#{content})
+  </insert>
+ <delete id="deleteByIds" parameterType="java.util.List">
+     delete from co_message where id in 
+        <foreach collection="array" index="index" item="item" open="("
+          separator="," close=")">
+           #{item}
+        </foreach>
+ </delete>
+ <update id="update" parameterType="com.yaao.app.system.entity.message.Message">
+    update co_message
+         <set>
+             <if test="id != null">
+                   id = #{id},
+             </if>
+             <if test="username != null">
+                   username = #{username},
+             </if>
+             <if test="email != null">
+                   email = #{email},
+             </if>
+             <if test="moblie != null">
+                   moblie = #{moblie},
+             </if>
+             <if test="display != null">
+                   display = #{display},
+             </if>
+             <if test="addtime != null">
+                   addtime = #{addtime},
+             </if>
+             <if test="content != null">
+                   content = #{content}
+             </if>
+          </set>
+     where id = #{id}
+ </update>
+ <select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from co_message 
+        where id = #{id}
+ </select>
+ <select id="getList" parameterType="com.yaao.app.system.entity.message.Message" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_message 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+ <select id="getPage" parameterType="com.yaao.app.system.entity.message.Message" resultMap="ResultMap">
+      select
+       <include refid="Base_Column_List" />
+        from co_message 
+       <where>
+             <if test="name != null and name != ''">
+         		  name like "%"#{name}"%"
+             </if>
+       </where>
+ </select>
+ <select id="getCount" parameterType="com.yaao.app.system.entity.message.Message" resultType="int">
+       select count(*) from co_message 
+         <where>
+             <if test="name != null and name != ''">
+                name like "%"#{name}"%"
+             </if>
+         </where>
+ </select>
+ <select id="selectMessage" parameterType="com.yaao.app.system.entity.message.Message" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_message 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+</mapper>

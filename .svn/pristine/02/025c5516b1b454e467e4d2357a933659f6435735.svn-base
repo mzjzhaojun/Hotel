@@ -1,0 +1,56 @@
+package com.yaao.app.system.entity.buycar;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Buycar implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Integer bid;
+  Object buycar;
+  Object bz;
+  Object retext;
+
+  public Integer getBid(){
+      return bid;
+  }
+
+  public void setBid(Integer bid) {
+      this.bid =bid;
+  }
+
+  public Object getBuycar(){
+      return buycar;
+  }
+
+  public void setBuycar(Object buycar) {
+      this.buycar =buycar;
+  }
+
+  public Object getBz(){
+      return bz;
+  }
+
+  public void setBz(Object bz) {
+      this.bz =bz;
+  }
+
+  public Object getRetext(){
+      return retext;
+  }
+
+  public void setRetext(Object retext) {
+      this.retext =retext;
+  }
+  public Buycar(){
+  }
+  public Buycar(Integer bid,Object buycar,Object bz,Object retext){
+      this.bid=bid;
+      this.buycar=buycar;
+      this.bz=bz;
+      this.retext=retext;
+  }
+}

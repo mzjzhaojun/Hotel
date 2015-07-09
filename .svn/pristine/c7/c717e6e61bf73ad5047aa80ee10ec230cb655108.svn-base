@@ -1,0 +1,86 @@
+package com.yaao.app.system.entity.ad;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Ad implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Integer id;
+  String ad_name;
+  String ad_link;
+  String ad_img;
+  Object position;
+  Integer sort;
+  String lang;
+
+  public Integer getId(){
+      return id;
+  }
+
+  public void setId(Integer id) {
+      this.id =id;
+  }
+
+  public String getAd_name(){
+      return ad_name;
+  }
+
+  public void setAd_name(String ad_name) {
+      this.ad_name =ad_name;
+  }
+
+  public String getAd_link(){
+      return ad_link;
+  }
+
+  public void setAd_link(String ad_link) {
+      this.ad_link =ad_link;
+  }
+
+  public String getAd_img(){
+      return ad_img;
+  }
+
+  public void setAd_img(String ad_img) {
+      this.ad_img =ad_img;
+  }
+
+  public Object getPosition(){
+      return position;
+  }
+
+  public void setPosition(Object position) {
+      this.position =position;
+  }
+
+  public Integer getSort(){
+      return sort;
+  }
+
+  public void setSort(Integer sort) {
+      this.sort =sort;
+  }
+
+  public String getLang(){
+      return lang;
+  }
+
+  public void setLang(String lang) {
+      this.lang =lang;
+  }
+  public Ad(){
+  }
+  public Ad(Integer id,String ad_name,String ad_link,String ad_img,Object position,Integer sort,String lang){
+      this.id=id;
+      this.ad_name=ad_name;
+      this.ad_link=ad_link;
+      this.ad_img=ad_img;
+      this.position=position;
+      this.sort=sort;
+      this.lang=lang;
+  }
+}

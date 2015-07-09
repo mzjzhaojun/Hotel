@@ -1,0 +1,66 @@
+package com.yaao.app.system.entity.role;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Role implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Integer id;
+  String name;
+  Integer pid;
+  Integer status;
+  String remark;
+
+  public Integer getId(){
+      return id;
+  }
+
+  public void setId(Integer id) {
+      this.id =id;
+  }
+
+  public String getName(){
+      return name;
+  }
+
+  public void setName(String name) {
+      this.name =name;
+  }
+
+  public Integer getPid(){
+      return pid;
+  }
+
+  public void setPid(Integer pid) {
+      this.pid =pid;
+  }
+
+  public Integer getStatus(){
+      return status;
+  }
+
+  public void setStatus(Integer status) {
+      this.status =status;
+  }
+
+  public String getRemark(){
+      return remark;
+  }
+
+  public void setRemark(String remark) {
+      this.remark =remark;
+  }
+  public Role(){
+  }
+  public Role(Integer id,String name,Integer pid,Integer status,String remark){
+      this.id=id;
+      this.name=name;
+      this.pid=pid;
+      this.status=status;
+      this.remark=remark;
+  }
+}

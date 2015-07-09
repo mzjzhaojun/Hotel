@@ -1,0 +1,14 @@
+package com.yaao.app.system.service.tag;
+
+import java.util.List;
+import com.yaao.app.system.entity.tag.Tag;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface ITagService {
+  public List<Tag> selectTag(Tag t);
+}

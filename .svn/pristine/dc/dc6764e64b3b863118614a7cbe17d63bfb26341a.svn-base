@@ -1,0 +1,67 @@
+/**
+ * Alipay.com Inc.
+ * Copyright (c) 2005-2008 All Rights Reserved.
+ */
+package com.yichuang.kyjd.commnd.alipay.client.callback;
+
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.yichuang.kyjd.commnd.alipay.client.base.ClientConfig;
+import com.yichuang.kyjd.commnd.alipay.client.security.SecurityManagerImpl;
+import com.yichuang.kyjd.commnd.alipay.client.util.ParameterUtil;
+
+/**
+ * 
+ * 
+ * @author feng.chenf
+ * @version $Id: CallBack.java, v 0.1 2009-2-3 ����05:16:26 feng.chenf Exp $
+ */
+public class Md5CallBack extends HttpServlet {
+
+    private com.yichuang.kyjd.commnd.alipay.client.security.SecurityManager securityManager  = new SecurityManagerImpl();
+
+    private static final long                          serialVersionUID = -2234271646410251381L;
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response) {
+        //���֪ͨǩ��
+        String sign = request.getParameter("sign");
+        String result = request.getParameter("result");
+        String requestToken = request.getParameter("request_token");
+        String outTradeNo = request.getParameter("out_trade_no");
+        String tradeNo = request.getParameter("trade_no");
+        Map<String,String> resMap  = new HashMap<String,String>();
+        resMap.put("result", result);
+        resMap.put("request_token", requestToken);
+        resMap.put("out_trade_no", outTradeNo);
+        resMap.put("trade_no", tradeNo);
+        String verifyData = ParameterUtil.getSignData(resMap);
+        boolean verified = false;
+
+        //��ǩ��
+        try {
+            verified = securityManager.verify(ClientConfig.md5SignAlgo, verifyData, sign,
+            		ClientConfig.md5Key);
+            
+	        PrintWriter out = response.getWriter();
+	        response.setContentType("text/html");
+	        if (!verified || !result.equals("success")) {
+	        	out.println("Illegal sign!!");
+	        } else {
+	        	out.println("Md5 signature verification success!!");
+	        	out.println("Do SomeThing!!");
+	        }
+	        out.flush();
+			out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+}

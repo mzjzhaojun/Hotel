@@ -1,0 +1,25 @@
+package com.yaao.app.system.service.tag.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.yaao.app.system.dao.tag.impl.TagDaoImpl;
+import com.yaao.app.system.service.tag.ITagService;
+import com.yaao.app.commnd.base.impl.BaseServiceImpl;
+import com.yaao.app.system.entity.tag.Tag;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Service
+public class TagServiceImpl extends BaseServiceImpl<Tag, Integer> implements ITagService{
+  @Autowired
+  private TagDaoImpl dao;
+
+  public List<Tag> selectTag(Tag t){
+       return dao.getList("selectTag", t);
+  }
+}

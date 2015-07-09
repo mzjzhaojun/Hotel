@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="News">
+  <sql id="Base_Column_List">
+     id,cid,title,keywords,description,status,summary,published,update_time,content,lang,aid,click,is_recommend
+  </sql>
+  <resultMap id="ResultMap" type="com.yaao.app.system.entity.news.News">
+         <id property="id" column="id" />
+         <id property="cid" column="cid" />
+         <id property="title" column="title" />
+         <id property="keywords" column="keywords" />
+         <id property="description" column="description" />
+         <id property="status" column="status" />
+         <id property="summary" column="summary" />
+         <id property="published" column="published" />
+         <id property="update_time" column="update_time" />
+         <id property="content" column="content" />
+         <id property="lang" column="lang" />
+         <id property="aid" column="aid" />
+         <id property="click" column="click" />
+         <id property="is_recommend" column="is_recommend" />
+  </resultMap>
+  <insert id="save" parameterType="com.yaao.app.system.entity.news.News">
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+  	SELECT LAST_INSERT_ID() AS id 
+  </selectKey>
+  insert into co_news (cid,title,keywords,description,status,summary,published,update_time,content,lang,aid,click,is_recommend)
+         values (#{cid},#{title},#{keywords},#{description},#{status},#{summary},#{published},#{update_time},#{content},#{lang},#{aid},#{click},#{is_recommend})
+  </insert>
+ <delete id="deleteByIds" parameterType="java.util.List">
+     delete from co_news where id in 
+        <foreach collection="array" index="index" item="item" open="("
+          separator="," close=")">
+           #{item}
+        </foreach>
+ </delete>
+ <update id="update" parameterType="com.yaao.app.system.entity.news.News">
+    update co_news
+         <set>
+             <if test="id != null">
+                   id = #{id},
+             </if>
+             <if test="cid != null">
+                   cid = #{cid},
+             </if>
+             <if test="title != null">
+                   title = #{title},
+             </if>
+             <if test="keywords != null">
+                   keywords = #{keywords},
+             </if>
+             <if test="description != null">
+                   description = #{description},
+             </if>
+             <if test="status != null">
+                   status = #{status},
+             </if>
+             <if test="summary != null">
+                   summary = #{summary},
+             </if>
+             <if test="published != null">
+                   published = #{published},
+             </if>
+             <if test="update_time != null">
+                   update_time = #{update_time},
+             </if>
+             <if test="content != null">
+                   content = #{content},
+             </if>
+             <if test="lang != null">
+                   lang = #{lang},
+             </if>
+             <if test="aid != null">
+                   aid = #{aid},
+             </if>
+             <if test="click != null">
+                   click = #{click},
+             </if>
+             <if test="is_recommend != null">
+                   is_recommend = #{is_recommend}
+             </if>
+          </set>
+     where id = #{id}
+ </update>
+ <select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from co_news 
+        where id = #{id}
+ </select>
+ <select id="getList" parameterType="com.yaao.app.system.entity.news.News" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_news 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+ <select id="getPage" parameterType="com.yaao.app.system.entity.news.News" resultMap="ResultMap">
+      select
+       <include refid="Base_Column_List" />
+        from co_news 
+       <where>
+             <if test="name != null and name != ''">
+         		  name like "%"#{name}"%"
+             </if>
+       </where>
+ </select>
+ <select id="getCount" parameterType="com.yaao.app.system.entity.news.News" resultType="int">
+       select count(*) from co_news 
+         <where>
+             <if test="name != null and name != ''">
+                name like "%"#{name}"%"
+             </if>
+         </where>
+ </select>
+ <select id="selectNews" parameterType="com.yaao.app.system.entity.news.News" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_news 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+</mapper>

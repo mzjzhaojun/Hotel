@@ -1,0 +1,14 @@
+package com.yaao.app.system.service.role;
+
+import java.util.List;
+import com.yaao.app.system.entity.role.Role;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface IRoleService {
+  public List<Role> selectRole(Role t);
+}

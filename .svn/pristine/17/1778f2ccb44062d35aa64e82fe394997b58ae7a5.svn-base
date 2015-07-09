@@ -1,0 +1,66 @@
+package com.yaao.app.system.entity.access;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Access implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Integer role_id;
+  Integer node_id;
+  Integer level;
+  Integer pid;
+  String module;
+
+  public Integer getRole_id(){
+      return role_id;
+  }
+
+  public void setRole_id(Integer role_id) {
+      this.role_id =role_id;
+  }
+
+  public Integer getNode_id(){
+      return node_id;
+  }
+
+  public void setNode_id(Integer node_id) {
+      this.node_id =node_id;
+  }
+
+  public Integer getLevel(){
+      return level;
+  }
+
+  public void setLevel(Integer level) {
+      this.level =level;
+  }
+
+  public Integer getPid(){
+      return pid;
+  }
+
+  public void setPid(Integer pid) {
+      this.pid =pid;
+  }
+
+  public String getModule(){
+      return module;
+  }
+
+  public void setModule(String module) {
+      this.module =module;
+  }
+  public Access(){
+  }
+  public Access(Integer role_id,Integer node_id,Integer level,Integer pid,String module){
+      this.role_id=role_id;
+      this.node_id=node_id;
+      this.level=level;
+      this.pid=pid;
+      this.module=module;
+  }
+}

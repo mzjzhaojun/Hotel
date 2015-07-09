@@ -1,0 +1,14 @@
+package com.yaao.app.system.service.role_user;
+
+import java.util.List;
+import com.yaao.app.system.entity.role_user.Role_user;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface IRole_userService {
+  public List<Role_user> selectRole_user(Role_user t);
+}

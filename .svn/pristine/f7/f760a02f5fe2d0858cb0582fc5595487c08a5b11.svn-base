@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Node">
+  <sql id="Base_Column_List">
+     id,name,title,status,remark,sort,pid,level
+  </sql>
+  <resultMap id="ResultMap" type="com.yaao.app.system.entity.node.Node">
+         <id property="id" column="id" />
+         <id property="name" column="name" />
+         <id property="title" column="title" />
+         <id property="status" column="status" />
+         <id property="remark" column="remark" />
+         <id property="sort" column="sort" />
+         <id property="pid" column="pid" />
+         <id property="level" column="level" />
+  </resultMap>
+  <insert id="save" parameterType="com.yaao.app.system.entity.node.Node">
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+  	SELECT LAST_INSERT_ID() AS id 
+  </selectKey>
+  insert into co_node (name,title,status,remark,sort,pid,level)
+         values (#{name},#{title},#{status},#{remark},#{sort},#{pid},#{level})
+  </insert>
+ <delete id="deleteByIds" parameterType="java.util.List">
+     delete from co_node where id in 
+        <foreach collection="array" index="index" item="item" open="("
+          separator="," close=")">
+           #{item}
+        </foreach>
+ </delete>
+ <update id="update" parameterType="com.yaao.app.system.entity.node.Node">
+    update co_node
+         <set>
+             <if test="id != null">
+                   id = #{id},
+             </if>
+             <if test="name != null">
+                   name = #{name},
+             </if>
+             <if test="title != null">
+                   title = #{title},
+             </if>
+             <if test="status != null">
+                   status = #{status},
+             </if>
+             <if test="remark != null">
+                   remark = #{remark},
+             </if>
+             <if test="sort != null">
+                   sort = #{sort},
+             </if>
+             <if test="pid != null">
+                   pid = #{pid},
+             </if>
+             <if test="level != null">
+                   level = #{level}
+             </if>
+          </set>
+     where id = #{id}
+ </update>
+ <select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from co_node 
+        where id = #{id}
+ </select>
+ <select id="getList" parameterType="com.yaao.app.system.entity.node.Node" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_node 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+ <select id="getPage" parameterType="com.yaao.app.system.entity.node.Node" resultMap="ResultMap">
+      select
+       <include refid="Base_Column_List" />
+        from co_node 
+       <where>
+             <if test="name != null and name != ''">
+         		  name like "%"#{name}"%"
+             </if>
+       </where>
+ </select>
+ <select id="getCount" parameterType="com.yaao.app.system.entity.node.Node" resultType="int">
+       select count(*) from co_node 
+         <where>
+             <if test="name != null and name != ''">
+                name like "%"#{name}"%"
+             </if>
+         </where>
+ </select>
+ <select id="selectNode" parameterType="com.yaao.app.system.entity.node.Node" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_node 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+</mapper>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Nav">
+  <sql id="Base_Column_List">
+     id,module,nav_name,parent_id,guide,type,link,lang,sort,target
+  </sql>
+  <resultMap id="ResultMap" type="com.yaao.app.system.entity.nav.Nav">
+         <id property="id" column="id" />
+         <id property="module" column="module" />
+         <id property="nav_name" column="nav_name" />
+         <id property="parent_id" column="parent_id" />
+         <id property="guide" column="guide" />
+         <id property="type" column="type" />
+         <id property="link" column="link" />
+         <id property="lang" column="lang" />
+         <id property="sort" column="sort" />
+         <id property="target" column="target" />
+  </resultMap>
+  <insert id="save" parameterType="com.yaao.app.system.entity.nav.Nav">
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+  	SELECT LAST_INSERT_ID() AS id 
+  </selectKey>
+  insert into co_nav (module,nav_name,parent_id,guide,type,link,lang,sort,target)
+         values (#{module},#{nav_name},#{parent_id},#{guide},#{type},#{link},#{lang},#{sort},#{target})
+  </insert>
+ <delete id="deleteByIds" parameterType="java.util.List">
+     delete from co_nav where id in 
+        <foreach collection="array" index="index" item="item" open="("
+          separator="," close=")">
+           #{item}
+        </foreach>
+ </delete>
+ <update id="update" parameterType="com.yaao.app.system.entity.nav.Nav">
+    update co_nav
+         <set>
+             <if test="id != null">
+                   id = #{id},
+             </if>
+             <if test="module != null">
+                   module = #{module},
+             </if>
+             <if test="nav_name != null">
+                   nav_name = #{nav_name},
+             </if>
+             <if test="parent_id != null">
+                   parent_id = #{parent_id},
+             </if>
+             <if test="guide != null">
+                   guide = #{guide},
+             </if>
+             <if test="type != null">
+                   type = #{type},
+             </if>
+             <if test="link != null">
+                   link = #{link},
+             </if>
+             <if test="lang != null">
+                   lang = #{lang},
+             </if>
+             <if test="sort != null">
+                   sort = #{sort},
+             </if>
+             <if test="target != null">
+                   target = #{target}
+             </if>
+          </set>
+     where id = #{id}
+ </update>
+ <select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from co_nav 
+        where id = #{id}
+ </select>
+ <select id="getList" parameterType="com.yaao.app.system.entity.nav.Nav" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_nav 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+ <select id="getPage" parameterType="com.yaao.app.system.entity.nav.Nav" resultMap="ResultMap">
+      select
+       <include refid="Base_Column_List" />
+        from co_nav 
+       <where>
+             <if test="name != null and name != ''">
+         		  name like "%"#{name}"%"
+             </if>
+       </where>
+ </select>
+ <select id="getCount" parameterType="com.yaao.app.system.entity.nav.Nav" resultType="int">
+       select count(*) from co_nav 
+         <where>
+             <if test="name != null and name != ''">
+                name like "%"#{name}"%"
+             </if>
+         </where>
+ </select>
+ <select id="selectNav" parameterType="com.yaao.app.system.entity.nav.Nav" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_nav 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+</mapper>

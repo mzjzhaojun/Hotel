@@ -1,0 +1,630 @@
+package com.yichuang.kyjd.commnd.base.impl;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.HttpStatus;
+import org.apache.ibatis.session.ResultHandler;
+import org.apache.ibatis.session.RowBounds;
+import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
+
+import com.yichuang.kyjd.commnd.base.IBaseDao;
+import com.yichuang.kyjd.commnd.base.SqlSessionDaoSupport;
+import com.yichuang.kyjd.commnd.system.exception.BaseDaoException;
+import com.yichuang.kyjd.commnd.system.util.bean.BeanMapUtil;
+import com.yichuang.kyjd.commnd.system.util.page.GenericDefaultPage;
+import com.yichuang.kyjd.commnd.system.util.page.IGenericPage;
+import com.yichuang.kyjd.commnd.system.util.reflect.ReflectGeneric;
+
+/**
+ * 
+ * 1.数据操作封装基于泛型T对象 
+ * 2.根据myBatis配置文件*.Mapper中namespace的名称操作对应表
+ * 3.所有*.Mapper操作ID根据本页中的常量设置
+ * 
+ * @author zjma
+ * 
+ */
+@Repository
+public class BaseDaoImpl<T, ID extends Serializable> extends
+		SqlSessionDaoSupport implements IBaseDao<T, ID> {
+
+	public static final String SQLNAME_SEPARATOR = ".";
+	public static final String SQL_SAVE = "save";
+	public static final String SQL_UPDATE = "update";
+	public static final String SQL_GETBYID = "getById";
+	public static final String SQL_DELETEBYID = "deleteById";
+	public static final String SQL_DELETEBYIDS = "deleteByIds";
+	public static final String SQL_FINDPAGEBY = "getPage";
+	public static final String SQL_FINDLISTBY = "getList";
+	public static final String SQL_GETCOUNTBY = "getCount";
+	public static final Integer SERVER_ERROR = HttpStatus.SC_INTERNAL_SERVER_ERROR;
+	private static final String SORT_NAME = "SORT";
+	private static final String DIR_NAME = "DIR";
+
+	/** 不能用于SQL中的非法字符（主要用于排序字段名） */
+	public static final String[] ILLEGAL_CHARS_FOR_SQL = { ",", ";", " ", "\"",
+			"%" };
+
+	/**
+	 * 获取默认SqlMapping命名空间。
+	 * 
+	 * @return 返回命名空间字符串
+	 */
+	@SuppressWarnings("unchecked")
+	protected String getDefaultSqlNamespace() {
+		Class<T> clazz = ReflectGeneric.getClassGenricType(this.getClass());
+		String nameSpace = clazz.getName();
+		return nameSpace.substring(
+				nameSpace.lastIndexOf(SQLNAME_SEPARATOR) + 1,
+				nameSpace.length());
+	}
+
+	/**
+	 * 将SqlMapping命名空间与给定的SqlMapping名组合在一起。
+	 * 
+	 */
+	protected String getSqlName(String sqlName) {
+		return sqlNamespace + SQLNAME_SEPARATOR + sqlName;
+	}
+
+	/**
+	 * SqlMapping命名空间
+	 */
+	private String sqlNamespace = getDefaultSqlNamespace();
+
+	/**
+	 * 获取SqlMapping命名空间
+	 * 
+	 * @return SqlMapping命名空间
+	 */
+	public String getSqlNamespace() {
+		return sqlNamespace;
+	}
+
+	/**
+	 * 设置SqlMapping命名空间.
+	 * 
+	 * @param sqlNamespace
+	 *            SqlMapping命名空间
+	 */
+	public void setSqlNamespace(String sqlNamespace) {
+		this.sqlNamespace = sqlNamespace;
+	}
+
+	/**
+	 * 生成主键值。 默认情况下什么也不做； 如果需要生成主键，需要由子类重写此方法根据需要的方式生成主键值。
+	 * 
+	 * @param ob
+	 *            要持久化的对象
+	 */
+	protected void generateId(T t) {
+
+	}
+
+	//================================================================================================================================================================================================================
+	//																							custom
+	//================================================================================================================================================================================================================
+	public T save(T t) {
+		generateId(t);
+		try {
+			this.getSqlSession().insert(getSqlName(SQL_SAVE), t);
+		} catch (Exception e) {
+			throw new BaseDaoException(SERVER_ERROR, "execute =SQL_SAVE= "
+					+ getSqlName(SQL_SAVE) + "; Message:" + e.getMessage(),
+					true);
+		}
+		return t;
+	}
+
+	public Integer update(T t) {
+		try {
+			return this.getSqlSession().update(getSqlName(SQL_UPDATE), t);
+		} catch (Exception e) {
+			throw new BaseDaoException(SERVER_ERROR, "execute =SQL_UPDATE= "
+					+ getSqlName(SQL_UPDATE) + "; Message:" + e.getMessage(),
+					true);
+		}
+	}
+
+	@SuppressWarnings({ "unchecked" })
+	public T getById(String id) {
+		try {
+			return (T) this.getSqlSession().selectOne(getSqlName(SQL_GETBYID),
+					id);
+		} catch (Exception e) {
+			throw new BaseDaoException(SERVER_ERROR, "execute =SQL_GETBYID= "
+					+ getSqlName(SQL_GETBYID) + "; Message:" + e.getMessage(),
+					true);
+		}
+	}
+
+	public Integer deleteByIds(ID[] ids) {
+		try {
+			return this.getSqlSession()
+					.delete(getSqlName(SQL_DELETEBYIDS), ids);
+		} catch (Exception e) {
+			throw new BaseDaoException(SERVER_ERROR,
+					"execute =SQL_DELETEBYIDS= " + getSqlName(SQL_DELETEBYIDS)
+							+ "; Message:" + e.getMessage(), true);
+		}
+	}
+
+	public Integer deleteById(ID id) {
+		try {
+			return this.getSqlSession().delete(getSqlName(SQL_DELETEBYID), id);
+		} catch (Exception e) {
+			throw new BaseDaoException(SERVER_ERROR,
+					"execute =SQL_DELETEBYID= " + getSqlName(SQL_DELETEBYID)
+							+ "; Message:" + e.getMessage(), true);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public IGenericPage<T> getPage(T param, int pageNo, int pageSize,
+			String sort, String dir) {
+		int count = getCount(param);
+		if (count < 1) {
+			return GenericDefaultPage.emptyPage();
+		}
+		Map<String, Object> paramMap = null;
+		try {
+			paramMap = BeanMapUtil.beanToMap(param);
+			if (sort != null) {
+				sort = filterIllegalChars(sort, ILLEGAL_CHARS_FOR_SQL);
+			}
+			if (StringUtils.isEmpty(sort) || StringUtils.isEmpty(dir)) {
+			} else {
+				paramMap.put(SORT_NAME, sort);
+				paramMap.put(DIR_NAME, dir);
+			}
+			int start = GenericDefaultPage.getStartOfPage(pageNo, pageSize) - 1;
+			paramMap.put("pageStart", start);
+			paramMap.put("pageEnd", start+pageSize);
+			List<T> lst = this.getSqlSession().selectList(
+					getSqlName(SQL_FINDPAGEBY), paramMap);
+			return new GenericDefaultPage<T>(pageNo, pageSize, lst, count);
+		} catch (Exception e) {
+			throw new BaseDaoException(SERVER_ERROR,
+					"execute =SQL_FINDPAGEBY= " + getSqlName(SQL_FINDPAGEBY)
+							+ "; Message:" + e.getMessage(), true);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Integer getCount(T t) {
+		Map<String, Object> paramMap = null;
+		try {
+			paramMap = BeanMapUtil.beanToMap(t);
+			return (Integer) this.getSqlSession().selectOne(
+					getSqlName(SQL_GETCOUNTBY), paramMap);
+		} catch (Exception e) {
+			throw new BaseDaoException(SERVER_ERROR,
+					"execute =SQL_GETCOUNTBY= " + getSqlName(SQL_GETCOUNTBY)
+							+ "; Message:" + e.getMessage(), true);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<T> getList(T t, String sort, String dir) {
+		Map<String, Object> paramMap = null;
+		try {
+			paramMap = BeanMapUtil.beanToMap(t);
+			if (sort != null) {
+				sort = filterIllegalChars(sort, ILLEGAL_CHARS_FOR_SQL);
+			}
+			if (StringUtils.isEmpty(sort) || StringUtils.isEmpty(dir)) {
+			} else {
+				paramMap.put(SORT_NAME, sort);
+				paramMap.put(DIR_NAME, dir);
+			}
+			return this.getSqlSession().selectList(getSqlName(SQL_FINDLISTBY),
+					paramMap);
+		} catch (Exception e) {
+			throw new BaseDaoException(SERVER_ERROR,
+					"execute =SQL_FINDLISTBY= " + getSqlName(SQL_FINDLISTBY)
+							+ "; Message:" + e.getMessage(), true);
+		}
+	}
+
+	/**
+	 * 
+	 * 
+	 * 
+	 */
+	@SuppressWarnings("unchecked")
+	public List<T> getList(T t) {
+		Map<String, Object> paramMap = null;
+		try {
+			paramMap = BeanMapUtil.beanToMap(t);
+		} catch (Exception e) {
+			throw new BaseDaoException(SERVER_ERROR,
+					"execute =SQL_FINDLISTBY= " + getSqlName(SQL_FINDLISTBY)
+							+ "; Message:" + e.getMessage(), true);
+		}
+		return this.getSqlSession().selectList(getSqlName(SQL_FINDLISTBY),
+				paramMap);
+	}
+	
+	
+
+	public int insertObject(String statement, Object parameter) {
+		try {
+			return this.insert(getSqlName(statement), parameter);
+		} catch (Exception e) {
+			throw new BaseDaoException(SERVER_ERROR, "execute =SQL_SAVE= "
+					+ getSqlName(SQL_SAVE) + "; Message:" + e.getMessage(),
+					true);
+		}
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public T selectObject(String statement, Object parameter) {
+		return (T)this.getSqlSession().selectOne(getSqlName(statement), parameter);
+	}
+	
+	
+	//================================================================================================================================================================================================================
+	//																							custom
+	//================================================================================================================================================================================================================
+	
+	
+	/**
+	 * 从给定字符串中将指定的非法字符串数组中各字符串过滤掉。
+	 * 
+	 * @param str
+	 *            待过滤的字符串
+	 * @param filterChars
+	 *            指定的非法字符串数组
+	 * @return 过滤后的字符串
+	 */
+	protected String filterIllegalChars(String str, String[] filterChars) {
+		String rs = str;
+		if (rs != null && filterChars != null) {
+			for (String fc : filterChars) {
+				if (fc != null && fc.length() > 0) {
+					str = str.replaceAll(fc, "");
+				}
+			}
+		}
+		return rs;
+	}
+	/**
+	 * 对
+	 * {@link org.apache.ibatis.session.SqlSession#insert(java.lang.String, java.lang.Object)}
+	 * 的代理。 将statement包装了命名空间，方便DAO子类调用。
+	 * 
+	 * @param statement
+	 *            映射的语句ID
+	 * @param parameter
+	 *            参数
+	 * @return 执行结果——插入成功的记录数
+	 * @see org.apache.ibatis.session.SqlSession#insert(java.lang.String,
+	 *      java.lang.Object)
+	 */
+	protected int insert(String statement, Object parameter) {
+		return this.getSqlSession().insert(getSqlName(statement), parameter);
+	}
+
+	/**
+	 * 对{@link org.apache.ibatis.session.SqlSession#insert(java.lang.String)}
+	 * 的代理。 将statement包装了命名空间，方便DAO子类调用。
+	 * 
+	 * @param statement
+	 *            映射的语句ID
+	 * @return 执行结果——插入成功的记录数
+	 * @see org.apache.ibatis.session.SqlSession#insert(java.lang.String)
+	 */
+	protected int insert(String statement) {
+		return this.getSqlSession().insert(getSqlName(statement));
+	}
+
+	/**
+	 * 对
+	 * {@link org.apache.ibatis.session.SqlSession#update(java.lang.String, java.lang.Object)}
+	 * 的代理。 将statement包装了命名空间，方便DAO子类调用。
+	 * 
+	 * @param statement
+	 *            映射的语句ID
+	 * @param parameter
+	 *            参数
+	 * @return 执行结果——更新成功的记录数
+	 * @see org.apache.ibatis.session.SqlSession#update(java.lang.String,
+	 *      java.lang.Object)
+	 */
+	protected int update(String statement, Object parameter) {
+		return this.getSqlSession().update(getSqlName(statement), parameter);
+	}
+
+	/**
+	 * 对{@link org.apache.ibatis.session.SqlSession#update(java.lang.String)}
+	 * 的代理。 将statement包装了命名空间，方便DAO子类调用。
+	 * 
+	 * @param statement
+	 *            映射的语句ID
+	 * @param parameter
+	 *            参数
+	 * @return 执行结果——更新成功的记录数
+	 * @see org.apache.ibatis.session.SqlSession#update(java.lang.String)
+	 */
+	protected int update(String statement) {
+		return this.getSqlSession().update(getSqlName(statement));
+	}
+
+	/**
+	 * 对
+	 * {@link org.apache.ibatis.session.SqlSession#delete(java.lang.String, java.lang.Object)}
+	 * 的代理。 将statement包装了命名空间，方便DAO子类调用。
+	 * 
+	 * @param statement
+	 *            映射的语句ID
+	 * @param parameter
+	 *            参数
+	 * @return 执行结果——删除成功的记录数
+	 * @see org.apache.ibatis.session.SqlSession#delete(java.lang.String,
+	 *      java.lang.Object)
+	 */
+	protected int delete(String statement, Object parameter) {
+		return this.getSqlSession().delete(getSqlName(statement), parameter);
+	}
+
+	/**
+	 * 对{@link org.apache.ibatis.session.SqlSession#delete(java.lang.String)}
+	 * 的代理。 将statement包装了命名空间，方便DAO子类调用。
+	 * 
+	 * @param statement
+	 *            映射的语句ID
+	 * @return 执行结果——删除成功的记录数
+	 * @see org.apache.ibatis.session.SqlSession#delete(java.lang.String)
+	 */
+	protected int delete(String statement) {
+		return this.getSqlSession().delete(getSqlName(statement));
+	}
+
+	/**
+	 * 对
+	 * {@link org.apache.ibatis.session.SqlSession#selectList(java.lang.String, java.lang.Object, org.apache.ibatis.session.RowBounds)}
+	 * 的代理。 将statement包装了命名空间，方便DAO子类调用。
+	 * 
+	 * @param statement
+	 *            映射的语句ID
+	 * @param parameter
+	 *            参数
+	 * @param rowBounds
+	 *            用于分页查询的记录范围
+	 * @return 查询结果列表
+	 * @see org.apache.ibatis.session.SqlSession#selectList(java.lang.String,
+	 *      java.lang.Object, org.apache.ibatis.session.RowBounds)
+	 */
+	protected List<T> selectList(String statement, Object parameter,
+			RowBounds rowBounds) {
+		return this.getSqlSession().selectList(getSqlName(statement),
+				parameter, rowBounds);
+	}
+
+	/**
+	 * 对
+	 * {@link org.apache.ibatis.session.SqlSession#selectList(java.lang.String, java.lang.Object)}
+	 * 的代理。 将statement包装了命名空间，方便DAO子类调用。
+	 * 
+	 * @param statement
+	 *            映射的语句ID
+	 * @param parameter
+	 *            参数
+	 * @return 查询结果列表
+	 * @see org.apache.ibatis.session.SqlSession#selectList(java.lang.String,
+	 *      java.lang.Object)
+	 */
+	protected List<Object> selectListMap(String statement, Object parameter) {
+		return this.getSqlSession()
+				.selectList(getSqlName(statement), parameter);
+	}
+	
+	
+	/**
+	 * 对
+	 * {@link org.apache.ibatis.session.SqlSession#selectList(java.lang.String, java.lang.Object)}
+	 * 的代理。 将statement包装了命名空间，方便DAO子类调用。
+	 * 
+	 * @param statement
+	 *            映射的语句ID
+	 * @param parameter
+	 *            参数
+	 * @return 查询结果列表
+	 * @see org.apache.ibatis.session.SqlSession#selectList(java.lang.String,
+	 *      java.lang.Object)
+	 */
+	protected List<Object> selectListMap(String statement) {
+		return this.getSqlSession()
+				.selectList(getSqlName(statement));
+	}
+	
+	
+	/**
+	 * 对
+	 * {@link org.apache.ibatis.session.SqlSession#selectList(java.lang.String, java.lang.Object)}
+	 * 的代理。 将statement包装了命名空间，方便DAO子类调用。
+	 * 
+	 * @param statement
+	 *            映射的语句ID
+	 * @param parameter
+	 *            参数
+	 * @return 查询结果列表
+	 * @see org.apache.ibatis.session.SqlSession#selectList(java.lang.String,
+	 *      java.lang.Object)
+	 */
+	protected List<T> selectList(String statement, Object parameter) {
+		return this.getSqlSession()
+				.selectList(getSqlName(statement), parameter);
+	}
+
+	/**
+	 * 对
+	 * {@link org.apache.ibatis.session.SqlSession#selectList(java.lang.String)}
+	 * 的代理。 将statement包装了命名空间，方便DAO子类调用。
+	 * 
+	 * @param statement
+	 *            映射的语句ID
+	 * @return 查询结果列表
+	 * @see org.apache.ibatis.session.SqlSession#selectList(java.lang.String)
+	 */
+	protected List<T> selectList(String statement) {
+		return this.getSqlSession().selectList(getSqlName(statement));
+	}
+
+	/**
+	 * 对
+	 * {@link org.apache.ibatis.session.SqlSession#selectOne(java.lang.String, java.lang.Object)}
+	 * 的代理。 将statement包装了命名空间，方便DAO子类调用。
+	 * 
+	 * @param statement
+	 *            映射的语句ID
+	 * @param parameter
+	 *            参数
+	 * @return 查询结果对象
+	 * @see org.apache.ibatis.session.SqlSession#selectOne(java.lang.String,
+	 *      java.lang.Object)
+	 */
+	protected Object selectOne(String statement, Object parameter) {
+		return this.getSqlSession().selectOne(getSqlName(statement), parameter);
+	}
+
+	/**
+	 * 对{@link org.apache.ibatis.session.SqlSession#selectOne(java.lang.String)}
+	 * 的代理。 将statement包装了命名空间，方便DAO子类调用。
+	 * 
+	 * @param statement
+	 *            映射的语句ID
+	 * @return 查询结果对象
+	 * @see org.apache.ibatis.session.SqlSession#selectOne(java.lang.String)
+	 */
+	protected Object selectOne(String statement) {
+		return this.getSqlSession().selectOne(getSqlName(statement));
+	}
+
+	/**
+	 * 对
+	 * {@link org.apache.ibatis.session.SqlSession#selectMap(java.lang.String, java.lang.Object, java.lang.String, org.apache.ibatis.session.RowBounds)}
+	 * 的代理。 将statement包装了命名空间，方便DAO子类调用。
+	 * 
+	 * @param statement
+	 *            映射的语句ID
+	 * @param parameter
+	 *            参数
+	 * @param mapKey
+	 *            数据mapKey
+	 * @param rowBounds
+	 *            用于分页查询的记录范围
+	 * @return 查询结果Map
+	 * @see org.apache.ibatis.session.SqlSession#selectMap(java.lang.String,
+	 *      java.lang.Object, java.lang.String,
+	 *      org.apache.ibatis.session.RowBounds)
+	 */
+	@SuppressWarnings("rawtypes")
+	protected Map selectMap(String statement, Object parameter, String mapKey,
+			RowBounds rowBounds) {
+		return this.getSqlSession().selectMap(getSqlName(statement), parameter,
+				mapKey, rowBounds);
+	}
+
+	/**
+	 * 对
+	 * {@link org.apache.ibatis.session.SqlSession#selectMap(java.lang.String, java.lang.Object, java.lang.String)}
+	 * 的代理。 将statement包装了命名空间，方便DAO子类调用。
+	 * 
+	 * @param statement
+	 *            映射的语句ID
+	 * @param parameter
+	 *            参数
+	 * @param mapKey
+	 *            数据mapKey
+	 * @return 查询结果Map
+	 * @see org.apache.ibatis.session.SqlSession#selectMap(java.lang.String,
+	 *      java.lang.Object, java.lang.String)
+	 */
+	@SuppressWarnings("rawtypes")
+	protected Map selectMap(String statement, Object parameter, String mapKey) {
+		return this.getSqlSession().selectMap(getSqlName(statement), parameter,
+				mapKey);
+	}
+
+	/**
+	 * 对
+	 * {@link org.apache.ibatis.session.SqlSession#selectMap(java.lang.String, java.lang.String)}
+	 * 的代理。 将statement包装了命名空间，方便DAO子类调用。
+	 * 
+	 * @param statement
+	 *            映射的语句ID
+	 * @param mapKey
+	 *            数据mapKey
+	 * @return 查询结果Map
+	 * @see org.apache.ibatis.session.SqlSession#selectMap(java.lang.String,
+	 *      java.lang.String)
+	 */
+	@SuppressWarnings("rawtypes")
+	protected Map selectMap(String statement, String mapKey) {
+		return this.getSqlSession().selectMap(getSqlName(statement), mapKey);
+	}
+
+	/**
+	 * 对
+	 * {@link org.apache.ibatis.session.SqlSession#select(java.lang.String, java.lang.Object, org.apache.ibatis.session.RowBounds, org.apache.ibatis.session.ResultHandler)}
+	 * 的代理。 将statement包装了命名空间，方便DAO子类调用。
+	 * 
+	 * @param statement
+	 *            映射的语句ID
+	 * @param parameter
+	 *            参数
+	 * @param rowBounds
+	 *            用于分页查询的记录范围
+	 * @param handler
+	 *            结果集处理器
+	 * @see org.apache.ibatis.session.SqlSession#select(java.lang.String,
+	 *      java.lang.Object, org.apache.ibatis.session.RowBounds,
+	 *      org.apache.ibatis.session.ResultHandler)
+	 */
+	protected void select(String statement, Object parameter,
+			RowBounds rowBounds, ResultHandler handler) {
+		this.getSqlSession().select(getSqlName(statement), parameter,
+				rowBounds, handler);
+	}
+
+	/**
+	 * 对
+	 * {@link org.apache.ibatis.session.SqlSession#select(java.lang.String, java.lang.Object, org.apache.ibatis.session.ResultHandler)}
+	 * 的代理。 将statement包装了命名空间，方便DAO子类调用。
+	 * 
+	 * @param statement
+	 *            映射的语句ID
+	 * @param parameter
+	 *            参数
+	 * @param handler
+	 *            结果集处理器
+	 * @see org.apache.ibatis.session.SqlSession#select(java.lang.String,
+	 *      java.lang.Object, org.apache.ibatis.session.ResultHandler)
+	 */
+	protected void select(String statement, Object parameter,
+			ResultHandler handler) {
+		this.getSqlSession().select(getSqlName(statement), parameter, handler);
+	}
+
+	/**
+	 * 对
+	 * {@link org.apache.ibatis.session.SqlSession#select(java.lang.String, org.apache.ibatis.session.ResultHandler)}
+	 * 的代理。 将statement包装了命名空间，方便DAO子类调用。
+	 * 
+	 * @param statement
+	 *            映射的语句ID
+	 * @param handler
+	 *            结果集处理器
+	 * @see org.apache.ibatis.session.SqlSession#select(java.lang.String,
+	 *      org.apache.ibatis.session.ResultHandler)
+	 */
+	protected void select(String statement, ResultHandler handler) {
+		this.getSqlSession().select(getSqlName(statement), handler);
+	}
+
+}

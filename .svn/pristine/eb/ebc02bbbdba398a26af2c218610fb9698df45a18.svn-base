@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Restaurant">
+	<sql id="Base_Column_List">
+		rowid,name,number,type,babychair,iscoupon,mincharge,maxdinernum,count,surplus,status,detail,deposit,lowest,axf,remark
+	</sql>
+	<resultMap id="ResultMap"
+		type="com.yichuang.kyjd.rest.entity.restaurant.Restaurant">
+		<id property="rowid" column="rowid" />
+		<id property="name" column="name" />
+		<id property="number" column="number" />
+		<id property="type" column="type" />
+		<id property="type_name" column="type_name" />
+		<id property="babychair" column="babychair" />
+		<id property="count" column="count" />
+		<id property="surplus" column="surplus" />
+		<id property="iscoupon" column="iscoupon" />
+		<id property="mincharge" column="mincharge" />
+		<id property="maxdinernum" column="maxdinernum" />
+		<id property="status" column="status" />
+		<id property="status_name" column="status_name" />
+		<id property="detail" column="detail" />
+		<id property="deposit" column="deposit" />
+		<id property="lowest" column="lowest" />
+		<id property="axf" column="axf" />
+		<id property="remark" column="remark" />
+	</resultMap>
+	<insert id="save" parameterType="com.yichuang.kyjd.rest.entity.restaurant.Restaurant">
+		<selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into ht_restaurant
+		(name,type,babychair,maxdinernum,status,detail,deposit,lowest,axf,count,surplus,remark)
+		values
+		(#{name},#{type},#{babychair},#{maxdinernum},#{status},#{detail},#{deposit},#{lowest},#{axf},#{count},#{count},#{remark})
+	</insert>
+	<delete id="deleteByIds" parameterType="java.util.List">
+		delete from ht_restaurant where rowid in
+		<foreach collection="array" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	<update id="update" parameterType="com.yichuang.kyjd.rest.entity.restaurant.Restaurant">
+		update ht_restaurant
+		<set>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="type != null">
+				type = #{type},
+			</if>
+			<if test="babychair != null">
+				babychair = #{babychair},
+			</if>
+			<if test="maxdinernum != null">
+				maxdinernum = #{maxdinernum},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="detail != null">
+				detail = #{detail},
+			</if>
+			<if test="deposit != null">
+				deposit = #{deposit},
+			</if>
+			<if test="count != null">
+				count = #{count},
+			</if>
+			<if test="remark != null">
+				remark = #{remark}
+			</if>
+		</set>
+		where rowid = #{rowid}
+	</update>
+	<select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ht_restaurant
+		where rowid = #{rowid}
+	</select>
+	<select id="getList" parameterType="com.yichuang.kyjd.rest.entity.restaurant.Restaurant"
+		resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ht_restaurant
+		<where>
+			<if test="name != null and name != ''">
+				name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+	<select id="getPage" parameterType="com.yichuang.kyjd.rest.entity.restaurant.Restaurant"
+		resultMap="ResultMap">
+		SELECT h.rowid,h.name,h.number,h.type,d.name AS
+		type_name,h.babychair,h.iscoupon,h.mincharge,h.maxdinernum,h.COUNT,h.surplus,h.STATUS,(SELECT
+		NAME FROM ht_dictionaries WHERE CODE =
+		STATUS) AS
+		status_name,h.detail,h.deposit,h.lowest,h.axf,h.remark FROM
+		ht_restaurant h
+		LEFT JOIN ht_dictionaries d ON h.type=d.code
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				and h.name like "%"#{name}"%"
+			</if>
+			<if test="status != null and status != ''">
+				and h.status = #{status}
+			</if>
+		</where>
+		LIMIT #{pageStart},#{pageEnd}
+	</select>
+	<select id="getCount" parameterType="com.yichuang.kyjd.rest.entity.restaurant.Restaurant"
+		resultType="int">
+		select count(*) from ht_restaurant
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				name like "%"#{name}"%"
+			</if>
+			<if test="status != null and status != ''">
+				and status = #{status}
+			</if>
+		</where>
+	</select>
+	<select id="selectRestaurant" parameterType="com.yichuang.kyjd.rest.entity.restaurant.Restaurant"
+		resultType="java.util.HashMap">
+		select
+		<include refid="Base_Column_List" />
+		from ht_restaurant
+		<where>
+			<if test="name != null and name != ''">
+				name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+</mapper>

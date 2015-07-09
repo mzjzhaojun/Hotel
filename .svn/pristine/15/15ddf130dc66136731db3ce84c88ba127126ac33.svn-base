@@ -1,0 +1,25 @@
+package com.yaao.app.system.service.room.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.yaao.app.system.dao.room.impl.RoomDaoImpl;
+import com.yaao.app.system.service.room.IRoomService;
+import com.yaao.app.commnd.base.impl.BaseServiceImpl;
+import com.yaao.app.system.entity.room.Room;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Service
+public class RoomServiceImpl extends BaseServiceImpl<Room, Integer> implements IRoomService{
+  @Autowired
+  private RoomDaoImpl dao;
+
+  public List<Room> selectRoom(Room t){
+       return dao.getList("selectRoom", t);
+  }
+}

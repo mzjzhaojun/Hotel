@@ -1,0 +1,76 @@
+package com.yaao.app.system.entity.link;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Link implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Integer id;
+  String title;
+  Integer display;
+  String link;
+  Integer sort;
+  String target;
+
+  public Integer getId(){
+      return id;
+  }
+
+  public void setId(Integer id) {
+      this.id =id;
+  }
+
+  public String getTitle(){
+      return title;
+  }
+
+  public void setTitle(String title) {
+      this.title =title;
+  }
+
+  public Integer getDisplay(){
+      return display;
+  }
+
+  public void setDisplay(Integer display) {
+      this.display =display;
+  }
+
+  public String getLink(){
+      return link;
+  }
+
+  public void setLink(String link) {
+      this.link =link;
+  }
+
+  public Integer getSort(){
+      return sort;
+  }
+
+  public void setSort(Integer sort) {
+      this.sort =sort;
+  }
+
+  public String getTarget(){
+      return target;
+  }
+
+  public void setTarget(String target) {
+      this.target =target;
+  }
+  public Link(){
+  }
+  public Link(Integer id,String title,Integer display,String link,Integer sort,String target){
+      this.id=id;
+      this.title=title;
+      this.display=display;
+      this.link=link;
+      this.sort=sort;
+      this.target=target;
+  }
+}

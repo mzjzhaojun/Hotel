@@ -1,0 +1,25 @@
+package com.yaao.app.system.service.message.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.yaao.app.system.dao.message.impl.MessageDaoImpl;
+import com.yaao.app.system.service.message.IMessageService;
+import com.yaao.app.commnd.base.impl.BaseServiceImpl;
+import com.yaao.app.system.entity.message.Message;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Service
+public class MessageServiceImpl extends BaseServiceImpl<Message, Integer> implements IMessageService{
+  @Autowired
+  private MessageDaoImpl dao;
+
+  public List<Message> selectMessage(Message t){
+       return dao.getList("selectMessage", t);
+  }
+}

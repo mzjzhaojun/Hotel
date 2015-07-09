@@ -1,0 +1,66 @@
+package com.yaao.app.commnd.base.impl;
+
+import java.io.Serializable;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.yaao.app.commnd.base.IBaseService;
+import com.yaao.app.commnd.orm.util.page.IGenericPage;
+
+/**
+ * 
+ * 实现类
+ * 
+ * @author zjma
+ * 
+ */
+@Service
+public class BaseServiceImpl<T, ID extends Serializable> implements
+		IBaseService<T, ID> {
+	
+	@Autowired
+	private BaseDaoImpl<T, ID> baseDao;
+
+	@Override
+	public T save(T t) {
+		return baseDao.save(t);
+	}
+
+	@Override
+	public Integer update(T t) {
+		return baseDao.update(t);
+	}
+
+	@Override
+	public T getById(String id) {
+		return baseDao.getById(id);
+	}
+
+	@Override
+	public Integer deleteByIds(ID[] ids) {
+		return baseDao.deleteByIds(ids);
+	}
+
+	@Override
+	public IGenericPage<T> getPage(T t, int pageNo, int pageSize,
+			String sort, String dir) {
+		return baseDao.getPage(t,pageNo,pageSize,sort,dir);
+	}
+
+	@Override
+	public Integer getCount(T t) {
+		return baseDao.getCount(t);
+	}
+
+	@Override
+	public List<T> getList(T t, String sort, String dir) {
+		return baseDao.getList(t,sort,dir);
+	}
+	
+	@Override
+	public List<T> getList(T t){
+		return baseDao.getList(t);
+	}
+}

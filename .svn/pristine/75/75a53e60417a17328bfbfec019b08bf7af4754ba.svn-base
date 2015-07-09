@@ -1,0 +1,35 @@
+/**
+ * Alipay.com Inc.
+ * Copyright (c) 2005-2008 All Rights Reserved.
+ */
+package com.yichuang.kyjd.commnd.alipay.client.base;
+
+
+/**
+ * 此处为了方便演示，key和签名方式放在静态变量里，请在正式环境放数据库或文件
+ * 
+ * @author feng.chenf
+ * @version $Id: ClientConfig.java, v 0.1 2008-12-24 上午09:31:39 feng.chenf Exp $
+ */
+public class ClientConfig {
+
+    /**
+     * 商户的MD5私钥
+     */
+    public static String md5Key       = "";
+    
+    /**
+    * 签名的算法 本次示例采用的是md5
+    */
+    public static String md5SignAlgo     = "MD5";
+    
+
+
+	public static void setMd5Key(String md5Key) {
+		ClientConfig.md5Key = md5Key;
+	}
+
+	public static void setMd5SignAlgo(String md5SignAlgo) {
+		ClientConfig.md5SignAlgo = md5SignAlgo;
+	}
+}

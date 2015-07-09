@@ -1,0 +1,14 @@
+package com.yaao.app.system.service.coupon;
+
+import java.util.List;
+import com.yaao.app.system.entity.coupon.Coupon;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface ICouponService {
+  public List<Coupon> selectCoupon(Coupon t);
+}

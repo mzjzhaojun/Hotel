@@ -1,0 +1,56 @@
+package com.yichuang.kyjd.rest.controller.sellcoupon;
+
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import com.yichuang.kyjd.commnd.base.impl.BaseController;
+import com.yichuang.kyjd.commnd.web.StaticSources;
+import net.sf.json.JSONObject;
+import com.yichuang.kyjd.rest.service.sellcoupon.impl.SellcouponServiceImpl;
+import com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon;
+
+/**
+* @author zj    default  test
+* 
+* @version 1.1
+*/
+
+
+@Controller
+@RequestMapping("/rest/sellcoupon")
+public class SellcouponController extends BaseController<Sellcoupon, Integer> {
+
+  @Autowired
+  private SellcouponServiceImpl service;
+
+  @Autowired
+  public void setBaseService() {
+		setBaseService(service);
+	}
+
+
+  /**
+  * custom 
+  * 
+  * @version 1.1
+  */
+  @RequestMapping(value = "/param1", method = RequestMethod.GET)
+  public void customSelect(HttpServletRequest request,HttpServletResponse response) {
+  	try {
+  		 String json = request.getParameter(StaticSources.JSONVO);
+			 Sellcoupon u = null;
+			 if (json != null) {
+			 	 u = (Sellcoupon) JSONObject.toBean(JSONObject.fromObject(json),Sellcoupon.class);
+			 }
+  		 List<Sellcoupon> list = service.selectSellcoupon(u);
+  		 super.setSuccess(list);
+  	}catch (Exception e) {
+  		super.setError(e.getMessage());
+      }
+  	super.ResponseJson(response);
+  }
+}

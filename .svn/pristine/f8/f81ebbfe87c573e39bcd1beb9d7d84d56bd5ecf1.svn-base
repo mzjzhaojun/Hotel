@@ -1,0 +1,106 @@
+package com.yaao.app.system.entity.category;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Category implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Integer id;
+  String name;
+  Integer pid;
+  Integer sort;
+  Integer isshow;
+  Integer model_id;
+  String keywords;
+  String description;
+  String title;
+
+  public Integer getId(){
+      return id;
+  }
+
+  public void setId(Integer id) {
+      this.id =id;
+  }
+
+  public String getName(){
+      return name;
+  }
+
+  public void setName(String name) {
+      this.name =name;
+  }
+
+  public Integer getPid(){
+      return pid;
+  }
+
+  public void setPid(Integer pid) {
+      this.pid =pid;
+  }
+
+  public Integer getSort(){
+      return sort;
+  }
+
+  public void setSort(Integer sort) {
+      this.sort =sort;
+  }
+
+  public Integer getIsshow(){
+      return isshow;
+  }
+
+  public void setIsshow(Integer isshow) {
+      this.isshow =isshow;
+  }
+
+  public Integer getModel_id(){
+      return model_id;
+  }
+
+  public void setModel_id(Integer model_id) {
+      this.model_id =model_id;
+  }
+
+  public String getKeywords(){
+      return keywords;
+  }
+
+  public void setKeywords(String keywords) {
+      this.keywords =keywords;
+  }
+
+  public String getDescription(){
+      return description;
+  }
+
+  public void setDescription(String description) {
+      this.description =description;
+  }
+
+  public String getTitle(){
+      return title;
+  }
+
+  public void setTitle(String title) {
+      this.title =title;
+  }
+  public Category(){
+  }
+  public Category(Integer id,String name,Integer pid,Integer sort,Integer isshow,Integer model_id,String keywords,String description,String title){
+      this.id=id;
+      this.name=name;
+      this.pid=pid;
+      this.sort=sort;
+      this.isshow=isshow;
+      this.model_id=model_id;
+      this.keywords=keywords;
+      this.description=description;
+      this.title=title;
+  }
+}

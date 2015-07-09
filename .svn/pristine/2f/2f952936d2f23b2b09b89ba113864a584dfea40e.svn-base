@@ -1,0 +1,196 @@
+package com.yaao.app.system.entity.product;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Product implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Object id;
+  Integer cid;
+  String title;
+  Double price;
+  String psize;
+  String image;
+  String keywords;
+  Object description;
+  Integer status;
+  String summary;
+  Integer published;
+  Integer update_time;
+  Object content;
+  String lang;
+  Integer aid;
+  Integer click;
+  Integer is_recommend;
+  Integer wap_display;
+
+  public Object getId(){
+      return id;
+  }
+
+  public void setId(Object id) {
+      this.id =id;
+  }
+
+  public Integer getCid(){
+      return cid;
+  }
+
+  public void setCid(Integer cid) {
+      this.cid =cid;
+  }
+
+  public String getTitle(){
+      return title;
+  }
+
+  public void setTitle(String title) {
+      this.title =title;
+  }
+
+  public Double getPrice(){
+      return price;
+  }
+
+  public void setPrice(Double price) {
+      this.price =price;
+  }
+
+  public String getPsize(){
+      return psize;
+  }
+
+  public void setPsize(String psize) {
+      this.psize =psize;
+  }
+
+  public String getImage(){
+      return image;
+  }
+
+  public void setImage(String image) {
+      this.image =image;
+  }
+
+  public String getKeywords(){
+      return keywords;
+  }
+
+  public void setKeywords(String keywords) {
+      this.keywords =keywords;
+  }
+
+  public Object getDescription(){
+      return description;
+  }
+
+  public void setDescription(Object description) {
+      this.description =description;
+  }
+
+  public Integer getStatus(){
+      return status;
+  }
+
+  public void setStatus(Integer status) {
+      this.status =status;
+  }
+
+  public String getSummary(){
+      return summary;
+  }
+
+  public void setSummary(String summary) {
+      this.summary =summary;
+  }
+
+  public Integer getPublished(){
+      return published;
+  }
+
+  public void setPublished(Integer published) {
+      this.published =published;
+  }
+
+  public Integer getUpdate_time(){
+      return update_time;
+  }
+
+  public void setUpdate_time(Integer update_time) {
+      this.update_time =update_time;
+  }
+
+  public Object getContent(){
+      return content;
+  }
+
+  public void setContent(Object content) {
+      this.content =content;
+  }
+
+  public String getLang(){
+      return lang;
+  }
+
+  public void setLang(String lang) {
+      this.lang =lang;
+  }
+
+  public Integer getAid(){
+      return aid;
+  }
+
+  public void setAid(Integer aid) {
+      this.aid =aid;
+  }
+
+  public Integer getClick(){
+      return click;
+  }
+
+  public void setClick(Integer click) {
+      this.click =click;
+  }
+
+  public Integer getIs_recommend(){
+      return is_recommend;
+  }
+
+  public void setIs_recommend(Integer is_recommend) {
+      this.is_recommend =is_recommend;
+  }
+
+  public Integer getWap_display(){
+      return wap_display;
+  }
+
+  public void setWap_display(Integer wap_display) {
+      this.wap_display =wap_display;
+  }
+  public Product(){
+  }
+  public Product(Object id,Integer cid,String title,Double price,String psize,String image,String keywords,Object description,Integer status,String summary,Integer published,Integer update_time,Object content,String lang,Integer aid,Integer click,Integer is_recommend,Integer wap_display){
+      this.id=id;
+      this.cid=cid;
+      this.title=title;
+      this.price=price;
+      this.psize=psize;
+      this.image=image;
+      this.keywords=keywords;
+      this.description=description;
+      this.status=status;
+      this.summary=summary;
+      this.published=published;
+      this.update_time=update_time;
+      this.content=content;
+      this.lang=lang;
+      this.aid=aid;
+      this.click=click;
+      this.is_recommend=is_recommend;
+      this.wap_display=wap_display;
+  }
+}

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Sellcoupon">
+	<sql id="Base_Column_List">
+		rowid,name,code,pwd,price,buyprice,issuedate,duedate,satus,exchangedate,buydate,usercode,buycount,coupontype,coupontype_name,status_name,remarks
+	</sql>
+	<resultMap id="ResultMap"
+		type="com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon">
+		<id property="rowid" column="rowid" />
+		<id property="name" column="name" />
+		<id property="code" column="code" />
+		<id property="pwd" column="pwd" />
+		<id property="price" column="price" />
+		<id property="buyprice" column="buyprice" />
+		<id property="issuedate" column="issuedate" />
+		<id property="duedate" column="duedate" />
+		<id property="satus" column="satus" />
+		<id property="exchangedate" column="exchangedate" />
+		<id property="buydate" column="buydate" />
+		<id property="usercode" column="usercode" />
+		<id property="buycount" column="buycount" />
+		<id property="coupontype" column="coupontype" />
+		<id property="coupontype_name" column="coupontype_name" />
+		<id property="status_name" column="status_name" />
+		<id property="remarks" column="remarks" />
+	</resultMap>
+	<insert id="save" parameterType="com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon">
+		<selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID() AS rowid
+		</selectKey>
+		insert into ht_sellcoupon
+		(code,pwd,price,buyprice,issuedate,duedate,satus,buydate,usercode,buycount,coupontype,remarks)
+		values
+		(#{code},'123',#{price},#{buyprice},Now(),#{duedate},#{satus},now(),#{usercode},#{buycount},#{coupontype},#{remarks})
+	</insert>
+	<delete id="deleteByIds" parameterType="java.util.List">
+		delete from ht_sellcoupon where rowid in
+		<foreach collection="array" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	<update id="update" parameterType="com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon">
+		update ht_sellcoupon
+		<set>
+			<if test="rowid != null">
+				rowid = #{rowid},
+			</if>
+			<if test="code != null">
+				code = #{code},
+			</if>
+			<if test="pwd != null">
+				pwd = #{pwd},
+			</if>
+			<if test="price != null">
+				price = #{price},
+			</if>
+			<if test="buyprice != null">
+				buyprice = #{buyprice},
+			</if>
+			<if test="issuedate != null">
+				issuedate = #{issuedate},
+			</if>
+			<if test="duedate != null">
+				duedate = #{duedate},
+			</if>
+			<if test="satus != null">
+				satus = #{satus},
+			</if>
+			<if test="exchangedate != null">
+				exchangedate = #{exchangedate},
+			</if>
+			<if test="buydate != null">
+				buydate = #{buydate},
+			</if>
+			<if test="usercode != null">
+				usercode = #{usercode},
+			</if>
+			<if test="buycount != null">
+				buycount = #{buycount},
+			</if>
+			<if test="coupontype != null">
+				coupontype = #{coupontype},
+			</if>
+			<if test="remarks != null">
+				remarks = #{remarks}
+			</if>
+		</set>
+		where rowid = #{rowid}
+	</update>
+	<select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
+		select
+		rowid,name,code,pwd,price,buyprice,issuedate,duedate,satus,exchangedate,buydate,usercode,buycount,coupontype,(SELECT
+		NAME FROM ht_dictionaries WHERE CODE = coupontype) AS
+		coupontype_name,(SELECT
+		NAME FROM ht_dictionaries WHERE CODE = satus)
+		AS status_name,remarks
+		from ht_sellcoupon
+		where rowid = #{rowid}
+	</select>
+	<select id="getList" parameterType="com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon"
+		resultMap="ResultMap">
+		select
+		rowid,name,code,pwd,price,buyprice,issuedate,duedate,satus,exchangedate,buydate,usercode,buycount,coupontype,(SELECT
+		NAME FROM ht_dictionaries WHERE CODE = coupontype) AS
+		coupontype_name,(SELECT
+		NAME FROM ht_dictionaries WHERE CODE = satus)
+		AS status_name,remarks
+		from ht_sellcoupon
+	</select>
+	<select id="getPage" parameterType="com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon"
+		resultMap="ResultMap">
+		select
+		rowid,name,code,pwd,price,buyprice,issuedate,duedate,satus,exchangedate,buydate,usercode,buycount,coupontype,(SELECT
+		NAME FROM ht_dictionaries WHERE CODE = coupontype) AS
+		coupontype_name,(SELECT
+		NAME FROM ht_dictionaries WHERE CODE = satus)
+		AS status_name,remarks
+		from ht_sellcoupon
+		<where>
+			<if test="name != null and name != ''">
+				name like "%"#{name}"%"
+			</if>
+			<if test="satus != null and satus != ''">
+				satus = #{satus}
+			</if>
+		</where>
+		LIMIT #{pageStart},#{pageEnd}
+	</select>
+	<select id="getCount" parameterType="com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon"
+		resultType="int">
+		select count(*) from ht_sellcoupon
+		<where>
+			<if test="name != null and name != ''">
+				name like "%"#{name}"%"
+			</if>
+			<if test="satus != null and satus != ''">
+				satus = #{satus}
+			</if>
+		</where>
+	</select>
+	<select id="selectSellcoupon" parameterType="com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon"
+		resultType="java.util.HashMap">
+		select
+		<include refid="Base_Column_List" />
+		from ht_sellcoupon
+		<where>
+			<if test="name != null and name != ''">
+				name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+	<update id="updateSellcoupon" parameterType="com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon">
+		update ht_sellcoupon
+		<set>
+			<if test="satus != null">
+				satus = #{satus},
+			</if>
+			<if test="pwd != null">
+				pwd = #{pwd},
+			</if>
+			<if duedate="pwd != null">
+				duedate = #{duedate},
+			</if>
+		</set>
+		where code = #{code}
+	</update>
+	<update id="updateSellcouponCode" parameterType="com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon">
+		update ht_sellcoupon
+		<set>
+			<if test="code != null">
+				code = #{code},
+			</if>
+		</set>
+		where rowid = #{rowid}
+	</update>
+
+	<select id="selectOneSellcoupon" parameterType="com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon"
+		resultMap="ResultMap">
+		select
+		rowid,name,code,pwd,price,buyprice,issuedate,duedate,satus,exchangedate,buydate,usercode,buycount,coupontype
+		m ht_sellcoupon
+		where code = #{code}
+	</select>
+
+</mapper>

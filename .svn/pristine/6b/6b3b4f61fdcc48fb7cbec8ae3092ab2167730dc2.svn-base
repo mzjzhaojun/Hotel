@@ -1,0 +1,56 @@
+package com.yaao.app.system.controller.nav;
+
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import com.yaao.app.commnd.base.impl.BaseController;
+import com.yaao.app.commnd.web.StaticSources;
+import net.sf.json.JSONObject;
+import com.yaao.app.system.service.nav.impl.NavServiceImpl;
+import com.yaao.app.system.entity.nav.Nav;
+
+/**
+* @author zj    default  test
+* 
+* @version 1.1
+*/
+
+
+@Controller
+@RequestMapping("/system/nav")
+public class NavController extends BaseController<Nav, Integer> {
+
+  @Autowired
+  private NavServiceImpl service;
+
+  @Autowired
+  public void setBaseService() {
+		setBaseService(service);
+	}
+
+
+  /**
+  * custom 
+  * 
+  * @version 1.1
+  */
+  @RequestMapping(value = "/param1", method = RequestMethod.GET)
+  public void customSelect(HttpServletRequest request,HttpServletResponse response) {
+  	try {
+  		 String json = request.getParameter(StaticSources.JSONVO);
+			 Nav u = null;
+			 if (json != null) {
+			 	 u = (Nav) JSONObject.toBean(JSONObject.fromObject(json),Nav.class);
+			 }
+  		 List<Nav> list = service.selectNav(u);
+  		 super.setSuccess(list);
+  	}catch (Exception e) {
+  		super.setError(e.getMessage());
+      }
+  	super.ResponseJson(response);
+  }
+}

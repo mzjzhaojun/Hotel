@@ -1,0 +1,14 @@
+package com.yichuang.kyjd.system.dao.user_role;
+
+import java.util.List;
+import com.yichuang.kyjd.system.entity.user_role.User_role;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface IUser_roleDao {
+  public List<User_role> getList(String statement,User_role t);
+}

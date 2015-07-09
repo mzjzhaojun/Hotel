@@ -1,0 +1,14 @@
+package com.yaao.app.system.dao.attribute;
+
+import java.util.List;
+import com.yaao.app.system.entity.attribute.Attribute;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface IAttributeDao {
+  public List<Attribute> getList(String statement,Attribute t);
+}

@@ -1,0 +1,107 @@
+package com.yichuang.kyjd.rest.controller.pay;
+
+import java.net.URLEncoder;
+import java.util.SortedMap;
+import java.util.TreeMap;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONObject;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.yichuang.kyjd.commnd.base.impl.BaseController;
+import com.yichuang.kyjd.commnd.system.wxpay.CommonUtil;
+import com.yichuang.kyjd.commnd.system.wxpay.Sha1Util;
+import com.yichuang.kyjd.rest.service.coupon.impl.CouponServiceImpl;
+import com.yichuang.kyjd.rest.entity.coupon.Coupon;
+
+/**
+ * @author zj default test
+ * 
+ * @version 1.1
+ */
+
+@Controller
+@RequestMapping("/rest/pay")
+public class PayController extends BaseController<Coupon, Integer> {
+
+	@Autowired
+	private CouponServiceImpl service;
+
+	@Autowired
+	public void setBaseService() {
+		setBaseService(service);
+	}
+
+	/**
+	 * custom
+	 * 
+	 * @version 1.1
+	 */
+	@RequestMapping(value = "/openid", method = RequestMethod.GET)
+	public void openid(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			String appid = "wx7e8d9f3e1345cad1";
+			String backUri = "http://121.41.34.177:10000/Hotel/rest/pay/dopay";
+			// 授权后要跳转的链接所需的参数一般有会员号，金额，订单号之类，
+			// 最好自己带上一个加密字符串将金额加上一个自定义的key用MD5签名或者自己写的签名,
+			// 比如 Sign = %3D%2F%CS%
+			String orderNo = appid + Sha1Util.getTimeStamp();
+			backUri = backUri + "?userId=caofeng914614&orderNo=" + orderNo
+					+ "&describe=test&money=1.00";
+			// URLEncoder.encode 后可以在backUri 的url里面获取传递的所有参数
+			backUri = URLEncoder.encode(backUri);
+			// scope 参数视各自需求而定，这里用scope=snsapi_base
+			// 不弹出授权页面直接授权目的只获取统一支付接口的openid
+			String url = "https://open.weixin.qq.com/connect/oauth2/authorize?"
+					+ "appid="
+					+ appid
+					+ "&redirect_uri="
+					+ backUri
+					+ "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+			response.sendRedirect(url);
+		} catch (Exception e) {
+			super.setError(e.getMessage());
+		}
+	}
+
+	@RequestMapping(value = "/dopay", method = RequestMethod.GET)
+	public void dopay(HttpServletRequest request, HttpServletResponse response) {
+			String userId = request.getParameter("userId");
+			String orderNo = request.getParameter("orderNo");
+			String money = request.getParameter("money");
+			String code = request.getParameter("code");
+			// 金额转化为分为单位
+			float sessionmoney = Float.parseFloat(money);
+			String finalmoney = String.format("%.2f", sessionmoney);
+			finalmoney = finalmoney.replace(".", "");
+
+			// 商户相关资料
+			String appid = "";
+			String appsecret = "";
+			String partner = "";
+			String partnerkey = "";
+
+			String openId = "";
+			String URL = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="
+					+ appid
+					+ "&secret="
+					+ appsecret
+					+ "&code="
+					+ code
+					+ "&grant_type=authorization_code";
+
+			JSONObject jsonObject = CommonUtil.httpsRequest(URL, "GET", null);
+			if (null != jsonObject) {
+				openId = jsonObject.getString("openid");
+			}
+			super.setSuccess(openId);
+			super.ResponseJson(response);
+	}
+
+}

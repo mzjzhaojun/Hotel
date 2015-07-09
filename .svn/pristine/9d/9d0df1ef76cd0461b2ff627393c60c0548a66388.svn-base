@@ -1,0 +1,14 @@
+package com.yaao.app.system.dao.ad;
+
+import java.util.List;
+import com.yaao.app.system.entity.ad.Ad;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface IAdDao {
+  public List<Ad> getList(String statement,Ad t);
+}

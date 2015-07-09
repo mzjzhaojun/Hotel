@@ -1,0 +1,14 @@
+package com.yaao.app.system.dao.admin;
+
+import java.util.List;
+import com.yaao.app.system.entity.admin.Admin;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface IAdminDao {
+  public List<Admin> getList(String statement,Admin t);
+}

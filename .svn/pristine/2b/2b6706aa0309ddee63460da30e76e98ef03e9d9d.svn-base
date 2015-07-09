@@ -1,0 +1,20 @@
+package com.yaao.app.system.dao.message.impl;
+
+import java.util.List;
+import org.springframework.stereotype.Repository;
+import com.yaao.app.system.dao.message.IMessageDao;
+import com.yaao.app.commnd.base.impl.BaseDaoImpl;
+import com.yaao.app.system.entity.message.Message;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Repository
+public class MessageDaoImpl extends BaseDaoImpl<Message, Integer> implements IMessageDao{
+public List<Message> getList(String statement,Message t){
+  return super.selectList(statement, t);
+  }
+}

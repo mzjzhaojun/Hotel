@@ -1,0 +1,306 @@
+package com.yaao.app.system.entity.member;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Member implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Integer uid;
+  String weibo_uid;
+  String tencent_uid;
+  String email;
+  String nickname;
+  Object pwd;
+  Integer reg_date;
+  Object reg_ip;
+  Integer verify_status;
+  String verify_code;
+  Integer verify_time;
+  Integer verify_exp_time;
+  String find_fwd_code;
+  Integer find_pwd_time;
+  Integer find_pwd_exp_time;
+  String avatar;
+  Integer birthday;
+  Integer sex;
+  String address;
+  String province;
+  String city;
+  String intr;
+  String mobile;
+  String phone;
+  String fax;
+  Integer qq;
+  String msn;
+  String login_ip;
+  Integer login_time;
+
+  public Integer getUid(){
+      return uid;
+  }
+
+  public void setUid(Integer uid) {
+      this.uid =uid;
+  }
+
+  public String getWeibo_uid(){
+      return weibo_uid;
+  }
+
+  public void setWeibo_uid(String weibo_uid) {
+      this.weibo_uid =weibo_uid;
+  }
+
+  public String getTencent_uid(){
+      return tencent_uid;
+  }
+
+  public void setTencent_uid(String tencent_uid) {
+      this.tencent_uid =tencent_uid;
+  }
+
+  public String getEmail(){
+      return email;
+  }
+
+  public void setEmail(String email) {
+      this.email =email;
+  }
+
+  public String getNickname(){
+      return nickname;
+  }
+
+  public void setNickname(String nickname) {
+      this.nickname =nickname;
+  }
+
+  public Object getPwd(){
+      return pwd;
+  }
+
+  public void setPwd(Object pwd) {
+      this.pwd =pwd;
+  }
+
+  public Integer getReg_date(){
+      return reg_date;
+  }
+
+  public void setReg_date(Integer reg_date) {
+      this.reg_date =reg_date;
+  }
+
+  public Object getReg_ip(){
+      return reg_ip;
+  }
+
+  public void setReg_ip(Object reg_ip) {
+      this.reg_ip =reg_ip;
+  }
+
+  public Integer getVerify_status(){
+      return verify_status;
+  }
+
+  public void setVerify_status(Integer verify_status) {
+      this.verify_status =verify_status;
+  }
+
+  public String getVerify_code(){
+      return verify_code;
+  }
+
+  public void setVerify_code(String verify_code) {
+      this.verify_code =verify_code;
+  }
+
+  public Integer getVerify_time(){
+      return verify_time;
+  }
+
+  public void setVerify_time(Integer verify_time) {
+      this.verify_time =verify_time;
+  }
+
+  public Integer getVerify_exp_time(){
+      return verify_exp_time;
+  }
+
+  public void setVerify_exp_time(Integer verify_exp_time) {
+      this.verify_exp_time =verify_exp_time;
+  }
+
+  public String getFind_fwd_code(){
+      return find_fwd_code;
+  }
+
+  public void setFind_fwd_code(String find_fwd_code) {
+      this.find_fwd_code =find_fwd_code;
+  }
+
+  public Integer getFind_pwd_time(){
+      return find_pwd_time;
+  }
+
+  public void setFind_pwd_time(Integer find_pwd_time) {
+      this.find_pwd_time =find_pwd_time;
+  }
+
+  public Integer getFind_pwd_exp_time(){
+      return find_pwd_exp_time;
+  }
+
+  public void setFind_pwd_exp_time(Integer find_pwd_exp_time) {
+      this.find_pwd_exp_time =find_pwd_exp_time;
+  }
+
+  public String getAvatar(){
+      return avatar;
+  }
+
+  public void setAvatar(String avatar) {
+      this.avatar =avatar;
+  }
+
+  public Integer getBirthday(){
+      return birthday;
+  }
+
+  public void setBirthday(Integer birthday) {
+      this.birthday =birthday;
+  }
+
+  public Integer getSex(){
+      return sex;
+  }
+
+  public void setSex(Integer sex) {
+      this.sex =sex;
+  }
+
+  public String getAddress(){
+      return address;
+  }
+
+  public void setAddress(String address) {
+      this.address =address;
+  }
+
+  public String getProvince(){
+      return province;
+  }
+
+  public void setProvince(String province) {
+      this.province =province;
+  }
+
+  public String getCity(){
+      return city;
+  }
+
+  public void setCity(String city) {
+      this.city =city;
+  }
+
+  public String getIntr(){
+      return intr;
+  }
+
+  public void setIntr(String intr) {
+      this.intr =intr;
+  }
+
+  public String getMobile(){
+      return mobile;
+  }
+
+  public void setMobile(String mobile) {
+      this.mobile =mobile;
+  }
+
+  public String getPhone(){
+      return phone;
+  }
+
+  public void setPhone(String phone) {
+      this.phone =phone;
+  }
+
+  public String getFax(){
+      return fax;
+  }
+
+  public void setFax(String fax) {
+      this.fax =fax;
+  }
+
+  public Integer getQq(){
+      return qq;
+  }
+
+  public void setQq(Integer qq) {
+      this.qq =qq;
+  }
+
+  public String getMsn(){
+      return msn;
+  }
+
+  public void setMsn(String msn) {
+      this.msn =msn;
+  }
+
+  public String getLogin_ip(){
+      return login_ip;
+  }
+
+  public void setLogin_ip(String login_ip) {
+      this.login_ip =login_ip;
+  }
+
+  public Integer getLogin_time(){
+      return login_time;
+  }
+
+  public void setLogin_time(Integer login_time) {
+      this.login_time =login_time;
+  }
+  public Member(){
+  }
+  public Member(Integer uid,String weibo_uid,String tencent_uid,String email,String nickname,Object pwd,Integer reg_date,Object reg_ip,Integer verify_status,String verify_code,Integer verify_time,Integer verify_exp_time,String find_fwd_code,Integer find_pwd_time,Integer find_pwd_exp_time,String avatar,Integer birthday,Integer sex,String address,String province,String city,String intr,String mobile,String phone,String fax,Integer qq,String msn,String login_ip,Integer login_time){
+      this.uid=uid;
+      this.weibo_uid=weibo_uid;
+      this.tencent_uid=tencent_uid;
+      this.email=email;
+      this.nickname=nickname;
+      this.pwd=pwd;
+      this.reg_date=reg_date;
+      this.reg_ip=reg_ip;
+      this.verify_status=verify_status;
+      this.verify_code=verify_code;
+      this.verify_time=verify_time;
+      this.verify_exp_time=verify_exp_time;
+      this.find_fwd_code=find_fwd_code;
+      this.find_pwd_time=find_pwd_time;
+      this.find_pwd_exp_time=find_pwd_exp_time;
+      this.avatar=avatar;
+      this.birthday=birthday;
+      this.sex=sex;
+      this.address=address;
+      this.province=province;
+      this.city=city;
+      this.intr=intr;
+      this.mobile=mobile;
+      this.phone=phone;
+      this.fax=fax;
+      this.qq=qq;
+      this.msn=msn;
+      this.login_ip=login_ip;
+      this.login_time=login_time;
+  }
+}

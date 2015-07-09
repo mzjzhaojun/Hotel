@@ -1,0 +1,25 @@
+package com.yaao.app.system.service.product.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.yaao.app.system.dao.product.impl.ProductDaoImpl;
+import com.yaao.app.system.service.product.IProductService;
+import com.yaao.app.commnd.base.impl.BaseServiceImpl;
+import com.yaao.app.system.entity.product.Product;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Service
+public class ProductServiceImpl extends BaseServiceImpl<Product, Integer> implements IProductService{
+  @Autowired
+  private ProductDaoImpl dao;
+
+  public List<Product> selectProduct(Product t){
+       return dao.getList("selectProduct", t);
+  }
+}

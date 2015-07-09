@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Spec">
+  <sql id="Base_Column_List">
+     id,name,pid,value,type,note,sort
+  </sql>
+  <resultMap id="ResultMap" type="com.yaao.app.system.entity.spec.Spec">
+         <id property="id" column="id" />
+         <id property="name" column="name" />
+         <id property="pid" column="pid" />
+         <id property="value" column="value" />
+         <id property="type" column="type" />
+         <id property="note" column="note" />
+         <id property="sort" column="sort" />
+  </resultMap>
+  <insert id="save" parameterType="com.yaao.app.system.entity.spec.Spec">
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+  	SELECT LAST_INSERT_ID() AS id 
+  </selectKey>
+  insert into co_spec (name,pid,value,type,note,sort)
+         values (#{name},#{pid},#{value},#{type},#{note},#{sort})
+  </insert>
+ <delete id="deleteByIds" parameterType="java.util.List">
+     delete from co_spec where id in 
+        <foreach collection="array" index="index" item="item" open="("
+          separator="," close=")">
+           #{item}
+        </foreach>
+ </delete>
+ <update id="update" parameterType="com.yaao.app.system.entity.spec.Spec">
+    update co_spec
+         <set>
+             <if test="id != null">
+                   id = #{id},
+             </if>
+             <if test="name != null">
+                   name = #{name},
+             </if>
+             <if test="pid != null">
+                   pid = #{pid},
+             </if>
+             <if test="value != null">
+                   value = #{value},
+             </if>
+             <if test="type != null">
+                   type = #{type},
+             </if>
+             <if test="note != null">
+                   note = #{note},
+             </if>
+             <if test="sort != null">
+                   sort = #{sort}
+             </if>
+          </set>
+     where id = #{id}
+ </update>
+ <select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from co_spec 
+        where id = #{id}
+ </select>
+ <select id="getList" parameterType="com.yaao.app.system.entity.spec.Spec" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_spec 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+ <select id="getPage" parameterType="com.yaao.app.system.entity.spec.Spec" resultMap="ResultMap">
+      select
+       <include refid="Base_Column_List" />
+        from co_spec 
+       <where>
+             <if test="name != null and name != ''">
+         		  name like "%"#{name}"%"
+             </if>
+       </where>
+ </select>
+ <select id="getCount" parameterType="com.yaao.app.system.entity.spec.Spec" resultType="int">
+       select count(*) from co_spec 
+         <where>
+             <if test="name != null and name != ''">
+                name like "%"#{name}"%"
+             </if>
+         </where>
+ </select>
+ <select id="selectSpec" parameterType="com.yaao.app.system.entity.spec.Spec" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_spec 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+</mapper>

@@ -1,0 +1,32 @@
+package com.yichuang.kyjd.commnd.base.impl;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSessionFactory;
+
+import com.yichuang.kyjd.commnd.base.BaseEntity;
+import com.yichuang.kyjd.commnd.system.exception.BaseDaoException;
+
+public class BaseCommonDao extends BaseDaoImpl<BaseEntity, Integer> {
+
+	public BaseCommonDao(SqlSessionFactory sqlSessionFactory) {
+		this.setSqlSessionFactory(sqlSessionFactory);
+	}
+
+	public List<Object> getForList(String statement, Object parameter) {
+		List<Object> list = this.getSqlSession().selectList(statement, parameter);
+		return list;
+	}
+	
+	
+	public int insertObject(String statement, Object parameter) {
+		try {
+			return this.getSqlSession().insert(statement, parameter);
+		} catch (Exception e) {
+			throw new BaseDaoException(SERVER_ERROR, "execute =SQL_SAVE= "
+					+ getSqlName(SQL_SAVE) + "; Message:" + e.getMessage(),
+					true);
+		}
+	}
+
+}

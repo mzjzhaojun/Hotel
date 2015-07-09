@@ -1,0 +1,100 @@
+package com.yichuang.kyjd.commnd.system.util.note;
+
+import java.io.ByteArrayInputStream;
+import java.net.URLEncoder;
+import java.util.Iterator;
+
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+
+import com.yichuang.kyjd.commnd.base.impl.BaseCommonDao;
+import com.yichuang.kyjd.commnd.system.util.ApplicationUtil;
+import com.yichuang.kyjd.rest.entity.message.Message;
+
+/**
+ * 发送短信
+ * 
+ * @author zj
+ * 
+ */
+public class NoteUtil {
+
+	public NoteUtil() {
+		super();
+	}
+
+	private static NoteUtil single = null;
+
+	BaseCommonDao commonDao = (BaseCommonDao) ApplicationUtil
+			.getBean("baseCommonDao");
+
+	//
+	public static NoteUtil getInstance() {
+		if (single == null) {
+			single = new NoteUtil();
+		}
+		return single;
+	}
+
+	private HttpRequester request = new HttpRequester();
+
+	// 接口账号：1001@501073970001
+
+	// 接口 Key：F04AB932AE2EF84DEADE016EA37E0D59
+
+	// 通道组ID: 52
+	@SuppressWarnings("deprecation")
+	public boolean sendMessage(String message, String mb, String type) {
+		HttpRespons hr;
+		String result, sendtype, resultCode, account, total, sendMessage, code;
+		boolean flag = true;
+		try {
+			code = "" + ((int) ((Math.random() * 9 + 1) * 100000));
+			message = "金茂凯悦酒店的验证码: [ " + code + " ]";
+			String msg = new String(message
+					.getBytes("ISO-8859-1"), "UTF-8");
+			// 发送
+			sendMessage = "http://smsapi.c123.cn/OpenPlatform/OpenApi?action=sendOnce&ac=1001@501073970001&authkey=F04AB932AE2EF84DEADE016EA37E0D59&cgid=52&csid=101&c="
+					+ URLEncoder.encode(message) + "&m=" + mb;
+			hr = request.sendGet(sendMessage);
+			// 获得结果 String result =
+			// "<xml name='sendOnce' result='1'><Item cid='501073970001' sid='1001' msgid='1537444070626266600' total='1' price='0.1' remain='363.700' /></xml>";
+			result = hr.getContent();
+			// 解析xml
+			SAXReader saxReader = new SAXReader();
+			Document document = saxReader.read(new ByteArrayInputStream(result
+					.getBytes("UTF-8")));
+			Element monitConfig = document.getRootElement();// 获取根节点
+			sendtype = monitConfig.attribute("name").getValue();
+			resultCode = monitConfig.attribute("result").getValue();
+			Iterator<?> i = monitConfig.elementIterator();
+			Element monits = (Element) i.next();
+			account = monits.attribute("cid").getValue();
+			total = monits.attribute("total").getValue();
+			Message ms = new Message();
+			ms.setAccount(account);
+			ms.setType(type);
+			ms.setNo(mb);
+			ms.setcontent(message);
+			ms.setRequest_message(sendMessage);
+			ms.setResponse_message(result);
+			ms.setSendtype(sendtype);
+			ms.setStatus(resultCode);
+			ms.setTotal(Integer.parseInt(total));
+			ms.setCode(code);
+			if (resultCode != null && resultCode.equals("1"))
+				flag = true;
+			else
+				flag = false;
+			commonDao.insertstatement("Message.save", ms);
+		} catch (DocumentException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+}

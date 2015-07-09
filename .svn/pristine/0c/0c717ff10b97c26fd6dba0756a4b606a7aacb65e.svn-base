@@ -1,0 +1,14 @@
+package com.yaao.app.system.service.admin;
+
+import java.util.List;
+import com.yaao.app.system.entity.admin.Admin;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface IAdminService {
+  public List<Admin> selectAdmin(Admin t);
+}

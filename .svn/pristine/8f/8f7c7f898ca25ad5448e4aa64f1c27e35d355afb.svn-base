@@ -1,0 +1,96 @@
+package com.yaao.app.system.entity.node;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Node implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Integer id;
+  String name;
+  String title;
+  Integer status;
+  String remark;
+  Integer sort;
+  Integer pid;
+  Integer level;
+
+  public Integer getId(){
+      return id;
+  }
+
+  public void setId(Integer id) {
+      this.id =id;
+  }
+
+  public String getName(){
+      return name;
+  }
+
+  public void setName(String name) {
+      this.name =name;
+  }
+
+  public String getTitle(){
+      return title;
+  }
+
+  public void setTitle(String title) {
+      this.title =title;
+  }
+
+  public Integer getStatus(){
+      return status;
+  }
+
+  public void setStatus(Integer status) {
+      this.status =status;
+  }
+
+  public String getRemark(){
+      return remark;
+  }
+
+  public void setRemark(String remark) {
+      this.remark =remark;
+  }
+
+  public Integer getSort(){
+      return sort;
+  }
+
+  public void setSort(Integer sort) {
+      this.sort =sort;
+  }
+
+  public Integer getPid(){
+      return pid;
+  }
+
+  public void setPid(Integer pid) {
+      this.pid =pid;
+  }
+
+  public Integer getLevel(){
+      return level;
+  }
+
+  public void setLevel(Integer level) {
+      this.level =level;
+  }
+  public Node(){
+  }
+  public Node(Integer id,String name,String title,Integer status,String remark,Integer sort,Integer pid,Integer level){
+      this.id=id;
+      this.name=name;
+      this.title=title;
+      this.status=status;
+      this.remark=remark;
+      this.sort=sort;
+      this.pid=pid;
+      this.level=level;
+  }
+}

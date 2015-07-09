@@ -1,0 +1,14 @@
+package com.yaao.app.system.dao.page;
+
+import java.util.List;
+import com.yaao.app.system.entity.page.Page;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface IPageDao {
+  public List<Page> getList(String statement,Page t);
+}

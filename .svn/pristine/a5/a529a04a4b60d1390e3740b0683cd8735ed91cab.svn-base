@@ -1,0 +1,25 @@
+package com.yaao.app.system.service.role_user.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.yaao.app.system.dao.role_user.impl.Role_userDaoImpl;
+import com.yaao.app.system.service.role_user.IRole_userService;
+import com.yaao.app.commnd.base.impl.BaseServiceImpl;
+import com.yaao.app.system.entity.role_user.Role_user;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Service
+public class Role_userServiceImpl extends BaseServiceImpl<Role_user, Integer> implements IRole_userService{
+  @Autowired
+  private Role_userDaoImpl dao;
+
+  public List<Role_user> selectRole_user(Role_user t){
+       return dao.getList("selectRole_user", t);
+  }
+}

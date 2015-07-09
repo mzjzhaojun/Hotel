@@ -1,0 +1,20 @@
+package com.yaao.app.system.dao.admin.impl;
+
+import java.util.List;
+import org.springframework.stereotype.Repository;
+import com.yaao.app.system.dao.admin.IAdminDao;
+import com.yaao.app.commnd.base.impl.BaseDaoImpl;
+import com.yaao.app.system.entity.admin.Admin;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Repository
+public class AdminDaoImpl extends BaseDaoImpl<Admin, Integer> implements IAdminDao{
+public List<Admin> getList(String statement,Admin t){
+  return super.selectList(statement, t);
+  }
+}

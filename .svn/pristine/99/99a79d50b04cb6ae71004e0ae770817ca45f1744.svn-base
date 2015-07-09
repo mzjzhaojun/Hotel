@@ -1,0 +1,66 @@
+package com.yaao.app.system.entity.tag;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Tag implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Integer id;
+  Object name;
+  Object unique_id;
+  Object content;
+  String lang;
+
+  public Integer getId(){
+      return id;
+  }
+
+  public void setId(Integer id) {
+      this.id =id;
+  }
+
+  public Object getName(){
+      return name;
+  }
+
+  public void setName(Object name) {
+      this.name =name;
+  }
+
+  public Object getUnique_id(){
+      return unique_id;
+  }
+
+  public void setUnique_id(Object unique_id) {
+      this.unique_id =unique_id;
+  }
+
+  public Object getContent(){
+      return content;
+  }
+
+  public void setContent(Object content) {
+      this.content =content;
+  }
+
+  public String getLang(){
+      return lang;
+  }
+
+  public void setLang(String lang) {
+      this.lang =lang;
+  }
+  public Tag(){
+  }
+  public Tag(Integer id,Object name,Object unique_id,Object content,String lang){
+      this.id=id;
+      this.name=name;
+      this.unique_id=unique_id;
+      this.content=content;
+      this.lang=lang;
+  }
+}

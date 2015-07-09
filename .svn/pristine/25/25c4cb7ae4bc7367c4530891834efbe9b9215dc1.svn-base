@@ -1,0 +1,20 @@
+package com.yaao.app.system.dao.news.impl;
+
+import java.util.List;
+import org.springframework.stereotype.Repository;
+import com.yaao.app.system.dao.news.INewsDao;
+import com.yaao.app.commnd.base.impl.BaseDaoImpl;
+import com.yaao.app.system.entity.news.News;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Repository
+public class NewsDaoImpl extends BaseDaoImpl<News, Integer> implements INewsDao{
+public List<News> getList(String statement,News t){
+  return super.selectList(statement, t);
+  }
+}

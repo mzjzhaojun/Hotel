@@ -1,0 +1,14 @@
+package com.yaao.app.system.dao.shoppay;
+
+import java.util.List;
+import com.yaao.app.system.entity.shoppay.Shoppay;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface IShoppayDao {
+  public List<Shoppay> getList(String statement,Shoppay t);
+}

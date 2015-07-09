@@ -1,0 +1,14 @@
+package com.yaao.app.system.service.access;
+
+import java.util.List;
+import com.yaao.app.system.entity.access.Access;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface IAccessService {
+  public List<Access> selectAccess(Access t);
+}

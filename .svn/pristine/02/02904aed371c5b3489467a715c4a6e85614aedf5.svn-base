@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Admin">
+  <sql id="Base_Column_List">
+     aid,nickname,email,pwd,status,remark,find_code,time
+  </sql>
+  <resultMap id="ResultMap" type="com.yaao.app.system.entity.admin.Admin">
+         <id property="aid" column="aid" />
+         <id property="nickname" column="nickname" />
+         <id property="email" column="email" />
+         <id property="pwd" column="pwd" />
+         <id property="status" column="status" />
+         <id property="remark" column="remark" />
+         <id property="find_code" column="find_code" />
+         <id property="time" column="time" />
+  </resultMap>
+  <insert id="save" parameterType="com.yaao.app.system.entity.admin.Admin">
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+  	SELECT LAST_INSERT_ID() AS id 
+  </selectKey>
+  insert into co_admin (nickname,email,pwd,status,remark,find_code,time)
+         values (#{nickname},#{email},#{pwd},#{status},#{remark},#{find_code},#{time})
+  </insert>
+ <delete id="deleteByIds" parameterType="java.util.List">
+     delete from co_admin where id in 
+        <foreach collection="array" index="index" item="item" open="("
+          separator="," close=")">
+           #{item}
+        </foreach>
+ </delete>
+ <update id="update" parameterType="com.yaao.app.system.entity.admin.Admin">
+    update co_admin
+         <set>
+             <if test="aid != null">
+                   aid = #{aid},
+             </if>
+             <if test="nickname != null">
+                   nickname = #{nickname},
+             </if>
+             <if test="email != null">
+                   email = #{email},
+             </if>
+             <if test="pwd != null">
+                   pwd = #{pwd},
+             </if>
+             <if test="status != null">
+                   status = #{status},
+             </if>
+             <if test="remark != null">
+                   remark = #{remark},
+             </if>
+             <if test="find_code != null">
+                   find_code = #{find_code},
+             </if>
+             <if test="time != null">
+                   time = #{time}
+             </if>
+          </set>
+     where id = #{id}
+ </update>
+ <select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from co_admin 
+        where id = #{id}
+ </select>
+ <select id="getList" parameterType="com.yaao.app.system.entity.admin.Admin" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_admin 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+ <select id="getPage" parameterType="com.yaao.app.system.entity.admin.Admin" resultMap="ResultMap">
+      select
+       <include refid="Base_Column_List" />
+        from co_admin 
+       <where>
+             <if test="name != null and name != ''">
+         		  name like "%"#{name}"%"
+             </if>
+       </where>
+ </select>
+ <select id="getCount" parameterType="com.yaao.app.system.entity.admin.Admin" resultType="int">
+       select count(*) from co_admin 
+         <where>
+             <if test="name != null and name != ''">
+                name like "%"#{name}"%"
+             </if>
+         </where>
+ </select>
+ <select id="selectAdmin" parameterType="com.yaao.app.system.entity.admin.Admin" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_admin 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+</mapper>

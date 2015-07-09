@@ -1,0 +1,116 @@
+package com.yaao.app.system.entity.nav;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Nav implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Object id;
+  String module;
+  String nav_name;
+  Integer parent_id;
+  Integer guide;
+  String type;
+  String link;
+  String lang;
+  Integer sort;
+  Integer target;
+
+  public Object getId(){
+      return id;
+  }
+
+  public void setId(Object id) {
+      this.id =id;
+  }
+
+  public String getModule(){
+      return module;
+  }
+
+  public void setModule(String module) {
+      this.module =module;
+  }
+
+  public String getNav_name(){
+      return nav_name;
+  }
+
+  public void setNav_name(String nav_name) {
+      this.nav_name =nav_name;
+  }
+
+  public Integer getParent_id(){
+      return parent_id;
+  }
+
+  public void setParent_id(Integer parent_id) {
+      this.parent_id =parent_id;
+  }
+
+  public Integer getGuide(){
+      return guide;
+  }
+
+  public void setGuide(Integer guide) {
+      this.guide =guide;
+  }
+
+  public String getType(){
+      return type;
+  }
+
+  public void setType(String type) {
+      this.type =type;
+  }
+
+  public String getLink(){
+      return link;
+  }
+
+  public void setLink(String link) {
+      this.link =link;
+  }
+
+  public String getLang(){
+      return lang;
+  }
+
+  public void setLang(String lang) {
+      this.lang =lang;
+  }
+
+  public Integer getSort(){
+      return sort;
+  }
+
+  public void setSort(Integer sort) {
+      this.sort =sort;
+  }
+
+  public Integer getTarget(){
+      return target;
+  }
+
+  public void setTarget(Integer target) {
+      this.target =target;
+  }
+  public Nav(){
+  }
+  public Nav(Object id,String module,String nav_name,Integer parent_id,Integer guide,String type,String link,String lang,Integer sort,Integer target){
+      this.id=id;
+      this.module=module;
+      this.nav_name=nav_name;
+      this.parent_id=parent_id;
+      this.guide=guide;
+      this.type=type;
+      this.link=link;
+      this.lang=lang;
+      this.sort=sort;
+      this.target=target;
+  }
+}

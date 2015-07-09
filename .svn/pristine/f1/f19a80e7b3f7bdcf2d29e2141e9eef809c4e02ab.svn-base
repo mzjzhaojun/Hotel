@@ -1,0 +1,136 @@
+package com.yaao.app.system.entity.restaurant;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Restaurant implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Integer rowid;
+  String name;
+  String number;
+  Object type;
+  Object babychair;
+  Object iscoupon;
+  Object mincharge;
+  Integer maxdinernum;
+  Object status;
+  String detail;
+  Object deposit;
+  String remark;
+
+  public Integer getRowid(){
+      return rowid;
+  }
+
+  public void setRowid(Integer rowid) {
+      this.rowid =rowid;
+  }
+
+  public String getName(){
+      return name;
+  }
+
+  public void setName(String name) {
+      this.name =name;
+  }
+
+  public String getNumber(){
+      return number;
+  }
+
+  public void setNumber(String number) {
+      this.number =number;
+  }
+
+  public Object getType(){
+      return type;
+  }
+
+  public void setType(Object type) {
+      this.type =type;
+  }
+
+  public Object getBabychair(){
+      return babychair;
+  }
+
+  public void setBabychair(Object babychair) {
+      this.babychair =babychair;
+  }
+
+  public Object getIscoupon(){
+      return iscoupon;
+  }
+
+  public void setIscoupon(Object iscoupon) {
+      this.iscoupon =iscoupon;
+  }
+
+  public Object getMincharge(){
+      return mincharge;
+  }
+
+  public void setMincharge(Object mincharge) {
+      this.mincharge =mincharge;
+  }
+
+  public Integer getMaxdinernum(){
+      return maxdinernum;
+  }
+
+  public void setMaxdinernum(Integer maxdinernum) {
+      this.maxdinernum =maxdinernum;
+  }
+
+  public Object getStatus(){
+      return status;
+  }
+
+  public void setStatus(Object status) {
+      this.status =status;
+  }
+
+  public String getDetail(){
+      return detail;
+  }
+
+  public void setDetail(String detail) {
+      this.detail =detail;
+  }
+
+  public Object getDeposit(){
+      return deposit;
+  }
+
+  public void setDeposit(Object deposit) {
+      this.deposit =deposit;
+  }
+
+  public String getRemark(){
+      return remark;
+  }
+
+  public void setRemark(String remark) {
+      this.remark =remark;
+  }
+  public Restaurant(){
+  }
+  public Restaurant(Integer rowid,String name,String number,Object type,Object babychair,Object iscoupon,Object mincharge,Integer maxdinernum,Object status,String detail,Object deposit,String remark){
+      this.rowid=rowid;
+      this.name=name;
+      this.number=number;
+      this.type=type;
+      this.babychair=babychair;
+      this.iscoupon=iscoupon;
+      this.mincharge=mincharge;
+      this.maxdinernum=maxdinernum;
+      this.status=status;
+      this.detail=detail;
+      this.deposit=deposit;
+      this.remark=remark;
+  }
+}

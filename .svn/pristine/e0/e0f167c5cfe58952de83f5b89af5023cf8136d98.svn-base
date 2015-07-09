@@ -1,0 +1,20 @@
+package com.yaao.app.commnd.base.impl;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSessionFactory;
+
+import com.yaao.app.commnd.base.BaseEntity;
+
+public class BaseCommonDao extends BaseDaoImpl<BaseEntity, Integer> {
+
+	public BaseCommonDao(SqlSessionFactory sqlSessionFactory) {
+		this.setSqlSessionFactory(sqlSessionFactory);
+	}
+
+	public List<Object> getForList(String statement, Object parameter) {
+		List<Object> list = this.getSqlSession().selectList(statement, parameter);
+		return list;
+	}
+
+}

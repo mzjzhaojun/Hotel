@@ -1,0 +1,14 @@
+package com.yaao.app.system.dao.spec;
+
+import java.util.List;
+import com.yaao.app.system.entity.spec.Spec;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface ISpecDao {
+  public List<Spec> getList(String statement,Spec t);
+}

@@ -1,0 +1,25 @@
+package com.yaao.app.system.service.shoppay.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.yaao.app.system.dao.shoppay.impl.ShoppayDaoImpl;
+import com.yaao.app.system.service.shoppay.IShoppayService;
+import com.yaao.app.commnd.base.impl.BaseServiceImpl;
+import com.yaao.app.system.entity.shoppay.Shoppay;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Service
+public class ShoppayServiceImpl extends BaseServiceImpl<Shoppay, Integer> implements IShoppayService{
+  @Autowired
+  private ShoppayDaoImpl dao;
+
+  public List<Shoppay> selectShoppay(Shoppay t){
+       return dao.getList("selectShoppay", t);
+  }
+}

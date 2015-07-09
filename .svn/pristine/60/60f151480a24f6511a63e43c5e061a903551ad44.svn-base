@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Link">
+  <sql id="Base_Column_List">
+     id,title,display,link,sort,target
+  </sql>
+  <resultMap id="ResultMap" type="com.yaao.app.system.entity.link.Link">
+         <id property="id" column="id" />
+         <id property="title" column="title" />
+         <id property="display" column="display" />
+         <id property="link" column="link" />
+         <id property="sort" column="sort" />
+         <id property="target" column="target" />
+  </resultMap>
+  <insert id="save" parameterType="com.yaao.app.system.entity.link.Link">
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+  	SELECT LAST_INSERT_ID() AS id 
+  </selectKey>
+  insert into co_link (title,display,link,sort,target)
+         values (#{title},#{display},#{link},#{sort},#{target})
+  </insert>
+ <delete id="deleteByIds" parameterType="java.util.List">
+     delete from co_link where id in 
+        <foreach collection="array" index="index" item="item" open="("
+          separator="," close=")">
+           #{item}
+        </foreach>
+ </delete>
+ <update id="update" parameterType="com.yaao.app.system.entity.link.Link">
+    update co_link
+         <set>
+             <if test="id != null">
+                   id = #{id},
+             </if>
+             <if test="title != null">
+                   title = #{title},
+             </if>
+             <if test="display != null">
+                   display = #{display},
+             </if>
+             <if test="link != null">
+                   link = #{link},
+             </if>
+             <if test="sort != null">
+                   sort = #{sort},
+             </if>
+             <if test="target != null">
+                   target = #{target}
+             </if>
+          </set>
+     where id = #{id}
+ </update>
+ <select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from co_link 
+        where id = #{id}
+ </select>
+ <select id="getList" parameterType="com.yaao.app.system.entity.link.Link" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_link 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+ <select id="getPage" parameterType="com.yaao.app.system.entity.link.Link" resultMap="ResultMap">
+      select
+       <include refid="Base_Column_List" />
+        from co_link 
+       <where>
+             <if test="name != null and name != ''">
+         		  name like "%"#{name}"%"
+             </if>
+       </where>
+ </select>
+ <select id="getCount" parameterType="com.yaao.app.system.entity.link.Link" resultType="int">
+       select count(*) from co_link 
+         <where>
+             <if test="name != null and name != ''">
+                name like "%"#{name}"%"
+             </if>
+         </where>
+ </select>
+ <select id="selectLink" parameterType="com.yaao.app.system.entity.link.Link" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_link 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+</mapper>

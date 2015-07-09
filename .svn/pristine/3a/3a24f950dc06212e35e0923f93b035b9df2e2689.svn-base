@@ -1,0 +1,111 @@
+package com.yaao.app.system.controller.user;
+
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import com.yaao.app.commnd.base.impl.BaseController;
+import com.yaao.app.commnd.web.StaticSources;
+import net.sf.json.JSONObject;
+import com.yaao.app.system.service.user.impl.UserServiceImpl;
+import com.yaao.app.system.entity.user.User;
+
+/**
+ * @author zj default test
+ * 
+ * @version 1.1
+ */
+
+@Controller
+@RequestMapping("/system/user")
+public class UserController extends BaseController<User, Integer> {
+
+	@Autowired
+	private UserServiceImpl service;
+
+	@Autowired
+	public void setBaseService() {
+		setBaseService(service);
+	}
+
+	/**
+	 * custom
+	 * 
+	 * @version 1.1
+	 */
+	@RequestMapping(value = "/param1", method = RequestMethod.GET)
+	public void customSelect(HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			String json = request.getParameter(StaticSources.JSONVO);
+			User u = null;
+			if (json != null) {
+				u = (User) JSONObject.toBean(JSONObject.fromObject(json),
+						User.class);
+			}
+			List<User> list = service.selectUser(u);
+			super.setSuccess(list);
+		} catch (Exception e) {
+			super.setError(e.getMessage());
+		}
+		super.ResponseJson(response);
+	}
+
+	/**
+	 * custom
+	 * 
+	 * @version 1.1
+	 */
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public void login(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			String json = request.getParameter(StaticSources.JSONVO);
+			User u = null;
+			if (json != null) {
+				u = (User) JSONObject.toBean(JSONObject.fromObject(json),
+						User.class);
+			}
+			User user = service.getUser(u);
+			//正确
+			if (user != null) {
+				HttpSession session = request.getSession();
+				session.setAttribute("token", user);
+				super.setSuccess(user);
+			}else{
+				//错误验证用户名称or密码
+				if(service.getUserName(u)==null)
+					super.setLoginUserError("noLoginName");
+				else if(service.getUserPwd(u)==null)
+					super.setLoginPwdError("noLoginPassword");
+			}
+		} catch (Exception e) {
+			super.setError(e.getMessage());
+		}
+		super.ResponseJson(response);
+	}
+	
+	
+	/**
+	 * custom
+	 * 
+	 * @version 1.1
+	 */
+	@RequestMapping(value = "/loginOut", method = RequestMethod.GET)
+	public void loginOut(HttpServletRequest request, HttpServletResponse response) {
+		try {
+				HttpSession session = request.getSession();
+				session.removeAttribute("token");
+				super.setSuccess("loginOut");
+		} catch (Exception e) {
+			super.setError(e.getMessage());
+		}
+		super.ResponseJson(response);
+	}
+	
+
+}

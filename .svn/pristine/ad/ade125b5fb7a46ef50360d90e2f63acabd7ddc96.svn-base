@@ -1,0 +1,14 @@
+package com.yaao.app.system.service.product;
+
+import java.util.List;
+import com.yaao.app.system.entity.product.Product;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface IProductService {
+  public List<Product> selectProduct(Product t);
+}

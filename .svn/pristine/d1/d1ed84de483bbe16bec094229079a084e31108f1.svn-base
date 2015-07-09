@@ -1,0 +1,20 @@
+package com.yaao.app.system.dao.member.impl;
+
+import java.util.List;
+import org.springframework.stereotype.Repository;
+import com.yaao.app.system.dao.member.IMemberDao;
+import com.yaao.app.commnd.base.impl.BaseDaoImpl;
+import com.yaao.app.system.entity.member.Member;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Repository
+public class MemberDaoImpl extends BaseDaoImpl<Member, Integer> implements IMemberDao{
+public List<Member> getList(String statement,Member t){
+  return super.selectList(statement, t);
+  }
+}

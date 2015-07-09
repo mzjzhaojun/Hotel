@@ -1,0 +1,14 @@
+package com.yaao.app.system.service.link;
+
+import java.util.List;
+import com.yaao.app.system.entity.link.Link;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface ILinkService {
+  public List<Link> selectLink(Link t);
+}

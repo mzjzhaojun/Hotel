@@ -1,0 +1,161 @@
+package com.yaao.app.commnd.base.impl;
+
+import java.io.Serializable;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONObject;
+
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.yaao.app.commnd.base.IBaseController;
+import com.yaao.app.commnd.orm.exception.BaseException;
+import com.yaao.app.commnd.orm.util.page.IGenericPage;
+import com.yaao.app.commnd.web.JsonResponse;
+import com.yaao.app.commnd.web.StaticSources;
+
+/**
+ * 
+ * baseController
+ * 
+ * @author zjma
+ * 
+ */
+public class BaseController<T, ID extends Serializable> extends JsonResponse
+		implements IBaseController<T, ID> {
+	
+	private BaseServiceImpl<T, Integer> baseService;
+	
+	public void setBaseService(BaseServiceImpl<T, Integer> baseService) {
+		this.baseService = baseService;
+	}
+
+	/**
+	 * add
+	 * 
+	 * @version 1.1
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(method = RequestMethod.POST)
+	public void save(HttpServletRequest request, HttpServletResponse response,T t) {
+		try {
+			String json = request.getParameter(StaticSources.JSONVO);
+			if (json != null) {
+				t = (T) JSONObject.toBean(JSONObject.fromObject(json),
+						t.getClass());
+			}
+			super.setSuccess(baseService.save(t));
+		} catch (Exception e) {
+			super.setError(e.getMessage());
+		}
+		super.ResponseJson(response);
+	}
+
+	/**
+	 * update
+	 * 
+	 * @version 1.1
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
+	public void update(@PathVariable String id, HttpServletRequest request,
+			HttpServletResponse response,T t) {
+		try {
+			String json = request.getParameter(StaticSources.JSONVO);
+			if (json != null) {
+				t = (T) JSONObject.toBean(JSONObject.fromObject(json),
+						t.getClass());
+			}
+			super.setSuccess(baseService.update(t));
+		} catch (Exception e) {
+			super.setError(e.getMessage());
+		}
+		super.ResponseJson(response);
+	}
+
+	/**
+	 * getbyId
+	 * 
+	 * @version 1.1
+	 */
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public void getById(@PathVariable String id, HttpServletRequest request,
+			HttpServletResponse response,T t) {
+		try {
+			super.setSuccess(baseService.getById(id));
+		} catch (BaseException e) {
+			super.setError(e.getMessage());
+		}
+		super.ResponseJson(response);
+	}
+
+	/**
+	 * deletes
+	 * 
+	 * @version 1.1
+	 */
+	@RequestMapping(value = "/delete/{ids}", method = RequestMethod.POST)
+	public void deleteByIds(@PathVariable String ids,
+			HttpServletRequest request, HttpServletResponse response,T t) {
+		try {
+			String[] str = ids.split(",");
+			Integer[] id = new Integer[str.length];
+			for (int i = 0; i < str.length; i++) {
+				id[i] = Integer.parseInt(str[i]);
+			}
+			super.setSuccess(baseService.deleteByIds(id));
+		} catch (BaseException e) {
+			super.setError(e.getMessage());
+		}
+		super.ResponseJson(response);
+	}
+
+	/**
+	 * getList
+	 * 
+	 * @version 1.1
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(method = RequestMethod.GET)
+	public void getList(HttpServletRequest request, HttpServletResponse response,T t) {
+		try {
+			String json = request.getParameter(StaticSources.JSONVO);
+			if (json != null) {
+				t = (T) JSONObject.toBean(JSONObject.fromObject(new String(json
+						.getBytes("ISO-8859-1"), "UTF-8")), t.getClass());
+			}
+			super.setSuccess(baseService.getList(t));
+		} catch (Exception e) {
+			super.setError(e.getMessage());
+		}
+		super.ResponseJson(response);
+	}
+
+	/**
+	 * getPage
+	 * 
+	 * @version 1.1
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/{pageNo}/{pageSize}", method = RequestMethod.GET)
+	public void getPage(@PathVariable Integer pageNo,
+			@PathVariable Integer pageSize, HttpServletRequest request,
+			HttpServletResponse response,T t) {
+		try {
+			String json = request.getParameter(StaticSources.JSONVO);
+			if (json != null) {
+				t = (T) JSONObject.toBean(JSONObject.fromObject(new String(json
+						.getBytes("ISO-8859-1"), "UTF-8")), t.getClass());
+			}
+			IGenericPage<T> list = baseService.getPage(t, pageNo, pageSize, null,
+					null);
+			super.setSuccess(list);
+		} catch (Exception e) {
+			super.setError(e.getMessage());
+		}
+		super.ResponseJson(response);
+	}
+}

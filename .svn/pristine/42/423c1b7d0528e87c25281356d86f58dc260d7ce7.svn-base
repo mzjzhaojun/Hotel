@@ -1,0 +1,25 @@
+package com.yaao.app.system.service.brand.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.yaao.app.system.dao.brand.impl.BrandDaoImpl;
+import com.yaao.app.system.service.brand.IBrandService;
+import com.yaao.app.commnd.base.impl.BaseServiceImpl;
+import com.yaao.app.system.entity.brand.Brand;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Service
+public class BrandServiceImpl extends BaseServiceImpl<Brand, Integer> implements IBrandService{
+  @Autowired
+  private BrandDaoImpl dao;
+
+  public List<Brand> selectBrand(Brand t){
+       return dao.getList("selectBrand", t);
+  }
+}

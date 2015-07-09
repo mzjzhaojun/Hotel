@@ -1,0 +1,14 @@
+package com.yaao.app.system.service.node;
+
+import java.util.List;
+import com.yaao.app.system.entity.node.Node;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface INodeService {
+  public List<Node> selectNode(Node t);
+}

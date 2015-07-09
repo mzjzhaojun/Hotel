@@ -1,0 +1,14 @@
+package com.yaao.app.system.service.model;
+
+import java.util.List;
+import com.yaao.app.system.entity.model.Model;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface IModelService {
+  public List<Model> selectModel(Model t);
+}

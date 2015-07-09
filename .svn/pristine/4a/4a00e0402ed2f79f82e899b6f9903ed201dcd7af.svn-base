@@ -1,0 +1,26 @@
+package com.yaao.app.system.dao.user_role.impl;
+
+import java.util.List;
+import org.springframework.stereotype.Repository;
+import com.yaao.app.system.dao.user_role.IUser_roleDao;
+import com.yaao.app.commnd.base.impl.BaseDaoImpl;
+import com.yaao.app.system.entity.user_role.User_role;
+
+/**
+ * @author zj default
+ * 
+ * @version 1.1
+ */
+
+@Repository
+public class User_roleDaoImpl extends BaseDaoImpl<User_role, Integer> implements
+		IUser_roleDao {
+	public List<User_role> getList(String statement, User_role t) {
+		return super.selectList(statement, t);
+	}
+
+	public User_role getUserRole(String statement, User_role t) {
+		return (User_role) super.selectOne(statement, t);
+	}
+
+}

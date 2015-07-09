@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd"
+	default-lazy-init="true">
+
+	<description>Spring-MVC</description>
+	
+	<bean id="appUtil" class="com.yaao.app.commnd.orm.util.ApplicationUtil" lazy-init="false"/>
+	
+	<!-- 自动扫描注解 -->
+	<context:component-scan base-package="com.yaao.app.*" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+<!-- 	
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	<bean id="wsdlServiceBean" class="com.yaao.app.commnd.webService.impl.WsdlService" />
+	<bean id="inMessageInterceptor" class="org.apache.cxf.interceptor.LoggingInInterceptor" />
+	<bean id="outLoggingInterceptor" class="org.apache.cxf.interceptor.LoggingOutInterceptor" />
+	<jaxws:server id="wsdlService" serviceClass="com.yaao.app.commnd.webService.IService"
+		address="/Wsdl">
+		<jaxws:serviceBean>
+			<ref bean="wsdlServiceBean" />
+		</jaxws:serviceBean>
+		<jaxws:inInterceptors>
+			<ref bean="inMessageInterceptor" />
+		</jaxws:inInterceptors>
+		<jaxws:outInterceptors>
+			<ref bean="outLoggingInterceptor" />
+		</jaxws:outInterceptors>
+	</jaxws:server> -->
+</beans>

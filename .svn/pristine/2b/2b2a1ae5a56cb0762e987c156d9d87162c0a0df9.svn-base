@@ -1,0 +1,156 @@
+package com.yichuang.kyjd.system.entity.sellcoupon;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Sellcoupon implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Integer rowid;
+  String name;
+  String code;
+  String pwd;
+  Object price;
+  Object buyprice;
+  String issuedate;
+  String duedate;
+  Object satus;
+  String exchangedate;
+  String buydate;
+  String usercode;
+  Integer buycount;
+  String remarks;
+
+  public Integer getRowid(){
+      return rowid;
+  }
+
+  public void setRowid(Integer rowid) {
+      this.rowid =rowid;
+  }
+
+  public String getName(){
+      return name;
+  }
+
+  public void setName(String name) {
+      this.name =name;
+  }
+
+  public String getCode(){
+      return code;
+  }
+
+  public void setCode(String code) {
+      this.code =code;
+  }
+
+  public String getPwd(){
+      return pwd;
+  }
+
+  public void setPwd(String pwd) {
+      this.pwd =pwd;
+  }
+
+  public Object getPrice(){
+      return price;
+  }
+
+  public void setPrice(Object price) {
+      this.price =price;
+  }
+
+  public Object getBuyprice(){
+      return buyprice;
+  }
+
+  public void setBuyprice(Object buyprice) {
+      this.buyprice =buyprice;
+  }
+
+  public String getIssuedate(){
+      return issuedate;
+  }
+
+  public void setIssuedate(String issuedate) {
+      this.issuedate =issuedate;
+  }
+
+  public String getDuedate(){
+      return duedate;
+  }
+
+  public void setDuedate(String duedate) {
+      this.duedate =duedate;
+  }
+
+  public Object getSatus(){
+      return satus;
+  }
+
+  public void setSatus(Object satus) {
+      this.satus =satus;
+  }
+
+  public String getExchangedate(){
+      return exchangedate;
+  }
+
+  public void setExchangedate(String exchangedate) {
+      this.exchangedate =exchangedate;
+  }
+
+  public String getBuydate(){
+      return buydate;
+  }
+
+  public void setBuydate(String buydate) {
+      this.buydate =buydate;
+  }
+
+  public String getUsercode(){
+      return usercode;
+  }
+
+  public void setUsercode(String usercode) {
+      this.usercode =usercode;
+  }
+
+  public Integer getBuycount(){
+      return buycount;
+  }
+
+  public void setBuycount(Integer buycount) {
+      this.buycount =buycount;
+  }
+
+  public String getRemarks(){
+      return remarks;
+  }
+
+  public void setRemarks(String remarks) {
+      this.remarks =remarks;
+  }
+  public Sellcoupon(){
+  }
+  public Sellcoupon(Integer rowid,String name,String code,String pwd,Object price,Object buyprice,String issuedate,String duedate,Object satus,String exchangedate,String buydate,String usercode,Integer buycount,String remarks){
+      this.rowid=rowid;
+      this.name=name;
+      this.code=code;
+      this.pwd=pwd;
+      this.price=price;
+      this.buyprice=buyprice;
+      this.issuedate=issuedate;
+      this.duedate=duedate;
+      this.satus=satus;
+      this.exchangedate=exchangedate;
+      this.buydate=buydate;
+      this.usercode=usercode;
+      this.buycount=buycount;
+      this.remarks=remarks;
+  }
+}

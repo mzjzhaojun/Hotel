@@ -1,0 +1,14 @@
+package com.yaao.app.system.dao.category;
+
+import java.util.List;
+import com.yaao.app.system.entity.category.Category;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface ICategoryDao {
+  public List<Category> getList(String statement,Category t);
+}

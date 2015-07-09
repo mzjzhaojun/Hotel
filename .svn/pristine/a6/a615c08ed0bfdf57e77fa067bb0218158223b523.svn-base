@@ -1,0 +1,20 @@
+package com.yaao.app.system.dao.spec.impl;
+
+import java.util.List;
+import org.springframework.stereotype.Repository;
+import com.yaao.app.system.dao.spec.ISpecDao;
+import com.yaao.app.commnd.base.impl.BaseDaoImpl;
+import com.yaao.app.system.entity.spec.Spec;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Repository
+public class SpecDaoImpl extends BaseDaoImpl<Spec, Integer> implements ISpecDao{
+public List<Spec> getList(String statement,Spec t){
+  return super.selectList(statement, t);
+  }
+}

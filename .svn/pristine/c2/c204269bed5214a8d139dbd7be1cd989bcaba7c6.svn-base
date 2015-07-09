@@ -1,0 +1,19 @@
+package com.yichuang.kyjd.commnd.base.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.session.ResultHandler;
+import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSessionFactory;
+
+import com.yichuang.kyjd.commnd.base.BaseEntity;
+import com.yichuang.kyjd.commnd.system.exception.BaseDaoException;
+
+public class BaseCommonDao extends BaseDaoImpl<BaseEntity, Integer> {
+
+	public BaseCommonDao(SqlSessionFactory sqlSessionFactory) {
+		this.setSqlSessionFactory(sqlSessionFactory);
+	}
+
+}

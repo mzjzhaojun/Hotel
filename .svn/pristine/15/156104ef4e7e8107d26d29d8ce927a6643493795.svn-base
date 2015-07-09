@@ -1,0 +1,20 @@
+package com.yaao.app.system.dao.node.impl;
+
+import java.util.List;
+import org.springframework.stereotype.Repository;
+import com.yaao.app.system.dao.node.INodeDao;
+import com.yaao.app.commnd.base.impl.BaseDaoImpl;
+import com.yaao.app.system.entity.node.Node;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Repository
+public class NodeDaoImpl extends BaseDaoImpl<Node, Integer> implements INodeDao{
+public List<Node> getList(String statement,Node t){
+  return super.selectList(statement, t);
+  }
+}

@@ -1,0 +1,25 @@
+package com.yaao.app.system.service.news.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.yaao.app.system.dao.news.impl.NewsDaoImpl;
+import com.yaao.app.system.service.news.INewsService;
+import com.yaao.app.commnd.base.impl.BaseServiceImpl;
+import com.yaao.app.system.entity.news.News;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Service
+public class NewsServiceImpl extends BaseServiceImpl<News, Integer> implements INewsService{
+  @Autowired
+  private NewsDaoImpl dao;
+
+  public List<News> selectNews(News t){
+       return dao.getList("selectNews", t);
+  }
+}

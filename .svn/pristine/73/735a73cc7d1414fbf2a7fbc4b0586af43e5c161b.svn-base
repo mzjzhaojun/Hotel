@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Product">
+  <sql id="Base_Column_List">
+     id,cid,title,price,psize,image,keywords,description,status,summary,published,update_time,content,lang,aid,click,is_recommend,wap_display
+  </sql>
+  <resultMap id="ResultMap" type="com.yaao.app.system.entity.product.Product">
+         <id property="id" column="id" />
+         <id property="cid" column="cid" />
+         <id property="title" column="title" />
+         <id property="price" column="price" />
+         <id property="psize" column="psize" />
+         <id property="image" column="image" />
+         <id property="keywords" column="keywords" />
+         <id property="description" column="description" />
+         <id property="status" column="status" />
+         <id property="summary" column="summary" />
+         <id property="published" column="published" />
+         <id property="update_time" column="update_time" />
+         <id property="content" column="content" />
+         <id property="lang" column="lang" />
+         <id property="aid" column="aid" />
+         <id property="click" column="click" />
+         <id property="is_recommend" column="is_recommend" />
+         <id property="wap_display" column="wap_display" />
+  </resultMap>
+  <insert id="save" parameterType="com.yaao.app.system.entity.product.Product">
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+  	SELECT LAST_INSERT_ID() AS id 
+  </selectKey>
+  insert into co_product (cid,title,price,psize,image,keywords,description,status,summary,published,update_time,content,lang,aid,click,is_recommend,wap_display)
+         values (#{cid},#{title},#{price},#{psize},#{image},#{keywords},#{description},#{status},#{summary},#{published},#{update_time},#{content},#{lang},#{aid},#{click},#{is_recommend},#{wap_display})
+  </insert>
+ <delete id="deleteByIds" parameterType="java.util.List">
+     delete from co_product where id in 
+        <foreach collection="array" index="index" item="item" open="("
+          separator="," close=")">
+           #{item}
+        </foreach>
+ </delete>
+ <update id="update" parameterType="com.yaao.app.system.entity.product.Product">
+    update co_product
+         <set>
+             <if test="id != null">
+                   id = #{id},
+             </if>
+             <if test="cid != null">
+                   cid = #{cid},
+             </if>
+             <if test="title != null">
+                   title = #{title},
+             </if>
+             <if test="price != null">
+                   price = #{price},
+             </if>
+             <if test="psize != null">
+                   psize = #{psize},
+             </if>
+             <if test="image != null">
+                   image = #{image},
+             </if>
+             <if test="keywords != null">
+                   keywords = #{keywords},
+             </if>
+             <if test="description != null">
+                   description = #{description},
+             </if>
+             <if test="status != null">
+                   status = #{status},
+             </if>
+             <if test="summary != null">
+                   summary = #{summary},
+             </if>
+             <if test="published != null">
+                   published = #{published},
+             </if>
+             <if test="update_time != null">
+                   update_time = #{update_time},
+             </if>
+             <if test="content != null">
+                   content = #{content},
+             </if>
+             <if test="lang != null">
+                   lang = #{lang},
+             </if>
+             <if test="aid != null">
+                   aid = #{aid},
+             </if>
+             <if test="click != null">
+                   click = #{click},
+             </if>
+             <if test="is_recommend != null">
+                   is_recommend = #{is_recommend},
+             </if>
+             <if test="wap_display != null">
+                   wap_display = #{wap_display}
+             </if>
+          </set>
+     where id = #{id}
+ </update>
+ <select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from co_product 
+        where id = #{id}
+ </select>
+ <select id="getList" parameterType="com.yaao.app.system.entity.product.Product" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_product 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+ <select id="getPage" parameterType="com.yaao.app.system.entity.product.Product" resultMap="ResultMap">
+      select
+       <include refid="Base_Column_List" />
+        from co_product 
+       <where>
+             <if test="name != null and name != ''">
+         		  name like "%"#{name}"%"
+             </if>
+       </where>
+ </select>
+ <select id="getCount" parameterType="com.yaao.app.system.entity.product.Product" resultType="int">
+       select count(*) from co_product 
+         <where>
+             <if test="name != null and name != ''">
+                name like "%"#{name}"%"
+             </if>
+         </where>
+ </select>
+ <select id="selectProduct" parameterType="com.yaao.app.system.entity.product.Product" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_product 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+</mapper>

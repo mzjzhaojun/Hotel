@@ -1,0 +1,25 @@
+package com.yaao.app.system.service.user_module.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.yaao.app.system.dao.user_module.impl.User_moduleDaoImpl;
+import com.yaao.app.system.service.user_module.IUser_moduleService;
+import com.yaao.app.commnd.base.impl.BaseServiceImpl;
+import com.yaao.app.system.entity.user_module.User_module;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Service
+public class User_moduleServiceImpl extends BaseServiceImpl<User_module, Integer> implements IUser_moduleService{
+  @Autowired
+  private User_moduleDaoImpl dao;
+
+  public List<User_module> selectUser_module(User_module t){
+       return dao.getList("selectUser_module", t);
+  }
+}

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Role_user">
+  <sql id="Base_Column_List">
+     role_id,user_id
+  </sql>
+  <resultMap id="ResultMap" type="com.yaao.app.system.entity.role_user.Role_user">
+         <id property="role_id" column="role_id" />
+         <id property="user_id" column="user_id" />
+  </resultMap>
+  <insert id="save" parameterType="com.yaao.app.system.entity.role_user.Role_user">
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+  	SELECT LAST_INSERT_ID() AS id 
+  </selectKey>
+  insert into co_role_user (user_id)
+         values (#{user_id})
+  </insert>
+ <delete id="deleteByIds" parameterType="java.util.List">
+     delete from co_role_user where id in 
+        <foreach collection="array" index="index" item="item" open="("
+          separator="," close=")">
+           #{item}
+        </foreach>
+ </delete>
+ <update id="update" parameterType="com.yaao.app.system.entity.role_user.Role_user">
+    update co_role_user
+         <set>
+             <if test="role_id != null">
+                   role_id = #{role_id},
+             </if>
+             <if test="user_id != null">
+                   user_id = #{user_id}
+             </if>
+          </set>
+     where id = #{id}
+ </update>
+ <select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from co_role_user 
+        where id = #{id}
+ </select>
+ <select id="getList" parameterType="com.yaao.app.system.entity.role_user.Role_user" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_role_user 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+ <select id="getPage" parameterType="com.yaao.app.system.entity.role_user.Role_user" resultMap="ResultMap">
+      select
+       <include refid="Base_Column_List" />
+        from co_role_user 
+       <where>
+             <if test="name != null and name != ''">
+         		  name like "%"#{name}"%"
+             </if>
+       </where>
+ </select>
+ <select id="getCount" parameterType="com.yaao.app.system.entity.role_user.Role_user" resultType="int">
+       select count(*) from co_role_user 
+         <where>
+             <if test="name != null and name != ''">
+                name like "%"#{name}"%"
+             </if>
+         </where>
+ </select>
+ <select id="selectRole_user" parameterType="com.yaao.app.system.entity.role_user.Role_user" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_role_user 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+</mapper>

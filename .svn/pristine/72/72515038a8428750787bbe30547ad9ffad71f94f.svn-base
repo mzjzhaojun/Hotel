@@ -1,0 +1,66 @@
+package com.yichuang.kyjd.rest.entity.role;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Role implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Integer rowid;
+  String role_code;
+  String role_name;
+  String sys_create_time;
+  String remarks;
+
+  public Integer getRowid(){
+      return rowid;
+  }
+
+  public void setRowid(Integer rowid) {
+      this.rowid =rowid;
+  }
+
+  public String getRole_code(){
+      return role_code;
+  }
+
+  public void setRole_code(String role_code) {
+      this.role_code =role_code;
+  }
+
+  public String getRole_name(){
+      return role_name;
+  }
+
+  public void setRole_name(String role_name) {
+      this.role_name =role_name;
+  }
+
+  public String getSys_create_time(){
+      return sys_create_time;
+  }
+
+  public void setSys_create_time(String sys_create_time) {
+      this.sys_create_time =sys_create_time;
+  }
+
+  public String getRemarks(){
+      return remarks;
+  }
+
+  public void setRemarks(String remarks) {
+      this.remarks =remarks;
+  }
+  public Role(){
+  }
+  public Role(Integer rowid,String role_code,String role_name,String sys_create_time,String remarks){
+      this.rowid=rowid;
+      this.role_code=role_code;
+      this.role_name=role_name;
+      this.sys_create_time=sys_create_time;
+      this.remarks=remarks;
+  }
+}

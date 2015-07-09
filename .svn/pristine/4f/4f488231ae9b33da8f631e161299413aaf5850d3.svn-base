@@ -1,0 +1,282 @@
+package com.yichuang.kyjd.rest.entity.order_info;
+
+public class Order {
+	Integer rowid;
+	String type;
+	String no;
+	String status;
+	String statusname;
+	String account;
+	String sumamounts;
+	String createdate;
+	String custname;
+	String mobilephone;
+	String orderrowid;
+	String title;
+	Integer count;
+	String price;
+	String newprice;
+	Integer inperson;
+	String iscoupon;
+	String indatetime;
+	String outdatetime;
+	String card;
+	String subnum;
+	String passport;
+	String need;
+	String otherneed;
+	String predict;
+	String remark;
+	String tradeno;
+
+	public String getTradeno() {
+		return tradeno;
+	}
+
+	public void setTradeno(String tradeno) {
+		this.tradeno = tradeno;
+	}
+
+	public String getStatusname() {
+		return statusname;
+	}
+
+	public void setStatusname(String statusname) {
+		this.statusname = statusname;
+	}
+
+	public String getCreatedate() {
+		return createdate;
+	}
+
+	public void setCreatedate(String createdate) {
+		this.createdate = createdate;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
+	public String getOrderrowid() {
+		return orderrowid;
+	}
+
+	public void setOrderrowid(String orderrowid) {
+		this.orderrowid = orderrowid;
+	}
+
+	public Integer getRowid() {
+		return rowid;
+	}
+
+	public void setRowid(Integer rowid) {
+		this.rowid = rowid;
+	}
+
+	public String getCustname() {
+		return custname;
+	}
+
+	public void setCustname(String custname) {
+		this.custname = custname;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getNo() {
+		return no;
+	}
+
+	public void setNo(String no) {
+		this.no = no;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getSumamounts() {
+		return sumamounts;
+	}
+
+	public void setSumamounts(String sumamounts) {
+		this.sumamounts = sumamounts;
+	}
+
+	public String getMobilephone() {
+		return mobilephone;
+	}
+
+	public void setMobilephone(String mobilephone) {
+		this.mobilephone = mobilephone;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
+	public String getNewprice() {
+		return newprice;
+	}
+
+	public void setNewprice(String newprice) {
+		this.newprice = newprice;
+	}
+
+	public Integer getInperson() {
+		return inperson;
+	}
+
+	public void setInperson(Integer inperson) {
+		this.inperson = inperson;
+	}
+
+	public String getIscoupon() {
+		return iscoupon;
+	}
+
+	public void setIscoupon(String iscoupon) {
+		this.iscoupon = iscoupon;
+	}
+
+	public String getIndatetime() {
+		return indatetime;
+	}
+
+	public void setIndatetime(String indatetime) {
+		this.indatetime = indatetime;
+	}
+
+	public String getOutdatetime() {
+		return outdatetime;
+	}
+
+	public void setOutdatetime(String outdatetime) {
+		this.outdatetime = outdatetime;
+	}
+
+	public String getCard() {
+		return card;
+	}
+
+	public void setCard(String card) {
+		this.card = card;
+	}
+
+	public String getSubnum() {
+		return subnum;
+	}
+
+	public void setSubnum(String subnum) {
+		this.subnum = subnum;
+	}
+
+	public String getPassport() {
+		return passport;
+	}
+
+	public void setPassport(String passport) {
+		this.passport = passport;
+	}
+
+	public String getNeed() {
+		return need;
+	}
+
+	public void setNeed(String need) {
+		this.need = need;
+	}
+
+	public String getOtherneed() {
+		return otherneed;
+	}
+
+	public void setOtherneed(String otherneed) {
+		this.otherneed = otherneed;
+	}
+
+	public String getPredict() {
+		return predict;
+	}
+
+	public void setPredict(String predict) {
+		this.predict = predict;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public Order() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Order(String type, String no, String status, String sumamounts,
+			String mobilephone, String title, Integer count, String price,
+			String newprice, Integer inperson, String iscoupon,
+			String indatetime, String outdatetime, String card, String subnum,
+			String passport, String need, String otherneed, String predict,
+			String remark) {
+		super();
+		this.type = type;
+		this.no = no;
+		this.status = status;
+		this.sumamounts = sumamounts;
+		this.mobilephone = mobilephone;
+		this.title = title;
+		this.count = count;
+		this.price = price;
+		this.newprice = newprice;
+		this.inperson = inperson;
+		this.iscoupon = iscoupon;
+		this.indatetime = indatetime;
+		this.outdatetime = outdatetime;
+		this.card = card;
+		this.subnum = subnum;
+		this.passport = passport;
+		this.need = need;
+		this.otherneed = otherneed;
+		this.predict = predict;
+		this.remark = remark;
+	}
+
+}

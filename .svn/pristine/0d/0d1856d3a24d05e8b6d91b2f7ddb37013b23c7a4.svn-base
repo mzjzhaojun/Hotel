@@ -1,0 +1,14 @@
+package com.yaao.app.system.service.buycar;
+
+import java.util.List;
+import com.yaao.app.system.entity.buycar.Buycar;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface IBuycarService {
+  public List<Buycar> selectBuycar(Buycar t);
+}

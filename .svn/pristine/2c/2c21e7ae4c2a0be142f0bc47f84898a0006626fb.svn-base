@@ -1,0 +1,34 @@
+package com.yichuang.kyjd.commnd.system.util;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class SubNumUtil {
+	public static String getNumCode() {
+		return "" + ((int) ((Math.random() * 9 + 1) * 100000));
+	}
+
+	public static String getSubNumCode() {
+		return getDate() + ((int) ((Math.random() * 9 + 1) * 100000));
+	}
+
+	public static String getSubNumSalt() {
+		return "" + ((int) ((Math.random() * 9 + 1) * 10000000));
+	}
+
+	public static String getDate() {
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");// 设置日期格式
+		return df.format(new Date());
+	}
+	
+	public static String getAddMoreDay(int day) {
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");// 设置日期格式
+		return df.format(DateUtil.addMoreDay(new Date(),day));
+	}
+
+	public static String getDateTime() {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
+		return df.format(new Date());
+	}
+
+}

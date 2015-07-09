@@ -1,0 +1,14 @@
+package com.yaao.app.system.service.news;
+
+import java.util.List;
+import com.yaao.app.system.entity.news.News;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface INewsService {
+  public List<News> selectNews(News t);
+}

@@ -1,0 +1,25 @@
+package com.yaao.app.system.service.attribute.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.yaao.app.system.dao.attribute.impl.AttributeDaoImpl;
+import com.yaao.app.system.service.attribute.IAttributeService;
+import com.yaao.app.commnd.base.impl.BaseServiceImpl;
+import com.yaao.app.system.entity.attribute.Attribute;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Service
+public class AttributeServiceImpl extends BaseServiceImpl<Attribute, Integer> implements IAttributeService{
+  @Autowired
+  private AttributeDaoImpl dao;
+
+  public List<Attribute> selectAttribute(Attribute t){
+       return dao.getList("selectAttribute", t);
+  }
+}

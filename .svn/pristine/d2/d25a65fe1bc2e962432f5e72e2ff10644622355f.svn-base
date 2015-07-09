@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Tag">
+  <sql id="Base_Column_List">
+     id,name,unique_id,content,lang
+  </sql>
+  <resultMap id="ResultMap" type="com.yaao.app.system.entity.tag.Tag">
+         <id property="id" column="id" />
+         <id property="name" column="name" />
+         <id property="unique_id" column="unique_id" />
+         <id property="content" column="content" />
+         <id property="lang" column="lang" />
+  </resultMap>
+  <insert id="save" parameterType="com.yaao.app.system.entity.tag.Tag">
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+  	SELECT LAST_INSERT_ID() AS id 
+  </selectKey>
+  insert into co_tag (name,unique_id,content,lang)
+         values (#{name},#{unique_id},#{content},#{lang})
+  </insert>
+ <delete id="deleteByIds" parameterType="java.util.List">
+     delete from co_tag where id in 
+        <foreach collection="array" index="index" item="item" open="("
+          separator="," close=")">
+           #{item}
+        </foreach>
+ </delete>
+ <update id="update" parameterType="com.yaao.app.system.entity.tag.Tag">
+    update co_tag
+         <set>
+             <if test="id != null">
+                   id = #{id},
+             </if>
+             <if test="name != null">
+                   name = #{name},
+             </if>
+             <if test="unique_id != null">
+                   unique_id = #{unique_id},
+             </if>
+             <if test="content != null">
+                   content = #{content},
+             </if>
+             <if test="lang != null">
+                   lang = #{lang}
+             </if>
+          </set>
+     where id = #{id}
+ </update>
+ <select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from co_tag 
+        where id = #{id}
+ </select>
+ <select id="getList" parameterType="com.yaao.app.system.entity.tag.Tag" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_tag 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+ <select id="getPage" parameterType="com.yaao.app.system.entity.tag.Tag" resultMap="ResultMap">
+      select
+       <include refid="Base_Column_List" />
+        from co_tag 
+       <where>
+             <if test="name != null and name != ''">
+         		  name like "%"#{name}"%"
+             </if>
+       </where>
+ </select>
+ <select id="getCount" parameterType="com.yaao.app.system.entity.tag.Tag" resultType="int">
+       select count(*) from co_tag 
+         <where>
+             <if test="name != null and name != ''">
+                name like "%"#{name}"%"
+             </if>
+         </where>
+ </select>
+ <select id="selectTag" parameterType="com.yaao.app.system.entity.tag.Tag" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from co_tag 
+        <where>
+             <if test="name != null and name != ''">
+           		name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+</mapper>

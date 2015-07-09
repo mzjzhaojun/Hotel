@@ -1,0 +1,40 @@
+package com.yichuang.kyjd.rest.service.user.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.yichuang.kyjd.rest.dao.user.impl.UserDaoImpl;
+import com.yichuang.kyjd.rest.service.user.IUserService;
+import com.yichuang.kyjd.commnd.base.impl.BaseServiceImpl;
+import com.yichuang.kyjd.rest.entity.user.User;
+
+/**
+ * @author zj default
+ * 
+ * @version 1.1
+ */
+
+@Service
+public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements
+		IUserService {
+	@Autowired
+	private UserDaoImpl dao;
+
+	public List<User> selectUser(User t) {
+		return dao.getList("selectUser", t);
+	}
+
+	public User getUser(User t) {
+		return dao.getUser("getUser", t);
+	}
+	
+	//查询user用户名是否存在
+	public User getUserName(User t) {
+		return dao.getUser("getUserName", t);
+	}
+	
+	public User getUserPwd(User t) {
+		return dao.getUser("getUserPwd", t);
+	}
+
+}

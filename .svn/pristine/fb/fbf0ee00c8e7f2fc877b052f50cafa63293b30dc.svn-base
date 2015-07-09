@@ -1,0 +1,96 @@
+package com.yaao.app.system.entity.brand;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Brand implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Integer id;
+  Integer cid;
+  String pname;
+  String blogo;
+  String url;
+  Integer sort;
+  Integer status;
+  Object description;
+
+  public Integer getId(){
+      return id;
+  }
+
+  public void setId(Integer id) {
+      this.id =id;
+  }
+
+  public Integer getCid(){
+      return cid;
+  }
+
+  public void setCid(Integer cid) {
+      this.cid =cid;
+  }
+
+  public String getPname(){
+      return pname;
+  }
+
+  public void setPname(String pname) {
+      this.pname =pname;
+  }
+
+  public String getBlogo(){
+      return blogo;
+  }
+
+  public void setBlogo(String blogo) {
+      this.blogo =blogo;
+  }
+
+  public String getUrl(){
+      return url;
+  }
+
+  public void setUrl(String url) {
+      this.url =url;
+  }
+
+  public Integer getSort(){
+      return sort;
+  }
+
+  public void setSort(Integer sort) {
+      this.sort =sort;
+  }
+
+  public Integer getStatus(){
+      return status;
+  }
+
+  public void setStatus(Integer status) {
+      this.status =status;
+  }
+
+  public Object getDescription(){
+      return description;
+  }
+
+  public void setDescription(Object description) {
+      this.description =description;
+  }
+  public Brand(){
+  }
+  public Brand(Integer id,Integer cid,String pname,String blogo,String url,Integer sort,Integer status,Object description){
+      this.id=id;
+      this.cid=cid;
+      this.pname=pname;
+      this.blogo=blogo;
+      this.url=url;
+      this.sort=sort;
+      this.status=status;
+      this.description=description;
+  }
+}

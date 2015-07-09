@@ -1,0 +1,56 @@
+package com.yaao.app.system.controller.product;
+
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import com.yaao.app.commnd.base.impl.BaseController;
+import com.yaao.app.commnd.web.StaticSources;
+import net.sf.json.JSONObject;
+import com.yaao.app.system.service.product.impl.ProductServiceImpl;
+import com.yaao.app.system.entity.product.Product;
+
+/**
+* @author zj    default  test
+* 
+* @version 1.1
+*/
+
+
+@Controller
+@RequestMapping("/system/product")
+public class ProductController extends BaseController<Product, Integer> {
+
+  @Autowired
+  private ProductServiceImpl service;
+
+  @Autowired
+  public void setBaseService() {
+		setBaseService(service);
+	}
+
+
+  /**
+  * custom 
+  * 
+  * @version 1.1
+  */
+  @RequestMapping(value = "/param1", method = RequestMethod.GET)
+  public void customSelect(HttpServletRequest request,HttpServletResponse response) {
+  	try {
+  		 String json = request.getParameter(StaticSources.JSONVO);
+			 Product u = null;
+			 if (json != null) {
+			 	 u = (Product) JSONObject.toBean(JSONObject.fromObject(json),Product.class);
+			 }
+  		 List<Product> list = service.selectProduct(u);
+  		 super.setSuccess(list);
+  	}catch (Exception e) {
+  		super.setError(e.getMessage());
+      }
+  	super.ResponseJson(response);
+  }
+}

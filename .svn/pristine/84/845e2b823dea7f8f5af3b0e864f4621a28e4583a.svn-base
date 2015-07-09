@@ -1,0 +1,66 @@
+package com.yaao.app.system.entity.attribute;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Attribute implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Integer id;
+  Integer model_id;
+  Integer type;
+  String name;
+  Object value;
+
+  public Integer getId(){
+      return id;
+  }
+
+  public void setId(Integer id) {
+      this.id =id;
+  }
+
+  public Integer getModel_id(){
+      return model_id;
+  }
+
+  public void setModel_id(Integer model_id) {
+      this.model_id =model_id;
+  }
+
+  public Integer getType(){
+      return type;
+  }
+
+  public void setType(Integer type) {
+      this.type =type;
+  }
+
+  public String getName(){
+      return name;
+  }
+
+  public void setName(String name) {
+      this.name =name;
+  }
+
+  public Object getValue(){
+      return value;
+  }
+
+  public void setValue(Object value) {
+      this.value =value;
+  }
+  public Attribute(){
+  }
+  public Attribute(Integer id,Integer model_id,Integer type,String name,Object value){
+      this.id=id;
+      this.model_id=model_id;
+      this.type=type;
+      this.name=name;
+      this.value=value;
+  }
+}

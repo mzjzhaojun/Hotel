@@ -1,0 +1,14 @@
+package com.yaao.app.system.service.room;
+
+import java.util.List;
+import com.yaao.app.system.entity.room.Room;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface IRoomService {
+  public List<Room> selectRoom(Room t);
+}

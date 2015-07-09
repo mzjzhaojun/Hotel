@@ -1,0 +1,86 @@
+package com.yaao.app.system.entity.spec;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+public class Spec implements java.io.Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Integer id;
+  String name;
+  Integer pid;
+  String value;
+  Integer type;
+  String note;
+  Integer sort;
+
+  public Integer getId(){
+      return id;
+  }
+
+  public void setId(Integer id) {
+      this.id =id;
+  }
+
+  public String getName(){
+      return name;
+  }
+
+  public void setName(String name) {
+      this.name =name;
+  }
+
+  public Integer getPid(){
+      return pid;
+  }
+
+  public void setPid(Integer pid) {
+      this.pid =pid;
+  }
+
+  public String getValue(){
+      return value;
+  }
+
+  public void setValue(String value) {
+      this.value =value;
+  }
+
+  public Integer getType(){
+      return type;
+  }
+
+  public void setType(Integer type) {
+      this.type =type;
+  }
+
+  public String getNote(){
+      return note;
+  }
+
+  public void setNote(String note) {
+      this.note =note;
+  }
+
+  public Integer getSort(){
+      return sort;
+  }
+
+  public void setSort(Integer sort) {
+      this.sort =sort;
+  }
+  public Spec(){
+  }
+  public Spec(Integer id,String name,Integer pid,String value,Integer type,String note,Integer sort){
+      this.id=id;
+      this.name=name;
+      this.pid=pid;
+      this.value=value;
+      this.type=type;
+      this.note=note;
+      this.sort=sort;
+  }
+}

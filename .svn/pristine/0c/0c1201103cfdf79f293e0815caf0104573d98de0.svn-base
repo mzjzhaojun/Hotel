@@ -1,0 +1,25 @@
+package com.yaao.app.system.service.restaurant.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.yaao.app.system.dao.restaurant.impl.RestaurantDaoImpl;
+import com.yaao.app.system.service.restaurant.IRestaurantService;
+import com.yaao.app.commnd.base.impl.BaseServiceImpl;
+import com.yaao.app.system.entity.restaurant.Restaurant;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Service
+public class RestaurantServiceImpl extends BaseServiceImpl<Restaurant, Integer> implements IRestaurantService{
+  @Autowired
+  private RestaurantDaoImpl dao;
+
+  public List<Restaurant> selectRestaurant(Restaurant t){
+       return dao.getList("selectRestaurant", t);
+  }
+}

@@ -1,0 +1,20 @@
+package com.yaao.app.system.dao.restaurant.impl;
+
+import java.util.List;
+import org.springframework.stereotype.Repository;
+import com.yaao.app.system.dao.restaurant.IRestaurantDao;
+import com.yaao.app.commnd.base.impl.BaseDaoImpl;
+import com.yaao.app.system.entity.restaurant.Restaurant;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Repository
+public class RestaurantDaoImpl extends BaseDaoImpl<Restaurant, Integer> implements IRestaurantDao{
+public List<Restaurant> getList(String statement,Restaurant t){
+  return super.selectList(statement, t);
+  }
+}

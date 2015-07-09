@@ -1,0 +1,20 @@
+package com.yaao.app.system.dao.link.impl;
+
+import java.util.List;
+import org.springframework.stereotype.Repository;
+import com.yaao.app.system.dao.link.ILinkDao;
+import com.yaao.app.commnd.base.impl.BaseDaoImpl;
+import com.yaao.app.system.entity.link.Link;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Repository
+public class LinkDaoImpl extends BaseDaoImpl<Link, Integer> implements ILinkDao{
+public List<Link> getList(String statement,Link t){
+  return super.selectList(statement, t);
+  }
+}

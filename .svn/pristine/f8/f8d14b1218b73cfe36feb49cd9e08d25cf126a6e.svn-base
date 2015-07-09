@@ -1,0 +1,14 @@
+package com.yaao.app.system.dao.specialty_info;
+
+import java.util.List;
+import com.yaao.app.system.entity.specialty_info.Specialty_info;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface ISpecialty_infoDao {
+  public List<Specialty_info> getList(String statement,Specialty_info t);
+}

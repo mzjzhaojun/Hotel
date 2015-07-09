@@ -1,0 +1,25 @@
+package com.yaao.app.system.service.node.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.yaao.app.system.dao.node.impl.NodeDaoImpl;
+import com.yaao.app.system.service.node.INodeService;
+import com.yaao.app.commnd.base.impl.BaseServiceImpl;
+import com.yaao.app.system.entity.node.Node;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+@Service
+public class NodeServiceImpl extends BaseServiceImpl<Node, Integer> implements INodeService{
+  @Autowired
+  private NodeDaoImpl dao;
+
+  public List<Node> selectNode(Node t){
+       return dao.getList("selectNode", t);
+  }
+}

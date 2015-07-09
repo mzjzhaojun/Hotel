@@ -1,0 +1,82 @@
+package com.yichuang.kyjd.commnd.system.util.note;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.Iterator;
+
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+
+
+public class NoteUtil {
+
+	public NoteUtil() {
+		super();
+	}
+
+	private static NoteUtil single = null;
+
+	// 
+	public static NoteUtil getInstance() {
+		if (single == null) {
+			single = new NoteUtil();
+		}
+		return single;
+	}
+
+	private HttpRequester request = new HttpRequester();
+
+	// 接口账号：1001@501073970001
+
+	// 接口 Key：F04AB932AE2EF84DEADE016EA37E0D59
+
+	// 通道组ID: 52
+	public boolean sendMessage(String message, String mb) {
+		HttpRespons hr;
+		String result = "";
+		boolean flag = true;
+		try {
+			hr = request
+					.sendGet("http://smsapi.c123.cn/OpenPlatform/OpenApi?action=sendOnce&ac=1001@501073970001&authkey=F04AB932AE2EF84DEADE016EA37E0D59&cgid=52&csid=101&c="
+							+ URLEncoder.encode(message) + "&m=" + mb);
+			result = hr.getContent();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			SAXReader saxReader = new SAXReader(); 
+			Document document = saxReader.read(new ByteArrayInputStream(result.getBytes("UTF-8")));
+			Element monitConfig = document.getRootElement();// 获取根节点
+			String name = monitConfig.attribute("name").getValue();
+			String resultCode =  monitConfig.attribute("result").getValue();
+		} catch (DocumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return true;
+	}
+	
+	
+	public static void main(String [] args){
+		String result = "<xml name='sendOnce' result='1'><Item cid='501073970001' sid='1001' msgid='1537444070626266600' total='1' price='0.1' remain='363.700' /></xml>";
+		
+		try {
+			SAXReader saxReader = new SAXReader(); 
+			Document document = saxReader.read(new ByteArrayInputStream(result.getBytes("UTF-8")));
+			Element monitConfig = document.getRootElement();// 获取根节点
+			monitConfig.attribute("name").getValue();
+		} catch (DocumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

@@ -1,0 +1,14 @@
+package com.yaao.app.system.dao.nav;
+
+import java.util.List;
+import com.yaao.app.system.entity.nav.Nav;
+
+/**
+* @author zj    default  
+* 
+* @version 1.1
+*/
+
+public interface INavDao {
+  public List<Nav> getList(String statement,Nav t);
+}
