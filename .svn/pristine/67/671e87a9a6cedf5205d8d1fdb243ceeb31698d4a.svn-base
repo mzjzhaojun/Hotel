@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Reservation">
+	<sql id="Base_Column_List">
+		rowid,name,detail,address,tel,remark
+	</sql>
+	<resultMap id="ResultMap"
+		type="com.yichuang.kyjd.rest.entity.reservation.Reservation">
+		<id property="rowid" column="rowid" />
+		<id property="name" column="name" />
+		<id property="detail" column="detail" />
+		<id property="address" column="address" />
+		<id property="tel" column="tel" />
+		<id property="remark" column="remark" />
+	</resultMap>
+	<insert id="save"
+		parameterType="com.yichuang.kyjd.rest.entity.reservation.Reservation">
+		<selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID() AS rowid
+		</selectKey>
+		insert into ht_reservation (name,detail,address,tel,remark)
+		values (#{name},#{detail},#{address},#{tel},#{remark})
+	</insert>
+	<delete id="deleteByIds" parameterType="java.util.List">
+		delete from ht_reservation where rowid in
+		<foreach collection="array" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	<update id="update"
+		parameterType="com.yichuang.kyjd.rest.entity.reservation.Reservation">
+		update ht_reservation
+		<set>
+			<if test="rowid != null">
+				rowid = #{rowid},
+			</if>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="detail != null">
+				detail = #{detail},
+			</if>
+			<if test="address != null">
+				address = #{address},
+			</if>
+			<if test="tel != null">
+				tel = #{tel},
+			</if>
+			<if test="remark != null">
+				remark = #{remark}
+			</if>
+		</set>
+		where rowid = #{rowid}
+	</update>
+	<select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ht_reservation
+		where rowid = #{rowid}
+	</select>
+	<select id="getList"
+		parameterType="com.yichuang.kyjd.rest.entity.reservation.Reservation"
+		resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ht_reservation
+		<where>
+			<if test="name != null and name != ''">
+				name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+	<select id="getPage"
+		parameterType="com.yichuang.kyjd.rest.entity.reservation.Reservation"
+		resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ht_reservation
+		<where>
+			<if test="name != null and name != ''">
+				name like "%"#{name}"%"
+			</if>
+		</where>
+		LIMIT #{pageStart},#{pageEnd}
+	</select>
+	<select id="getCount"
+		parameterType="com.yichuang.kyjd.rest.entity.reservation.Reservation"
+		resultType="int">
+		select count(*) from ht_reservation
+		<where>
+			<if test="name != null and name != ''">
+				name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+	<select id="selectReservation"
+		parameterType="com.yichuang.kyjd.rest.entity.reservation.Reservation"
+		resultType="java.util.HashMap">
+		select
+		<include refid="Base_Column_List" />
+		from ht_reservation
+		<where>
+			<if test="name != null and name != ''">
+				name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+</mapper>
