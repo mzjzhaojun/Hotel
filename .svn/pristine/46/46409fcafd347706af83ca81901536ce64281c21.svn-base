@@ -1,10 +1,10 @@
-package com.yichuang.kyjd.rest.dao.message.impl;
+package com.yichuang.kyjd.app.dao.message.impl;
 
 import java.util.List;
 import org.springframework.stereotype.Repository;
-import com.yichuang.kyjd.rest.dao.message.IMessageDao;
+import com.yichuang.kyjd.app.dao.message.IMessageDao;
 import com.yichuang.kyjd.commnd.base.impl.BaseDaoImpl;
-import com.yichuang.kyjd.rest.entity.message.Message;
+import com.yichuang.kyjd.app.entity.message.Message;
 
 /**
  * @author zj default

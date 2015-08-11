@@ -31,5 +31,5 @@ Zj.basePage=com.yichuang.kyjd.rest
 Zj.commndPage=com.yichuang.kyjd.commnd.base
 Zj.dbName=hotel
 Zj.osName=rest
-Zj.classesByPage=com.yichuang.kyjd.rest.controller
+Zj.classesByPage=com.yichuang.kyjd.app.controller
 Zj.projectName=Hotel

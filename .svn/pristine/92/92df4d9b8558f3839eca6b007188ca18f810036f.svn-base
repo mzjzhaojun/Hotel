@@ -1,4 +1,4 @@
-package com.yichuang.kyjd.rest.entity.restaurant;
+package com.yichuang.kyjd.app.entity.restaurant;
 
 /**
  * @author zj default

@@ -5,7 +5,7 @@
 		rowid,type,no,status,sumamounts,add_date,add_user,mobile_phone,remark
 	</sql>
 	<resultMap id="ResultMap"
-		type="com.yichuang.kyjd.rest.entity.order_info.Order_info">
+		type="com.yichuang.kyjd.app.entity.order_info.Order_info">
 		<id property="rowid" column="rowid" />
 		<id property="type" column="type" />
 		<id property="no" column="no" />
@@ -19,7 +19,7 @@
 
 
 	<resultMap id="ResultMap2"
-		type="com.yichuang.kyjd.rest.entity.order_info.Order_info">
+		type="com.yichuang.kyjd.app.entity.order_info.Order_info">
 		<id property="rowid" column="rowid" />
 		<result property="type" column="type" />
 		<result property="no" column="no" />
@@ -30,7 +30,7 @@
 		<result property="mobile_phone" column="mobile_phone" />
 		<result property="remark" column="remark" />
 		
-		<association property="orderdetail" javaType="com.yichuang.kyjd.rest.entity.order_detail.Order_detail">
+		<association property="orderdetail" javaType="com.yichuang.kyjd.app.entity.order_detail.Order_detail">
             <id column="rowid" property="rowid" />
 			<result property="title" column="title" />
 			<result property="count" column="count" />
@@ -48,7 +48,7 @@
 		
 	</resultMap>
 
-	<insert id="save" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order_info">
+	<insert id="save" parameterType="com.yichuang.kyjd.app.entity.order_info.Order_info">
 		<selectKey resultType="java.lang.Integer" order="AFTER"
 			keyProperty="id">
 			SELECT LAST_INSERT_ID() AS id
@@ -65,7 +65,7 @@
 			#{item}
 		</foreach>
 	</delete>
-	<update id="update" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order_info">
+	<update id="update" parameterType="com.yichuang.kyjd.app.entity.order_info.Order_info">
 		update ht_order_info
 		<set>
 			<if test="rowid != null">
@@ -99,7 +99,7 @@
 		select o.*, d.* from ht_order_info o, ht_order_detail d 
 		where o.rowid = #{rowid}
 	</select>
-	<select id="getList" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order_info"
+	<select id="getList" parameterType="com.yichuang.kyjd.app.entity.order_info.Order_info"
 		resultMap="ResultMap">
 		select
 		<include refid="Base_Column_List" />
@@ -123,7 +123,7 @@
 		</where>
 		LIMIT #{pageStart},#{pageEnd}
 	</select>
-	<select id="getCount" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order_info"
+	<select id="getCount" parameterType="com.yichuang.kyjd.app.entity.order_info.Order_info"
 		resultType="int">
 		select count(*) from ht_order_info
 		<where>
@@ -132,7 +132,7 @@
 			</if>
 		</where>
 	</select>
-	<select id="selectOrder_info" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order_info"
+	<select id="selectOrder_info" parameterType="com.yichuang.kyjd.app.entity.order_info.Order_info"
 		resultType="java.util.HashMap">
 		select
 		<include refid="Base_Column_List" />

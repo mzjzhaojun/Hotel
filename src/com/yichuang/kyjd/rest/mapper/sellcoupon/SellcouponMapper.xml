@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Sellcoupon">
 	<sql id="Base_Column_List">
-		rowid,name,code,pwd,price,buyprice,issuedate,duedate,satus,exchangedate,buydate,usercode,buycount,coupontype,coupontype_name,status_name,remarks
+		rowid,name,code,pwd,price,buyprice,issuedate,duedate,satus,exchangedate,buydate,usercode,buycount,coupontype,coupontype_name,status_name,remarks,cwcode
 	</sql>
 	<resultMap id="ResultMap"
-		type="com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon">
+		type="com.yichuang.kyjd.app.entity.sellcoupon.Sellcoupon">
 		<id property="rowid" column="rowid" />
 		<id property="name" column="name" />
 		<id property="code" column="code" />
@@ -24,7 +24,7 @@
 		<id property="status_name" column="status_name" />
 		<id property="remarks" column="remarks" />
 	</resultMap>
-	<insert id="save" parameterType="com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon">
+	<insert id="save" parameterType="com.yichuang.kyjd.app.entity.sellcoupon.Sellcoupon">
 		<selectKey resultType="java.lang.Integer" order="AFTER"
 			keyProperty="id">
 			SELECT LAST_INSERT_ID() AS rowid
@@ -41,7 +41,7 @@
 			#{item}
 		</foreach>
 	</delete>
-	<update id="update" parameterType="com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon">
+	<update id="update" parameterType="com.yichuang.kyjd.app.entity.sellcoupon.Sellcoupon">
 		update ht_sellcoupon
 		<set>
 			<if test="rowid != null">
@@ -99,7 +99,7 @@
 		from ht_sellcoupon
 		where rowid = #{rowid}
 	</select>
-	<select id="getList" parameterType="com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon"
+	<select id="getList" parameterType="com.yichuang.kyjd.app.entity.sellcoupon.Sellcoupon"
 		resultMap="ResultMap">
 		select
 		rowid,name,code,pwd,price,buyprice,issuedate,duedate,satus,exchangedate,buydate,usercode,buycount,coupontype,(SELECT
@@ -109,7 +109,7 @@
 		AS status_name,remarks
 		from ht_sellcoupon
 	</select>
-	<select id="selectSellcoupon" parameterType="com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon"
+	<select id="selectSellcoupon" parameterType="com.yichuang.kyjd.app.entity.sellcoupon.Sellcoupon"
 		resultMap="ResultMap">
 		select
 		rowid,name,code,pwd,price,buyprice,issuedate,duedate,satus,exchangedate,buydate,usercode,buycount,coupontype,(SELECT
@@ -122,14 +122,14 @@
 		ORDER BY rowid DESC
 	</select>
 	
-	<select id="getPage" parameterType="com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon"
+	<select id="getPage" parameterType="com.yichuang.kyjd.app.entity.sellcoupon.Sellcoupon"
 		resultMap="ResultMap">
 		select
 		rowid,name,code,pwd,price,buyprice,issuedate,duedate,satus,exchangedate,buydate,usercode,buycount,coupontype,(SELECT
 		NAME FROM ht_dictionaries WHERE CODE = coupontype) AS
 		coupontype_name,(SELECT
 		NAME FROM ht_dictionaries WHERE CODE = satus)
-		AS status_name,remarks
+		AS status_name,remarks,cwcode
 		from ht_sellcoupon
 		<where>
 			<if test="name != null and name != ''">
@@ -139,9 +139,10 @@
 				satus = #{satus}
 			</if>
 		</where>
-		LIMIT #{pageStart},#{pageEnd}
+		order by buydate desc
+		LIMIT #{pageStart},#{pageEnd} 
 	</select>
-	<select id="getCount" parameterType="com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon"
+	<select id="getCount" parameterType="com.yichuang.kyjd.app.entity.sellcoupon.Sellcoupon"
 		resultType="int">
 		select count(*) from ht_sellcoupon
 		<where>
@@ -153,7 +154,7 @@
 			</if>
 		</where>
 	</select>
-	<update id="updateSellcoupon" parameterType="com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon">
+	<update id="updateSellcoupon" parameterType="com.yichuang.kyjd.app.entity.sellcoupon.Sellcoupon">
 		update ht_sellcoupon
 		<set>
 			<if test="satus != null">
@@ -168,7 +169,7 @@
 		</set>
 		where code = #{code}
 	</update>
-	<update id="updateSellcouponCode" parameterType="com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon">
+	<update id="updateSellcouponCode" parameterType="com.yichuang.kyjd.app.entity.sellcoupon.Sellcoupon">
 		update ht_sellcoupon
 		<set>
 			<if test="code != null">
@@ -178,14 +179,14 @@
 		where rowid = #{rowid}
 	</update>
 
-	<select id="selectOneSellcoupon" parameterType="com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon"
+	<select id="selectOneSellcoupon" parameterType="com.yichuang.kyjd.app.entity.sellcoupon.Sellcoupon"
 		resultMap="ResultMap">
 		select
 		rowid,name,code,pwd,price,buyprice,issuedate,duedate,satus,(SELECT
 		NAME FROM ht_dictionaries WHERE CODE = coupontype) AS
 		coupontype_name,(SELECT
 		NAME FROM ht_dictionaries WHERE CODE = satus)
-		AS status_name,exchangedate,buydate,usercode,buycount,coupontype,pwd
+		AS status_name,exchangedate,buydate,usercode,buycount,coupontype,pwd,cwcode
 		from ht_sellcoupon
 		<where>
 			<if test="code != null and code != ''">
@@ -193,16 +194,22 @@
 			</if>
 		</where>
 	</select>
-	<update id="updateSellcouponStatus" parameterType="com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon">
+	<update id="updateSellcouponStatus" parameterType="com.yichuang.kyjd.app.entity.sellcoupon.Sellcoupon">
 		update ht_sellcoupon
 		<set>
 			<if test="satus != null">
 				satus = #{satus},
 			</if>
+			<if test="exchangedate != null">
+				exchangedate = #{exchangedate},
+			</if>
+			<if test="cwcode != null">
+				cwcode = #{cwcode},
+			</if>
 		</set>
 		where code = #{code}
 	</update>
-	<select id="checkPwd" parameterType="com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon"
+	<select id="checkPwd" parameterType="com.yichuang.kyjd.app.entity.sellcoupon.Sellcoupon"
 		resultMap="ResultMap">
 		select
 		rowid,pwd

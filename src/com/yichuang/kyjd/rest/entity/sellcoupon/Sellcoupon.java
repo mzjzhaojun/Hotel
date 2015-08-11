@@ -26,9 +26,18 @@ public class Sellcoupon implements java.io.Serializable {
 	String coupontype_name;
 	String status_name;
 	String remarks;
+	String cwcode;
 	
 	
 	
+	public String getCwcode() {
+		return cwcode;
+	}
+
+	public void setCwcode(String cwcode) {
+		this.cwcode = cwcode;
+	}
+
 	public String getStatus_name() {
 		return status_name;
 	}

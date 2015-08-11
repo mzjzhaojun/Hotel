@@ -1,4 +1,4 @@
-package com.yichuang.kyjd.rest.entity.message;
+package com.yichuang.kyjd.app.entity.message;
 
 /**
 * @author zj    default  

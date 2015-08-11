@@ -1,4 +1,4 @@
-package com.yichuang.kyjd.rest.controller.order_detail;
+package com.yichuang.kyjd.app.controller.order_detail;
 
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.yichuang.kyjd.commnd.base.impl.BaseController;
 import com.yichuang.kyjd.commnd.web.StaticSources;
 import net.sf.json.JSONObject;
-import com.yichuang.kyjd.rest.service.order_detail.impl.Order_detailServiceImpl;
-import com.yichuang.kyjd.rest.entity.order_detail.Order_detail;
+import com.yichuang.kyjd.app.service.order_detail.impl.Order_detailServiceImpl;
+import com.yichuang.kyjd.app.entity.order_detail.Order_detail;
 
 /**
 * @author zj    default  test

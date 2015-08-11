@@ -1,4 +1,4 @@
-package com.yichuang.kyjd.rest.entity.reservation;
+package com.yichuang.kyjd.app.entity.reservation;
 
 /**
 * @author zj    default  

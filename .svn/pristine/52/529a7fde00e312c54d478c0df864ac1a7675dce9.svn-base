@@ -1,4 +1,4 @@
-package com.yichuang.kyjd.rest.entity.customer;
+package com.yichuang.kyjd.app.entity.customer;
 
 /**
 * @author zj    default  

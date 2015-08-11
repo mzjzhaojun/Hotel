@@ -1195,7 +1195,7 @@ public class ConvertUtil {
             int lowByte = 256 + bytes[1];
 
             int ascii = (256 * hightByte + lowByte) - 256 * 256;
-            // rest.out.println( "ASCII=" + ascii );
+            // app.out.println( "ASCII=" + ascii );
             return ascii;
         }
         return 0; // 错误

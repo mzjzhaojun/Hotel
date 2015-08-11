@@ -1,11 +1,11 @@
-package com.yichuang.kyjd.rest.dao.dictionaries.impl;
+package com.yichuang.kyjd.app.dao.dictionaries.impl;
 
 import java.util.List;
 import org.springframework.stereotype.Repository;
-import com.yichuang.kyjd.rest.dao.dictionaries.IDictionariesDao;
+import com.yichuang.kyjd.app.dao.dictionaries.IDictionariesDao;
 import com.yichuang.kyjd.commnd.base.impl.BaseDaoImpl;
-import com.yichuang.kyjd.rest.entity.dictionaries.Dictionaries;
-import com.yichuang.kyjd.rest.entity.role.Role;
+import com.yichuang.kyjd.app.entity.dictionaries.Dictionaries;
+import com.yichuang.kyjd.app.entity.role.Role;
 
 /**
 * @author zj    default  

@@ -1,4 +1,4 @@
-package com.yichuang.kyjd.rest.controller.pay;
+package com.yichuang.kyjd.app.controller.pay;
 
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -21,10 +21,10 @@ import com.yichuang.kyjd.commnd.alipay.util.AlipaySubmit;
 import com.yichuang.kyjd.commnd.alipay.util.UtilDate;
 import com.yichuang.kyjd.commnd.base.impl.BaseController;
 import com.yichuang.kyjd.commnd.system.util.note.NoteUtil;
-import com.yichuang.kyjd.rest.service.coupon.impl.CouponServiceImpl;
-import com.yichuang.kyjd.rest.service.order_info.impl.Order_infoServiceImpl;
-import com.yichuang.kyjd.rest.entity.coupon.Coupon;
-import com.yichuang.kyjd.rest.entity.order_info.Order;
+import com.yichuang.kyjd.app.service.coupon.impl.CouponServiceImpl;
+import com.yichuang.kyjd.app.service.order_info.impl.Order_infoServiceImpl;
+import com.yichuang.kyjd.app.entity.coupon.Coupon;
+import com.yichuang.kyjd.app.entity.order_info.Order;
 
 /**
  * @author zj default test
@@ -57,7 +57,7 @@ public class PayController extends BaseController<Coupon, Integer> {
 			HttpServletResponse response) {
 		try {
 			String address = request.getLocalAddr();
-			String ALIPAY_GATEWAY_NEW = "http://wappaygw.alipay.com/service/rest.htm?";
+			String ALIPAY_GATEWAY_NEW = "http://wappaygw.alipay.com/service/app.htm?";
 			String format = "xml";
 			String v = "2.0";
 			String req_id = UtilDate.getOrderNum();

@@ -1,7 +1,7 @@
-package com.yichuang.kyjd.rest.service.order_detail;
+package com.yichuang.kyjd.app.service.order_detail;
 
 import java.util.List;
-import com.yichuang.kyjd.rest.entity.order_detail.Order_detail;
+import com.yichuang.kyjd.app.entity.order_detail.Order_detail;
 
 /**
 * @author zj    default  

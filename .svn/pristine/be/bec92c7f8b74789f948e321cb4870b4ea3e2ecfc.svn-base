@@ -4,7 +4,7 @@
   <sql id="Base_Column_List">
      rowid,name,create_time,detail,instructions,count,surplus,price,sellprice,coupontype,remark
   </sql>
-  <resultMap id="ResultMap" type="com.yichuang.kyjd.rest.entity.coupon.Coupon">
+  <resultMap id="ResultMap" type="com.yichuang.kyjd.app.entity.coupon.Coupon">
          <id property="rowid" column="rowid" />
          <id property="name" column="name" />
          <id property="create_time" column="create_time" />
@@ -17,7 +17,7 @@
          <id property="coupontype" column="coupontype" />
          <id property="remark" column="remark" />
   </resultMap>
-  <insert id="save" parameterType="com.yichuang.kyjd.rest.entity.coupon.Coupon">
+  <insert id="save" parameterType="com.yichuang.kyjd.app.entity.coupon.Coupon">
   <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
   	SELECT LAST_INSERT_ID() AS rowid 
   </selectKey>
@@ -31,7 +31,7 @@
            #{item}
         </foreach>
  </delete>
- <update id="update" parameterType="com.yichuang.kyjd.rest.entity.coupon.Coupon">
+ <update id="update" parameterType="com.yichuang.kyjd.app.entity.coupon.Coupon">
     update ht_coupon
          <set>
              <if test="name != null">
@@ -73,7 +73,7 @@
         from ht_coupon 
         where rowid = #{id}
  </select>
- <select id="getList" parameterType="com.yichuang.kyjd.rest.entity.coupon.Coupon" resultMap="ResultMap">
+ <select id="getList" parameterType="com.yichuang.kyjd.app.entity.coupon.Coupon" resultMap="ResultMap">
        select
         <include refid="Base_Column_List" />
         from ht_coupon 
@@ -83,7 +83,7 @@
              </if>
         </where>
  </select>
- <select id="getPage" parameterType="com.yichuang.kyjd.rest.entity.coupon.Coupon" resultMap="ResultMap">
+ <select id="getPage" parameterType="com.yichuang.kyjd.app.entity.coupon.Coupon" resultMap="ResultMap">
       select
        <include refid="Base_Column_List" />
         from ht_coupon 
@@ -94,7 +94,7 @@
        </where>
        LIMIT #{pageStart},#{pageEnd}
  </select>
- <select id="getCount" parameterType="com.yichuang.kyjd.rest.entity.coupon.Coupon" resultType="int">
+ <select id="getCount" parameterType="com.yichuang.kyjd.app.entity.coupon.Coupon" resultType="int">
        select count(*) from ht_coupon 
          <where>
              <if test="name != null and name != ''">
@@ -102,7 +102,7 @@
              </if>
          </where>
  </select>
- <select id="selectCoupon" parameterType="com.yichuang.kyjd.rest.entity.coupon.Coupon" resultType="java.util.HashMap">
+ <select id="selectCoupon" parameterType="com.yichuang.kyjd.app.entity.coupon.Coupon" resultType="java.util.HashMap">
        select
         <include refid="Base_Column_List" />
         from ht_coupon 

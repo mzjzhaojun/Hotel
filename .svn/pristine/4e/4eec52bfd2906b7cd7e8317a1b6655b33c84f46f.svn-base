@@ -1,10 +1,10 @@
-package com.yichuang.kyjd.rest.dao.customer.impl;
+package com.yichuang.kyjd.app.dao.customer.impl;
 
 import java.util.List;
 import org.springframework.stereotype.Repository;
-import com.yichuang.kyjd.rest.dao.customer.ICustomerDao;
+import com.yichuang.kyjd.app.dao.customer.ICustomerDao;
 import com.yichuang.kyjd.commnd.base.impl.BaseDaoImpl;
-import com.yichuang.kyjd.rest.entity.customer.Customer;
+import com.yichuang.kyjd.app.entity.customer.Customer;
 
 /**
 * @author zj    default  

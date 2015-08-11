@@ -3,6 +3,7 @@ package com.yichuang.kyjd.rest.controller.sellcoupon;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -25,6 +26,7 @@ import com.yichuang.kyjd.commnd.alipay.util.AlipayNotify;
 import com.yichuang.kyjd.commnd.alipay.util.AlipaySubmit;
 import com.yichuang.kyjd.commnd.alipay.util.UtilDate;
 import com.yichuang.kyjd.commnd.base.impl.BaseController;
+import com.yichuang.kyjd.commnd.system.util.DateUtil;
 import com.yichuang.kyjd.commnd.system.util.SubNumUtil;
 import com.yichuang.kyjd.commnd.system.util.md5.MD5Util;
 import com.yichuang.kyjd.commnd.system.util.note.NoteUtil;
@@ -111,7 +113,7 @@ public class SellcouponController extends BaseController<Sellcoupon, Integer> {
 			HttpServletResponse response) {
 		try {
 			// String address = "121.237.48.21";//request.getLocalAddr();
-			String address = "121.237.199.77";
+			String address = "www.chongmingregency.com";
 			// /////////////////////////////////////////存入订单/////////////////////////////////////////////
 			HttpSession session = request.getSession();
 			Customer cust = (Customer) session.getAttribute("cust");
@@ -124,7 +126,7 @@ public class SellcouponController extends BaseController<Sellcoupon, Integer> {
 			}
 			u.setUsercode(cust.getAccout()); // 登陆用户
 			u.setCode(SubNumUtil.getSubNumCode()); // 订单号
-			String ALIPAY_GATEWAY_NEW = "http://wappaygw.alipay.com/service/rest.htm?";
+			String ALIPAY_GATEWAY_NEW = "http://wappaygw.alipay.com/service/app.htm?";
 			String format = "xml";
 			String v = "2.0";
 			String req_id = UtilDate.getOrderNum();
@@ -204,9 +206,9 @@ public class SellcouponController extends BaseController<Sellcoupon, Integer> {
 	public void paymoney(HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
-			String address = "121.237.199.77";
+			String address = "www.chongmingregency.com";
 			// String address = "121.237.48.21";//request.getLocalAddr();
-			String ALIPAY_GATEWAY_NEW = "http://wappaygw.alipay.com/service/rest.htm?";
+			String ALIPAY_GATEWAY_NEW = "http://wappaygw.alipay.com/service/app.htm?";
 			String format = "xml";
 			String v = "2.0";
 			String req_id = UtilDate.getOrderNum();
@@ -385,7 +387,7 @@ public class SellcouponController extends BaseController<Sellcoupon, Integer> {
 			HttpServletResponse response) {
 		try {
 			Map<String, String> params = new HashMap<String, String>();
-			String address = "121.237.199.77";
+			String address = "www.chongmingregency.com";
 			// String address = "121.237.48.21";//request.getLocalAddr();
 			PrintWriter out = response.getWriter();
 			Map requestParams = request.getParameterMap();
@@ -501,8 +503,13 @@ public class SellcouponController extends BaseController<Sellcoupon, Integer> {
 			HttpServletRequest request, HttpServletResponse response) {
 		try {
 			Sellcoupon u = new Sellcoupon();
+			String json = request.getParameter(StaticSources.JSONVO);
+			if (json != null) {
+				u = (Sellcoupon) JSONObject.toBean(JSONObject.fromObject(json), Sellcoupon.class);
+			}
 			u.setCode(code);
 			u.setSatus("D__9a92yxowsy30");
+			u.setExchangedate(SubNumUtil.getDate());
 			super.setSuccess(service.updateSellcouponStatus(u));
 		} catch (Exception e) {
 			super.setError(e.getMessage());

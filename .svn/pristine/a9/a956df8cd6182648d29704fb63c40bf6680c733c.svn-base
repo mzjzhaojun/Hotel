@@ -11,10 +11,10 @@ import org.dom4j.io.SAXReader;
 
 import com.yichuang.kyjd.commnd.base.impl.BaseCommonDao;
 import com.yichuang.kyjd.commnd.system.util.ApplicationUtil;
-import com.yichuang.kyjd.rest.entity.message.Message;
+import com.yichuang.kyjd.app.entity.message.Message;
 
 /**
- * ·¢ËÍ¶ÌÐÅ
+ * ï¿½ï¿½ï¿½Í¶ï¿½ï¿½ï¿½
  * 
  * @author zj
  * 
@@ -40,11 +40,11 @@ public class NoteUtil {
 
 	private HttpRequester request = new HttpRequester();
 
-	// ½Ó¿ÚÕËºÅ£º1001@501073970001
+	// ï¿½Ó¿ï¿½ï¿½ËºÅ£ï¿½1001@501073970001
 
-	// ½Ó¿Ú Key£ºF04AB932AE2EF84DEADE016EA37E0D59
+	// ï¿½Ó¿ï¿½ Keyï¿½ï¿½F04AB932AE2EF84DEADE016EA37E0D59
 
-	// Í¨µÀ×éID: 52
+	// Í¨ï¿½ï¿½ï¿½ï¿½ID: 52
 	@SuppressWarnings("deprecation")
 	public boolean sendMessage(String message, String mb, String type) {
 		HttpRespons hr;
@@ -52,20 +52,20 @@ public class NoteUtil {
 		boolean flag = true;
 		try {
 			code = "" + ((int) ((Math.random() * 9 + 1) * 100000));
-			message = "½ðÃ¯¿­ÔÃ¾ÆµêµÄÑéÖ¤Âë";
-			// ·¢ËÍ
+			message = "ï¿½ï¿½Ã¯ï¿½ï¿½ï¿½Ã¾Æµï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½";
+			// ï¿½ï¿½ï¿½ï¿½
 			sendMessage = "http://smsapi.c123.cn/OpenPlatform/OpenApi?action=sendOnce&ac=1001@501073970001&authkey=F04AB932AE2EF84DEADE016EA37E0D59&cgid=52&csid=101&c="
 					+ URLEncoder.encode(message) + "&m=" + mb;
 			System.out.println(sendMessage);
 			hr = request.sendGet(sendMessage);
-			// »ñµÃ½á¹û String result =
+			// ï¿½ï¿½Ã½ï¿½ï¿½ String result =
 			// "<xml name='sendOnce' result='1'><Item cid='501073970001' sid='1001' msgid='1537444070626266600' total='1' price='0.1' remain='363.700' /></xml>";
 			result = hr.getContent();
-			// ½âÎöxml
+			// ï¿½ï¿½ï¿½ï¿½xml
 			SAXReader saxReader = new SAXReader();
 			Document document = saxReader.read(new ByteArrayInputStream(result
 					.getBytes("UTF-8")));
-			Element monitConfig = document.getRootElement();// »ñÈ¡¸ù½Úµã
+			Element monitConfig = document.getRootElement();// ï¿½ï¿½È¡ï¿½ï¿½Úµï¿½
 			sendtype = monitConfig.attribute("name").getValue();
 			resultCode = monitConfig.attribute("result").getValue();
 			Iterator<?> i = monitConfig.elementIterator();

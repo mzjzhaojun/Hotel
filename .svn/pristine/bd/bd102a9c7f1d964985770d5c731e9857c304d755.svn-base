@@ -4,7 +4,7 @@
   <sql id="Base_Column_List">
      rowid,name,number,type,babychair,iscoupon,mincharge,maxdinernum,status,detail,deposit,lowest,axf,remark
   </sql>
-  <resultMap id="ResultMap" type="com.yichuang.kyjd.rest.entity.restaurant.Restaurant">
+  <resultMap id="ResultMap" type="com.yichuang.kyjd.app.entity.restaurant.Restaurant">
          <id property="rowid" column="rowid" />
          <id property="name" column="name" />
          <id property="number" column="number" />
@@ -20,7 +20,7 @@
          <id property="axf" column="axf" />
          <id property="remark" column="remark" />
   </resultMap>
-  <insert id="save" parameterType="com.yichuang.kyjd.rest.entity.restaurant.Restaurant">
+  <insert id="save" parameterType="com.yichuang.kyjd.app.entity.restaurant.Restaurant">
   <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
   	SELECT LAST_INSERT_ID() AS id 
   </selectKey>
@@ -34,7 +34,7 @@
            #{item}
         </foreach>
  </delete>
- <update id="update" parameterType="com.yichuang.kyjd.rest.entity.restaurant.Restaurant">
+ <update id="update" parameterType="com.yichuang.kyjd.app.entity.restaurant.Restaurant">
     update ht_restaurant
          <set>
              <if test="name != null">
@@ -73,7 +73,7 @@
         from ht_restaurant 
         where rowid = #{rowid}
  </select>
- <select id="getList" parameterType="com.yichuang.kyjd.rest.entity.restaurant.Restaurant" resultMap="ResultMap">
+ <select id="getList" parameterType="com.yichuang.kyjd.app.entity.restaurant.Restaurant" resultMap="ResultMap">
        select
         <include refid="Base_Column_List" />
         from ht_restaurant 
@@ -83,7 +83,7 @@
              </if>
         </where>
  </select>
- <select id="getPage" parameterType="com.yichuang.kyjd.rest.entity.restaurant.Restaurant" resultMap="ResultMap">
+ <select id="getPage" parameterType="com.yichuang.kyjd.app.entity.restaurant.Restaurant" resultMap="ResultMap">
       select
        <include refid="Base_Column_List" />
         from ht_restaurant 
@@ -94,7 +94,7 @@
        </where>
        LIMIT #{pageStart},#{pageEnd}
  </select>
- <select id="getCount" parameterType="com.yichuang.kyjd.rest.entity.restaurant.Restaurant" resultType="int">
+ <select id="getCount" parameterType="com.yichuang.kyjd.app.entity.restaurant.Restaurant" resultType="int">
        select count(*) from ht_restaurant 
          <where>
              <if test="name != null and name != ''">
@@ -102,7 +102,7 @@
              </if>
          </where>
  </select>
- <select id="selectRestaurant" parameterType="com.yichuang.kyjd.rest.entity.restaurant.Restaurant" resultType="java.util.HashMap">
+ <select id="selectRestaurant" parameterType="com.yichuang.kyjd.app.entity.restaurant.Restaurant" resultType="java.util.HashMap">
        select
         <include refid="Base_Column_List" />
         from ht_restaurant 

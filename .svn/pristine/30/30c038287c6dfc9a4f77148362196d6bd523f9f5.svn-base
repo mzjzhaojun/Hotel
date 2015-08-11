@@ -5,7 +5,7 @@
 		rowid,role_code,module_code,remarks
 	</sql>
 	<resultMap id="ResultMap"
-		type="com.yichuang.kyjd.rest.entity.role_module.Role_module">
+		type="com.yichuang.kyjd.app.entity.role_module.Role_module">
 		<id property="rowid" column="rowid" />
 		<id property="role_code" column="role_code" />
 		<id property="module_code" column="module_code" />
@@ -13,7 +13,7 @@
 	</resultMap>
 	
 	<resultMap id="ResultMap2"
-		type="com.yichuang.kyjd.rest.entity.role_module.Menu">
+		type="com.yichuang.kyjd.app.entity.role_module.Menu">
 		<id property="user_code" column="user_code" />
 		<id property="role_code" column="role_code" />
 		<id property="module_code" column="module_code" />
@@ -22,14 +22,14 @@
 		<id property="module_name" column="module_name" />
 	</resultMap>
 	<resultMap id="ResultMap3"
-		type="com.yichuang.kyjd.rest.entity.module.Module">
+		type="com.yichuang.kyjd.app.entity.module.Module">
 		<id property="module_code" column="module_code" />
 		<id property="url" column="url" />
 		<id property="module_name" column="module_name" />
 	</resultMap>
 	
 	
-	<insert id="save" parameterType="com.yichuang.kyjd.rest.entity.role_module.Role_module">
+	<insert id="save" parameterType="com.yichuang.kyjd.app.entity.role_module.Role_module">
 		<selectKey resultType="java.lang.Integer" order="AFTER"
 			keyProperty="id">
 			SELECT LAST_INSERT_ID() AS id
@@ -45,7 +45,7 @@
 			#{item}
 		</foreach>
 	</delete>
-	<update id="update" parameterType="com.yichuang.kyjd.rest.entity.role_module.Role_module">
+	<update id="update" parameterType="com.yichuang.kyjd.app.entity.role_module.Role_module">
 		update ht_role_module
 		<set>
 			<if test="rowid != null">
@@ -69,7 +69,7 @@
 		from ht_role_module
 		where id = #{id}
 	</select>
-	<select id="getList" parameterType="com.yichuang.kyjd.rest.entity.role_module.Role_module"
+	<select id="getList" parameterType="com.yichuang.kyjd.app.entity.role_module.Role_module"
 		resultMap="ResultMap">
 		select
 		<include refid="Base_Column_List" />
@@ -80,7 +80,7 @@
 			</if>
 		</where>
 	</select>
-	<select id="getPage" parameterType="com.yichuang.kyjd.rest.entity.role_module.Role_module"
+	<select id="getPage" parameterType="com.yichuang.kyjd.app.entity.role_module.Role_module"
 		resultMap="ResultMap">
 		select
 		<include refid="Base_Column_List" />
@@ -92,7 +92,7 @@
 		</where>
 		LIMIT #{pageStart},#{pageEnd}
 	</select>
-	<select id="getCount" parameterType="com.yichuang.kyjd.rest.entity.role_module.Role_module"
+	<select id="getCount" parameterType="com.yichuang.kyjd.app.entity.role_module.Role_module"
 		resultType="int">
 		select count(*) from ht_role_module
 		<where>
@@ -101,7 +101,7 @@
 			</if>
 		</where>
 	</select>
-	<select id="selectModuleCode" parameterType="com.yichuang.kyjd.rest.entity.role_module.Role_module"
+	<select id="selectModuleCode" parameterType="com.yichuang.kyjd.app.entity.role_module.Role_module"
 		resultMap="ResultMap2">
 		SELECT
 		ur.user_code,ur.role_code,r.role_name,m.module_code,m.module_name,m.url
@@ -113,7 +113,7 @@
 	</select>
 
 
-	<select id="selectParentModuleCode" parameterType="com.yichuang.kyjd.rest.entity.role_module.Role_module"
+	<select id="selectParentModuleCode" parameterType="com.yichuang.kyjd.app.entity.role_module.Role_module"
 		resultMap="ResultMap2">
 		SELECT * FROM ht_user_role ur
 		LEFT JOIN ht_role r ON
@@ -124,7 +124,7 @@
 		WHERE rm.ROLE_CODE = #{role_code} AND m.PARENT_MODULE_CODE = #{module_code}
 	</select>
 	
-	<select id="selectModuleCodeByRoleCode" parameterType="com.yichuang.kyjd.rest.entity.role_module.Role_module"
+	<select id="selectModuleCodeByRoleCode" parameterType="com.yichuang.kyjd.app.entity.role_module.Role_module"
 		resultMap="ResultMap3">
 		SELECT m.MODULE_CODE,m.MODULE_NAME,m.PARENT_MODULE_CODE FROM ht_role AS r 
 		INNER JOIN ht_role_module rm ON r.ROLE_CODE =rm.ROLE_CODE

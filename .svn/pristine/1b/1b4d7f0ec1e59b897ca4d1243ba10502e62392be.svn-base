@@ -1,7 +1,7 @@
-package com.yichuang.kyjd.rest.service.role_module;
+package com.yichuang.kyjd.app.service.role_module;
 
 import java.util.List;
-import com.yichuang.kyjd.rest.entity.role_module.Role_module;
+import com.yichuang.kyjd.app.entity.role_module.Role_module;
 
 /**
 * @author zj    default  

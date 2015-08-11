@@ -1,4 +1,4 @@
-package com.yichuang.kyjd.rest.controller.user;
+package com.yichuang.kyjd.app.controller.user;
 
 import java.util.List;
 
@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.yichuang.kyjd.commnd.base.impl.BaseController;
 import com.yichuang.kyjd.commnd.web.StaticSources;
-import com.yichuang.kyjd.rest.entity.role.Role;
-import com.yichuang.kyjd.rest.entity.user.User;
-import com.yichuang.kyjd.rest.entity.user_role.User_role;
-import com.yichuang.kyjd.rest.service.role.impl.RoleServiceImpl;
-import com.yichuang.kyjd.rest.service.user.impl.UserServiceImpl;
-import com.yichuang.kyjd.rest.service.user_role.impl.User_roleServiceImpl;
+import com.yichuang.kyjd.app.entity.role.Role;
+import com.yichuang.kyjd.app.entity.user.User;
+import com.yichuang.kyjd.app.entity.user_role.User_role;
+import com.yichuang.kyjd.app.service.role.impl.RoleServiceImpl;
+import com.yichuang.kyjd.app.service.user.impl.UserServiceImpl;
+import com.yichuang.kyjd.app.service.user_role.impl.User_roleServiceImpl;
 
 /**
  * @author zj default test

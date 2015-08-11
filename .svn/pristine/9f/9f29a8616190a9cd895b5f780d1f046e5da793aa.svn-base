@@ -1,4 +1,4 @@
-package com.yichuang.kyjd.rest.controller.order_info;
+package com.yichuang.kyjd.app.controller.order_info;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -22,10 +22,10 @@ import com.yichuang.kyjd.commnd.base.impl.BaseController;
 import com.yichuang.kyjd.commnd.system.util.SubNumUtil;
 import com.yichuang.kyjd.commnd.web.StaticSources;
 import net.sf.json.JSONObject;
-import com.yichuang.kyjd.rest.service.order_info.impl.Order_infoServiceImpl;
-import com.yichuang.kyjd.rest.entity.customer.Customer;
-import com.yichuang.kyjd.rest.entity.order_info.Order;
-import com.yichuang.kyjd.rest.entity.order_info.Order_info;
+import com.yichuang.kyjd.app.service.order_info.impl.Order_infoServiceImpl;
+import com.yichuang.kyjd.app.entity.customer.Customer;
+import com.yichuang.kyjd.app.entity.order_info.Order;
+import com.yichuang.kyjd.app.entity.order_info.Order_info;
 
 /**
  * @author zj default test
@@ -84,7 +84,7 @@ public class OrderInfoController extends BaseController<Order_info, Integer> {
 			}
 			u.setAccount(cust.getAccout()); //登陆用户
 			u.setNo(SubNumUtil.getSubNumCode()); //订单号
-			String ALIPAY_GATEWAY_NEW = "http://wappaygw.alipay.com/service/rest.htm?";
+			String ALIPAY_GATEWAY_NEW = "http://wappaygw.alipay.com/service/app.htm?";
 			String format = "xml";
 			String v = "2.0";
 			String req_id = UtilDate.getOrderNum();

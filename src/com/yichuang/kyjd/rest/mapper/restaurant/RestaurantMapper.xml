@@ -5,7 +5,7 @@
 		rowid,name,number,type,babychair,iscoupon,mincharge,maxdinernum,count,surplus,status,detail,deposit,lowest,axf,remark,dningimg
 	</sql>
 	<resultMap id="ResultMap"
-		type="com.yichuang.kyjd.rest.entity.restaurant.Restaurant">
+		type="com.yichuang.kyjd.app.entity.restaurant.Restaurant">
 		<id property="rowid" column="rowid" />
 		<id property="name" column="name" />
 		<id property="number" column="number" />
@@ -26,7 +26,7 @@
 		<id property="dningimg" column="dningimg" />
 		<id property="remark" column="remark" />
 	</resultMap>
-	<insert id="save" parameterType="com.yichuang.kyjd.rest.entity.restaurant.Restaurant">
+	<insert id="save" parameterType="com.yichuang.kyjd.app.entity.restaurant.Restaurant">
 		<selectKey resultType="java.lang.Integer" order="AFTER"
 			keyProperty="id">
 			SELECT LAST_INSERT_ID() AS id
@@ -43,7 +43,7 @@
 			#{item}
 		</foreach>
 	</delete>
-	<update id="update" parameterType="com.yichuang.kyjd.rest.entity.restaurant.Restaurant">
+	<update id="update" parameterType="com.yichuang.kyjd.app.entity.restaurant.Restaurant">
 		update ht_restaurant
 		<set>
 			<if test="name != null">
@@ -82,7 +82,7 @@
 		ht_restaurant h LEFT JOIN ht_dictionaries d ON h.type=d.code
 		where h.rowid = #{rowid}
 	</select>
-	<select id="getList" parameterType="com.yichuang.kyjd.rest.entity.restaurant.Restaurant"
+	<select id="getList" parameterType="com.yichuang.kyjd.app.entity.restaurant.Restaurant"
 		resultMap="ResultMap">
 		SELECT h.rowid,h.name,h.number,h.type,d.name AS
 		type_name,h.babychair,h.iscoupon,h.mincharge,h.maxdinernum,h.COUNT,h.surplus,h.STATUS,(SELECT
@@ -93,7 +93,7 @@
 		LEFT JOIN ht_dictionaries d ON h.type=d.code 
 		WHERE h.STATUS = 'D__25fqwkcr5vz0'
 	</select>
-	<select id="getPage" parameterType="com.yichuang.kyjd.rest.entity.restaurant.Restaurant"
+	<select id="getPage" parameterType="com.yichuang.kyjd.app.entity.restaurant.Restaurant"
 		resultMap="ResultMap">
 		SELECT h.rowid,h.name,h.number,h.type,d.name AS
 		type_name,h.babychair,h.iscoupon,h.mincharge,h.maxdinernum,h.COUNT,h.surplus,h.STATUS,(SELECT
@@ -113,7 +113,7 @@
 		</where>
 		LIMIT #{pageStart},#{pageEnd}
 	</select>
-	<select id="getCount" parameterType="com.yichuang.kyjd.rest.entity.restaurant.Restaurant"
+	<select id="getCount" parameterType="com.yichuang.kyjd.app.entity.restaurant.Restaurant"
 		resultType="int">
 		select count(*) from ht_restaurant h
 		<where>
@@ -126,7 +126,7 @@
 			</if>
 		</where>
 	</select>
-	<select id="selectRestaurant" parameterType="com.yichuang.kyjd.rest.entity.restaurant.Restaurant"
+	<select id="selectRestaurant" parameterType="com.yichuang.kyjd.app.entity.restaurant.Restaurant"
 		resultType="java.util.HashMap">
 		select
 		<include refid="Base_Column_List" />

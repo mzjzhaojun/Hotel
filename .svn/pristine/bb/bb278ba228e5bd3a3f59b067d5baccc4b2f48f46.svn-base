@@ -1,12 +1,12 @@
-package com.yichuang.kyjd.rest.service.restaurant.impl;
+package com.yichuang.kyjd.app.service.restaurant.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.yichuang.kyjd.rest.dao.restaurant.impl.RestaurantDaoImpl;
-import com.yichuang.kyjd.rest.service.restaurant.IRestaurantService;
+import com.yichuang.kyjd.app.dao.restaurant.impl.RestaurantDaoImpl;
+import com.yichuang.kyjd.app.service.restaurant.IRestaurantService;
 import com.yichuang.kyjd.commnd.base.impl.BaseServiceImpl;
-import com.yichuang.kyjd.rest.entity.restaurant.Restaurant;
+import com.yichuang.kyjd.app.entity.restaurant.Restaurant;
 
 /**
 * @author zj    default  

@@ -4,7 +4,7 @@
   <sql id="Base_Column_List">
      rowid,module_code,module_name,module_desc,parent_module_code,url,level,icon,descs,remarks
   </sql>
-  <resultMap id="ResultMap" type="com.yichuang.kyjd.rest.entity.module.Module">
+  <resultMap id="ResultMap" type="com.yichuang.kyjd.app.entity.module.Module">
          <id property="rowid" column="rowid" />
          <id property="module_code" column="module_code" />
          <id property="module_name" column="module_name" />
@@ -16,7 +16,7 @@
          <id property="descs" column="descs" />
          <id property="remarks" column="remarks" />
   </resultMap>
-  <insert id="save" parameterType="com.yichuang.kyjd.rest.entity.module.Module">
+  <insert id="save" parameterType="com.yichuang.kyjd.app.entity.module.Module">
   <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
   	SELECT LAST_INSERT_ID() AS id 
   </selectKey>
@@ -30,7 +30,7 @@
            #{item}
         </foreach>
  </delete>
- <update id="update" parameterType="com.yichuang.kyjd.rest.entity.module.Module">
+ <update id="update" parameterType="com.yichuang.kyjd.app.entity.module.Module">
     update ht_module
          <set>
              <if test="rowid != null">
@@ -72,7 +72,7 @@
         from ht_module 
         where id = #{id}
  </select>
- <select id="getList" parameterType="com.yichuang.kyjd.rest.entity.module.Module" resultMap="ResultMap">
+ <select id="getList" parameterType="com.yichuang.kyjd.app.entity.module.Module" resultMap="ResultMap">
        select
         <include refid="Base_Column_List" />
         from ht_module 
@@ -82,7 +82,7 @@
              </if>
         </where>
  </select>
- <select id="getPage" parameterType="com.yichuang.kyjd.rest.entity.module.Module" resultMap="ResultMap">
+ <select id="getPage" parameterType="com.yichuang.kyjd.app.entity.module.Module" resultMap="ResultMap">
       select
        <include refid="Base_Column_List" />
         from ht_module 
@@ -93,7 +93,7 @@
        </where>
        LIMIT #{pageStart},#{pageEnd}
  </select>
- <select id="getCount" parameterType="com.yichuang.kyjd.rest.entity.module.Module" resultType="int">
+ <select id="getCount" parameterType="com.yichuang.kyjd.app.entity.module.Module" resultType="int">
        select count(*) from ht_module 
          <where>
              <if test="name != null and name != ''">
@@ -101,7 +101,7 @@
              </if>
          </where>
  </select>
- <select id="selectModule" parameterType="com.yichuang.kyjd.rest.entity.module.Module" resultType="java.util.HashMap">
+ <select id="selectModule" parameterType="com.yichuang.kyjd.app.entity.module.Module" resultType="java.util.HashMap">
        select
         <include refid="Base_Column_List" />
         from ht_module 

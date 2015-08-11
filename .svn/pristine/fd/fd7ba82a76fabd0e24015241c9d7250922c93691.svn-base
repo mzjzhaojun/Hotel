@@ -4,7 +4,7 @@
   <sql id="Base_Column_List">
      rowid,account,type,no,content,request_time,request_message,response_message,status,response_time,sendtype,total
   </sql>
-  <resultMap id="ResultMap" type="com.yichuang.kyjd.rest.entity.message.Message">
+  <resultMap id="ResultMap" type="com.yichuang.kyjd.app.entity.message.Message">
          <id property="rowid" column="rowid" />
          <id property="account" column="account" />
          <id property="type" column="type" />
@@ -18,7 +18,7 @@
          <id property="sendtype" column="sendtype" />
          <id property="total" column="total" />
   </resultMap>
-  <insert id="save" parameterType="com.yichuang.kyjd.rest.entity.message.Message">
+  <insert id="save" parameterType="com.yichuang.kyjd.app.entity.message.Message">
   <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
   	SELECT LAST_INSERT_ID() AS id 
   </selectKey>
@@ -32,7 +32,7 @@
            #{item}
         </foreach>
  </delete>
- <update id="update" parameterType="com.yichuang.kyjd.rest.entity.message.Message">
+ <update id="update" parameterType="com.yichuang.kyjd.app.entity.message.Message">
     update ht_message
          <set>
              <if test="rowid != null">
@@ -80,7 +80,7 @@
         from ht_message 
         where id = #{id}
  </select>
- <select id="getList" parameterType="com.yichuang.kyjd.rest.entity.message.Message" resultMap="ResultMap">
+ <select id="getList" parameterType="com.yichuang.kyjd.app.entity.message.Message" resultMap="ResultMap">
        select
         <include refid="Base_Column_List" />
         from ht_message 
@@ -90,7 +90,7 @@
              </if>
         </where>
  </select>
- <select id="getPage" parameterType="com.yichuang.kyjd.rest.entity.message.Message" resultMap="ResultMap">
+ <select id="getPage" parameterType="com.yichuang.kyjd.app.entity.message.Message" resultMap="ResultMap">
       select
        <include refid="Base_Column_List" />
         from ht_message 
@@ -101,7 +101,7 @@
        </where>
        LIMIT #{pageStart},#{pageEnd}
  </select>
- <select id="getCount" parameterType="com.yichuang.kyjd.rest.entity.message.Message" resultType="int">
+ <select id="getCount" parameterType="com.yichuang.kyjd.app.entity.message.Message" resultType="int">
        select count(*) from ht_message 
          <where>
              <if test="name != null and name != ''">
@@ -109,7 +109,7 @@
              </if>
          </where>
  </select>
- <select id="selectMessage" parameterType="com.yichuang.kyjd.rest.entity.message.Message" resultType="java.util.HashMap">
+ <select id="selectMessage" parameterType="com.yichuang.kyjd.app.entity.message.Message" resultType="java.util.HashMap">
        select
         <include refid="Base_Column_List" />
         from ht_message 

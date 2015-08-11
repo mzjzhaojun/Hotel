@@ -1,8 +1,8 @@
-package com.yichuang.kyjd.rest.entity.user;
+package com.yichuang.kyjd.app.entity.user;
 
 import java.util.List;
 
-import com.yichuang.kyjd.rest.entity.role.Role;
+import com.yichuang.kyjd.app.entity.role.Role;
 
 
 /**

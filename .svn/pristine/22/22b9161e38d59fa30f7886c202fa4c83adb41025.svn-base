@@ -1,4 +1,4 @@
-package com.yichuang.kyjd.rest.entity.specialty_info;
+package com.yichuang.kyjd.app.entity.specialty_info;
 
 /**
 * @author zj    default  

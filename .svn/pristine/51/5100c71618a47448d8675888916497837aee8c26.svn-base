@@ -1,4 +1,4 @@
-package com.yichuang.kyjd.rest.entity.coupon;
+package com.yichuang.kyjd.app.entity.coupon;
 
 /**
  * @author zj default

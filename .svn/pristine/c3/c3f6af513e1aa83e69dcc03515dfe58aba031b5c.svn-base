@@ -1,4 +1,4 @@
-package com.yichuang.kyjd.rest.entity.order_info;
+package com.yichuang.kyjd.app.entity.order_info;
 
 /**
 * @author zj    default  

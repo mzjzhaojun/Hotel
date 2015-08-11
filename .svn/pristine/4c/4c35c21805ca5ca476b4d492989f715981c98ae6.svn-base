@@ -1,4 +1,4 @@
-package com.yichuang.kyjd.rest.controller.customer;
+package com.yichuang.kyjd.app.controller.customer;
 
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +14,8 @@ import com.yichuang.kyjd.commnd.system.util.SubNumUtil;
 import com.yichuang.kyjd.commnd.system.util.md5.MD5Util;
 import com.yichuang.kyjd.commnd.web.StaticSources;
 import net.sf.json.JSONObject;
-import com.yichuang.kyjd.rest.service.customer.impl.CustomerServiceImpl;
-import com.yichuang.kyjd.rest.entity.customer.Customer;
+import com.yichuang.kyjd.app.service.customer.impl.CustomerServiceImpl;
+import com.yichuang.kyjd.app.entity.customer.Customer;
 
 /**
  * @author zj default test

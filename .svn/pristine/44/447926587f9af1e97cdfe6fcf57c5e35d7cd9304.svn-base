@@ -1,4 +1,4 @@
-package com.yichuang.kyjd.rest.controller.sellcoupon;
+package com.yichuang.kyjd.app.controller.sellcoupon;
 
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.yichuang.kyjd.commnd.base.impl.BaseController;
 import com.yichuang.kyjd.commnd.web.StaticSources;
 import net.sf.json.JSONObject;
-import com.yichuang.kyjd.rest.service.sellcoupon.impl.SellcouponServiceImpl;
-import com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon;
+import com.yichuang.kyjd.app.service.sellcoupon.impl.SellcouponServiceImpl;
+import com.yichuang.kyjd.app.entity.sellcoupon.Sellcoupon;
 
 /**
 * @author zj    default  test

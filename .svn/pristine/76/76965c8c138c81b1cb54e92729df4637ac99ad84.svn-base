@@ -5,7 +5,7 @@
 		rowid,nickname,name,code,sex,birthday,status,phone,addr,head_img,integral,rating,sys_create_time,accout,password,salt,cardtype,idcard,remarks
 	</sql>
 	<resultMap id="ResultMap"
-		type="com.yichuang.kyjd.rest.entity.customer.Customer">
+		type="com.yichuang.kyjd.app.entity.customer.Customer">
 		<id property="rowid" column="rowid" />
 		<id property="nickname" column="nickname" />
 		<id property="name" column="name" />
@@ -26,7 +26,7 @@
 		<id property="idcard" column="idcard" />
 		<id property="remarks" column="remarks" />
 	</resultMap>
-	<insert id="save" parameterType="com.yichuang.kyjd.rest.entity.customer.Customer">
+	<insert id="save" parameterType="com.yichuang.kyjd.app.entity.customer.Customer">
 		<selectKey resultType="java.lang.Integer" order="AFTER"
 			keyProperty="rowid">
 			SELECT LAST_INSERT_ID() AS id
@@ -36,7 +36,7 @@
 		values
 		(#{nickname},#{name},#{code},#{sex},#{birthday},#{status},#{phone},#{addr},#{head_img},#{integral},#{rating},#{sys_create_time},#{accout},#{cardtype},#{idcard},#{remarks})
 	</insert>
-	<insert id="register" parameterType="com.yichuang.kyjd.rest.entity.customer.Customer">
+	<insert id="register" parameterType="com.yichuang.kyjd.app.entity.customer.Customer">
 		<selectKey resultType="java.lang.Integer" order="AFTER"
 			keyProperty="rowid">
 			SELECT LAST_INSERT_ID() AS rowid
@@ -51,7 +51,7 @@
 			#{item}
 		</foreach>
 	</delete>
-	<update id="update" parameterType="com.yichuang.kyjd.rest.entity.customer.Customer">
+	<update id="update" parameterType="com.yichuang.kyjd.app.entity.customer.Customer">
 		update ht_customer
 		<set>
 			<if test="rowid != null">
@@ -114,7 +114,7 @@
 		from ht_customer
 		where rowid = #{rowid}
 	</select>
-	<select id="getList" parameterType="com.yichuang.kyjd.rest.entity.customer.Customer"
+	<select id="getList" parameterType="com.yichuang.kyjd.app.entity.customer.Customer"
 		resultMap="ResultMap">
 		select
 		<include refid="Base_Column_List" />
@@ -127,7 +127,7 @@
 	</select>
 
 
-	<select id="getPage" parameterType="com.yichuang.kyjd.rest.entity.customer.Customer"
+	<select id="getPage" parameterType="com.yichuang.kyjd.app.entity.customer.Customer"
 		resultMap="ResultMap">
 		select
 		<include refid="Base_Column_List" />
@@ -140,13 +140,13 @@
 		LIMIT #{pageStart},#{pageEnd}
 	</select>
 
-	<select id="selectCustomer" parameterType="com.yichuang.kyjd.rest.entity.customer.Customer"
+	<select id="selectCustomer" parameterType="com.yichuang.kyjd.app.entity.customer.Customer"
 		resultMap="ResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from ht_customer
 	</select>
-	<select id="getCount" parameterType="com.yichuang.kyjd.rest.entity.customer.Customer"
+	<select id="getCount" parameterType="com.yichuang.kyjd.app.entity.customer.Customer"
 		resultType="int">
 		select count(*) from ht_customer
 		<where>
@@ -155,7 +155,7 @@
 			</if>
 		</where>
 	</select>
-	<select id="loginCustomer" parameterType="com.yichuang.kyjd.rest.entity.customer.Customer"
+	<select id="loginCustomer" parameterType="com.yichuang.kyjd.app.entity.customer.Customer"
 		resultMap="ResultMap">
 		select
 		<include refid="Base_Column_List" />
@@ -163,7 +163,7 @@
 		where accout = #{accout} and password = #{password}
 	</select>
 	
-	<select id="checkCustomer" parameterType="com.yichuang.kyjd.rest.entity.customer.Customer"
+	<select id="checkCustomer" parameterType="com.yichuang.kyjd.app.entity.customer.Customer"
 		resultMap="ResultMap">
 		select
 		<include refid="Base_Column_List" />
@@ -171,7 +171,7 @@
 		where accout = #{accout}
 	</select>
 	
-	<select id="selectCustomerSalt" parameterType="com.yichuang.kyjd.rest.entity.customer.Customer"
+	<select id="selectCustomerSalt" parameterType="com.yichuang.kyjd.app.entity.customer.Customer"
 		resultMap="ResultMap">
 		select
 		salt
@@ -179,7 +179,7 @@
 		where accout = #{accout}
 	</select>
 	
-	<update id="retrievePassword" parameterType="com.yichuang.kyjd.rest.entity.customer.Customer">
+	<update id="retrievePassword" parameterType="com.yichuang.kyjd.app.entity.customer.Customer">
 		update ht_customer
 		<set>
 			<if test="accout != null">

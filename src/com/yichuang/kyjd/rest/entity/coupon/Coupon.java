@@ -20,8 +20,26 @@ public class Coupon implements java.io.Serializable {
 	float sellprice;
 	String coupontype;
 	String coupontype_name;
+	String status;
+	String status_name;
 	String couponimg;
 	String remark;
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getStatus_name() {
+		return status_name;
+	}
+
+	public void setStatus_name(String status_name) {
+		this.status_name = status_name;
+	}
 
 	public String getCouponimg() {
 		return couponimg;

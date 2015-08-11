@@ -1,12 +1,12 @@
-package com.yichuang.kyjd.rest.service.user.impl;
+package com.yichuang.kyjd.app.service.user.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.yichuang.kyjd.rest.dao.user.impl.UserDaoImpl;
-import com.yichuang.kyjd.rest.service.user.IUserService;
+import com.yichuang.kyjd.app.dao.user.impl.UserDaoImpl;
+import com.yichuang.kyjd.app.service.user.IUserService;
 import com.yichuang.kyjd.commnd.base.impl.BaseServiceImpl;
-import com.yichuang.kyjd.rest.entity.user.User;
+import com.yichuang.kyjd.app.entity.user.User;
 
 /**
  * @author zj default

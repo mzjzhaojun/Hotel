@@ -1,12 +1,12 @@
-package com.yichuang.kyjd.rest.service.message.impl;
+package com.yichuang.kyjd.app.service.message.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.yichuang.kyjd.rest.dao.message.impl.MessageDaoImpl;
-import com.yichuang.kyjd.rest.service.message.IMessageService;
+import com.yichuang.kyjd.app.dao.message.impl.MessageDaoImpl;
+import com.yichuang.kyjd.app.service.message.IMessageService;
 import com.yichuang.kyjd.commnd.base.impl.BaseServiceImpl;
-import com.yichuang.kyjd.rest.entity.message.Message;
+import com.yichuang.kyjd.app.entity.message.Message;
 
 /**
 * @author zj    default  

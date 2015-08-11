@@ -1,4 +1,4 @@
-package com.yichuang.kyjd.rest.controller.sellcoupon;
+package com.yichuang.kyjd.app.controller.sellcoupon;
 
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -29,9 +29,9 @@ import com.yichuang.kyjd.commnd.system.util.md5.MD5Util;
 import com.yichuang.kyjd.commnd.system.util.note.NoteUtil;
 import com.yichuang.kyjd.commnd.web.StaticSources;
 import net.sf.json.JSONObject;
-import com.yichuang.kyjd.rest.service.sellcoupon.impl.SellcouponServiceImpl;
-import com.yichuang.kyjd.rest.entity.customer.Customer;
-import com.yichuang.kyjd.rest.entity.sellcoupon.Sellcoupon;
+import com.yichuang.kyjd.app.service.sellcoupon.impl.SellcouponServiceImpl;
+import com.yichuang.kyjd.app.entity.customer.Customer;
+import com.yichuang.kyjd.app.entity.sellcoupon.Sellcoupon;
 
 /**
  * @author zj default test
@@ -90,7 +90,7 @@ public class SellcouponController extends BaseController<Sellcoupon, Integer> {
 			}
 			u.setUsercode(cust.getAccout()); //登陆用户
 			u.setCode(SubNumUtil.getSubNumCode()); //订单号
-			String ALIPAY_GATEWAY_NEW = "http://wappaygw.alipay.com/service/rest.htm?";
+			String ALIPAY_GATEWAY_NEW = "http://wappaygw.alipay.com/service/app.htm?";
 			String format = "xml";
 			String v = "2.0";
 			String req_id = UtilDate.getOrderNum();
@@ -167,7 +167,7 @@ public class SellcouponController extends BaseController<Sellcoupon, Integer> {
 		try {
 			//String address = "www.chongmingregency.com";
 			String address = "121.237.48.21";//request.getLocalAddr();
-			String ALIPAY_GATEWAY_NEW = "http://wappaygw.alipay.com/service/rest.htm?";
+			String ALIPAY_GATEWAY_NEW = "http://wappaygw.alipay.com/service/app.htm?";
 			String format = "xml";
 			String v = "2.0";
 			String req_id = UtilDate.getOrderNum();

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Coupon">
 	<sql id="Base_Column_List">
-		rowid,name,create_time,detail,instructions,count,surplus,price,sellprice,coupontype,remark,couponimg
+		rowid,name,create_time,detail,instructions,count,surplus,price,sellprice,status,coupontype,remark,couponimg
 	</sql>
-	<resultMap id="ResultMap" type="com.yichuang.kyjd.rest.entity.coupon.Coupon">
+	<resultMap id="ResultMap" type="com.yichuang.kyjd.app.entity.coupon.Coupon">
 		<id property="rowid" column="rowid" />
 		<id property="name" column="name" />
 		<id property="create_time" column="create_time" />
@@ -16,18 +16,20 @@
 		<id property="sellprice" column="sellprice" />
 		<id property="coupontype" column="coupontype" />
 		<id property="coupontype_name" column="coupontype_name" />
+		<id property="status" column="status" />
+		<id property="status_name" column="status_name" />
 		<id property="couponimg" column="couponimg" />
 		<id property="remark" column="remark" />
 	</resultMap>
-	<insert id="save" parameterType="com.yichuang.kyjd.rest.entity.coupon.Coupon">
+	<insert id="save" parameterType="com.yichuang.kyjd.app.entity.coupon.Coupon">
 		<selectKey resultType="java.lang.Integer" order="AFTER"
 			keyProperty="id">
 			SELECT LAST_INSERT_ID() AS rowid
 		</selectKey>
 		insert into ht_coupon
-		(name,create_time,detail,instructions,count,surplus,price,sellprice,coupontype,couponimg,remark)
+		(name,create_time,detail,instructions,count,surplus,price,sellprice,coupontype,status,couponimg,remark)
 		values
-		(#{name},Now(),#{detail},#{instructions},#{count},#{count},#{price},#{sellprice},#{coupontype},#{couponimg},#{remark})
+		(#{name},Now(),#{detail},#{instructions},#{count},#{count},#{price},#{sellprice},#{coupontype},#{status},#{couponimg},#{remark})
 	</insert>
 	<delete id="deleteByIds" parameterType="java.util.List">
 		delete from ht_coupon where rowid in
@@ -36,7 +38,7 @@
 			#{item}
 		</foreach>
 	</delete>
-	<update id="update" parameterType="com.yichuang.kyjd.rest.entity.coupon.Coupon">
+	<update id="update" parameterType="com.yichuang.kyjd.app.entity.coupon.Coupon">
 		update ht_coupon
 		<set>
 			<if test="name != null">
@@ -66,6 +68,9 @@
 			<if test="coupontype != null">
 				coupontype = #{coupontype},
 			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
 			<if test="couponimg != null">
 				couponimg = #{couponimg},
 			</if>
@@ -77,36 +82,35 @@
 	</update>
 	<select id="getById" parameterType="java.lang.String" resultMap="ResultMap">
 		SELECT
-		rowid,NAME,create_time,detail,instructions,COUNT,surplus,price,sellprice,coupontype,couponimg,remark,(SELECT
-		NAME FROM ht_dictionaries WHERE CODE = coupontype) AS coupontype_name
+		rowid,NAME,create_time,detail,instructions,COUNT,surplus,price,sellprice,coupontype,status,couponimg,remark,(SELECT
+		NAME FROM ht_dictionaries WHERE CODE = coupontype) AS coupontype_name,(SELECT
+		NAME FROM ht_dictionaries WHERE CODE = status) AS status_name
 		FROM ht_coupon
 		where rowid = #{id}
 	</select>
-	<select id="getByName" parameterType="com.yichuang.kyjd.rest.entity.coupon.Coupon"
+	<select id="getByName" parameterType="com.yichuang.kyjd.app.entity.coupon.Coupon"
 		resultMap="ResultMap">
 		SELECT
 		rowid,name,create_time,detail,instructions,COUNT,surplus,price,sellprice,coupontype,couponimg,remark
 		FROM ht_coupon
 		where name = #{name}
 	</select>
-	<select id="getList" parameterType="com.yichuang.kyjd.rest.entity.coupon.Coupon"
+	<select id="getList" parameterType="com.yichuang.kyjd.app.entity.coupon.Coupon"
 		resultMap="ResultMap">
 		SELECT
-		rowid,NAME,create_time,detail,instructions,COUNT,surplus,price,sellprice,coupontype,couponimg,remark,(SELECT
-		NAME FROM ht_dictionaries WHERE CODE = coupontype) AS coupontype_name
+		rowid,NAME,create_time,detail,instructions,COUNT,surplus,price,sellprice,coupontype,status,couponimg,remark,(SELECT
+		NAME FROM ht_dictionaries WHERE CODE = coupontype) AS coupontype_name,(SELECT
+		NAME FROM ht_dictionaries WHERE CODE = status) AS status_name
 		FROM ht_coupon
-		<where>
-			<if test="name != null and name != ''">
-				name like "%"#{name}"%"
-			</if>
-		</where>
+		where status = 'D__25fqwkcr5vz0'
 		order by coupontype
 	</select>
-	<select id="getPage" parameterType="com.yichuang.kyjd.rest.entity.coupon.Coupon"
+	<select id="getPage" parameterType="com.yichuang.kyjd.app.entity.coupon.Coupon"
 		resultMap="ResultMap">
 		SELECT
 		rowid,NAME,create_time,detail,instructions,COUNT,surplus,price,sellprice,coupontype,couponimg,remark,(SELECT
-		NAME FROM ht_dictionaries WHERE CODE = coupontype) AS coupontype_name
+		NAME FROM ht_dictionaries WHERE CODE = coupontype) AS coupontype_name,status,(SELECT
+		NAME FROM ht_dictionaries WHERE CODE = status) AS status_name
 		FROM ht_coupon
 		<where>
 			<if test="name != null and name != ''">
@@ -115,7 +119,7 @@
 		</where>
 		LIMIT #{pageStart},#{pageEnd}
 	</select>
-	<select id="getCount" parameterType="com.yichuang.kyjd.rest.entity.coupon.Coupon"
+	<select id="getCount" parameterType="com.yichuang.kyjd.app.entity.coupon.Coupon"
 		resultType="int">
 		select count(*) from ht_coupon
 		<where>
@@ -124,7 +128,7 @@
 			</if>
 		</where>
 	</select>
-	<select id="selectCoupon" parameterType="com.yichuang.kyjd.rest.entity.coupon.Coupon"
+	<select id="selectCoupon" parameterType="com.yichuang.kyjd.app.entity.coupon.Coupon"
 		resultType="java.util.HashMap">
 		select
 		<include refid="Base_Column_List" />
@@ -146,7 +150,7 @@
 		where rowid = #{rowid}
 	</select>
 
-	<update id="updateCoupon" parameterType="com.yichuang.kyjd.rest.entity.room.Room">
+	<update id="updateCoupon" parameterType="com.yichuang.kyjd.app.entity.room.Room">
 		update ht_coupon
 		<set>
 			<if test="surplus != null">

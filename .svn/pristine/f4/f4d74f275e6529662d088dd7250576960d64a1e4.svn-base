@@ -1,4 +1,4 @@
-package com.yichuang.kyjd.rest.controller.message;
+package com.yichuang.kyjd.app.controller.message;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,8 +10,8 @@ import com.yichuang.kyjd.commnd.base.impl.BaseController;
 import com.yichuang.kyjd.commnd.system.util.note.NoteUtil;
 import com.yichuang.kyjd.commnd.web.StaticSources;
 import net.sf.json.JSONObject;
-import com.yichuang.kyjd.rest.service.message.impl.MessageServiceImpl;
-import com.yichuang.kyjd.rest.entity.message.Message;
+import com.yichuang.kyjd.app.service.message.impl.MessageServiceImpl;
+import com.yichuang.kyjd.app.entity.message.Message;
 
 /**
  * @author zj default test

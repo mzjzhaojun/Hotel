@@ -4,27 +4,27 @@
   <sql id="Base_Column_List">
      rowid,role_code,role_name,sys_create_time,remarks
   </sql>
-  <resultMap id="ResultMap" type="com.yichuang.kyjd.rest.entity.role.Role">
+  <resultMap id="ResultMap" type="com.yichuang.kyjd.app.entity.role.Role">
          <id property="rowid" column="rowid" />
          <id property="role_code" column="role_code" />
          <id property="role_name" column="role_name" />
          <id property="sys_create_time" column="sys_create_time" />
          <id property="remarks" column="remarks" />
   </resultMap>
-  <!--  <resultMap id="ResultMap2" type="com.yichuang.kyjd.rest.entity.role.Role">
+  <!--  <resultMap id="ResultMap2" type="com.yichuang.kyjd.app.entity.role.Role">
          <id property="rowid" column="rowid" />
          <id property="role_code" column="role_code" />
          <id property="role_name" column="role_name" />
          <id property="sys_create_time" column="sys_create_time" />
          <id property="remarks" column="remarks" />
-         <collection property="list_role_module" javaType="com.yichuang.kyjd.rest.entity.role_module.Role_module" column="role_code">注意此处的group_id是student表的外键  
+         <collection property="list_role_module" javaType="com.yichuang.kyjd.app.entity.role_module.Role_module" column="role_code">注意此处的group_id是student表的外键  
             <id property="rowid" column="rowid" />
 			<result property="role_code" column="role_code" />
 			<result property="module_code" column="module_code" />
 			<result property="remarks" column="remarks" />
         </collection>  
   </resultMap> -->
-  <insert id="save" parameterType="com.yichuang.kyjd.rest.entity.role.Role">
+  <insert id="save" parameterType="com.yichuang.kyjd.app.entity.role.Role">
   <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
   	SELECT LAST_INSERT_ID() AS id 
   </selectKey>
@@ -32,7 +32,7 @@
          values (#{role_code},#{role_name},#{sys_create_time},#{remarks})
   </insert>
   
-  <insert id="saverole" parameterType="com.yichuang.kyjd.rest.entity.role.Role">
+  <insert id="saverole" parameterType="com.yichuang.kyjd.app.entity.role.Role">
   <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
   	SELECT LAST_INSERT_ID() AS id 
   </selectKey>
@@ -47,7 +47,7 @@
            #{item}
         </foreach>
  </delete>
- <update id="update" parameterType="com.yichuang.kyjd.rest.entity.role.Role">
+ <update id="update" parameterType="com.yichuang.kyjd.app.entity.role.Role">
     update ht_role
          <set>
              <if test="rowid != null">
@@ -74,7 +74,7 @@
         from ht_role 
         where rowid = #{rowid}
  </select>
- <select id="getList" parameterType="com.yichuang.kyjd.rest.entity.role.Role" resultMap="ResultMap">
+ <select id="getList" parameterType="com.yichuang.kyjd.app.entity.role.Role" resultMap="ResultMap">
        select
         <include refid="Base_Column_List" />
         from ht_role 
@@ -84,7 +84,7 @@
              </if>
         </where>
  </select>
- <select id="getPage" parameterType="com.yichuang.kyjd.rest.entity.role.Role" resultMap="ResultMap">
+ <select id="getPage" parameterType="com.yichuang.kyjd.app.entity.role.Role" resultMap="ResultMap">
       select
        <include refid="Base_Column_List" />
         from ht_role 
@@ -95,7 +95,7 @@
        </where>
        LIMIT #{pageStart},#{pageEnd}
  </select>
- <select id="getCount" parameterType="com.yichuang.kyjd.rest.entity.role.Role" resultType="int">
+ <select id="getCount" parameterType="com.yichuang.kyjd.app.entity.role.Role" resultType="int">
        select count(*) from ht_role 
          <where>
              <if test="role_name != null and role_name != ''">
@@ -103,7 +103,7 @@
              </if>
          </where>
  </select>
- <select id="selectRole" parameterType="com.yichuang.kyjd.rest.entity.role.Role" resultType="java.util.HashMap">
+ <select id="selectRole" parameterType="com.yichuang.kyjd.app.entity.role.Role" resultType="java.util.HashMap">
        select
         <include refid="Base_Column_List" />
         from ht_role 
@@ -114,14 +114,14 @@
         </where>
  </select>
  
- <select id="getRoleName" parameterType="com.yichuang.kyjd.rest.entity.role.Role" resultMap="ResultMap">
+ <select id="getRoleName" parameterType="com.yichuang.kyjd.app.entity.role.Role" resultMap="ResultMap">
       select
         <include refid="Base_Column_List" />
         from ht_role 
         where role_name = #{role_name}
  </select>
  
-  <select id="getRoleByRoleCode" parameterType="com.yichuang.kyjd.rest.entity.role.Role" resultMap="ResultMap">
+  <select id="getRoleByRoleCode" parameterType="com.yichuang.kyjd.app.entity.role.Role" resultMap="ResultMap">
   		SELECT r.* FROM ht_user AS u
 		INNER JOIN ht_user_role as ur ON  u.USER_CODE=ur.USER_CODE
 		INNER JOIN ht_role AS r  ON r.ROLE_CODE=ur.ROLE_CODE

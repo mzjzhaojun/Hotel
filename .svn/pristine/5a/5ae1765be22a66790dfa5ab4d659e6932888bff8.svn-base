@@ -1,4 +1,4 @@
-package com.yichuang.kyjd.rest.controller.pay;
+package com.yichuang.kyjd.app.controller.pay;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -30,8 +30,8 @@ import com.yichuang.kyjd.commnd.alipay.client.util.XMapUtil;
 import com.yichuang.kyjd.commnd.alipay.client.vo.DirectTradeCreateRes;
 import com.yichuang.kyjd.commnd.alipay.client.vo.ErrorCode;
 import com.yichuang.kyjd.commnd.base.impl.BaseController;
-import com.yichuang.kyjd.rest.service.coupon.impl.CouponServiceImpl;
-import com.yichuang.kyjd.rest.entity.coupon.Coupon;
+import com.yichuang.kyjd.app.service.coupon.impl.CouponServiceImpl;
+import com.yichuang.kyjd.app.entity.coupon.Coupon;
 
 /**
  * @author zj default test

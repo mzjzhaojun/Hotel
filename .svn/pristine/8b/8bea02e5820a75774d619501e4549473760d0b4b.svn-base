@@ -4,7 +4,7 @@
   <sql id="Base_Column_List">
      rowid,code,name,detail,instructions,count,surplus,price,sellprice,isenabled,iscoupon,floor,provide,breakfast,wifi,badtype,area,remark
   </sql>
-  <resultMap id="ResultMap" type="com.yichuang.kyjd.rest.entity.room.Room">
+  <resultMap id="ResultMap" type="com.yichuang.kyjd.app.entity.room.Room">
          <id property="rowid" column="rowid" />
          <id property="code" column="code" />
          <id property="name" column="name" />
@@ -24,7 +24,7 @@
          <id property="area" column="area" />
          <id property="remark" column="remark" />
   </resultMap>
-  <insert id="save" parameterType="com.yichuang.kyjd.rest.entity.room.Room">
+  <insert id="save" parameterType="com.yichuang.kyjd.app.entity.room.Room">
   <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
   	SELECT LAST_INSERT_ID() AS id 
   </selectKey>
@@ -38,7 +38,7 @@
            #{item}
         </foreach>
  </delete>
- <update id="update" parameterType="com.yichuang.kyjd.rest.entity.room.Room">
+ <update id="update" parameterType="com.yichuang.kyjd.app.entity.room.Room">
     update ht_room
          <set>
              <if test="code != null">
@@ -101,7 +101,7 @@
         from ht_room 
         where rowid = #{rowid}
  </select>
- <select id="getList" parameterType="com.yichuang.kyjd.rest.entity.room.Room" resultMap="ResultMap">
+ <select id="getList" parameterType="com.yichuang.kyjd.app.entity.room.Room" resultMap="ResultMap">
        select
         <include refid="Base_Column_List" />
         from ht_room 
@@ -111,7 +111,7 @@
              </if>
         </where>
  </select>
- <select id="getPage" parameterType="com.yichuang.kyjd.rest.entity.room.Room" resultMap="ResultMap">
+ <select id="getPage" parameterType="com.yichuang.kyjd.app.entity.room.Room" resultMap="ResultMap">
       select
        <include refid="Base_Column_List" />
         from ht_room 
@@ -122,7 +122,7 @@
        </where>
        LIMIT #{pageStart},#{pageEnd}
  </select>
- <select id="getCount" parameterType="com.yichuang.kyjd.rest.entity.room.Room" resultType="int">
+ <select id="getCount" parameterType="com.yichuang.kyjd.app.entity.room.Room" resultType="int">
        select count(*) from ht_room 
          <where>
              <if test="name != null and name != ''">
@@ -130,7 +130,7 @@
              </if>
          </where>
  </select>
- <select id="selectRoom" parameterType="com.yichuang.kyjd.rest.entity.room.Room" resultType="java.util.HashMap">
+ <select id="selectRoom" parameterType="com.yichuang.kyjd.app.entity.room.Room" resultType="java.util.HashMap">
        select
         <include refid="Base_Column_List" />
         from ht_room 

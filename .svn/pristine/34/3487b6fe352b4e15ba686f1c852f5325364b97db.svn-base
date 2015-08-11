@@ -1,12 +1,12 @@
-package com.yichuang.kyjd.rest.service.news_info.impl;
+package com.yichuang.kyjd.app.service.news_info.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.yichuang.kyjd.rest.dao.news_info.impl.News_infoDaoImpl;
-import com.yichuang.kyjd.rest.service.news_info.INews_infoService;
+import com.yichuang.kyjd.app.dao.news_info.impl.News_infoDaoImpl;
+import com.yichuang.kyjd.app.service.news_info.INews_infoService;
 import com.yichuang.kyjd.commnd.base.impl.BaseServiceImpl;
-import com.yichuang.kyjd.rest.entity.news_info.News_info;
+import com.yichuang.kyjd.app.entity.news_info.News_info;
 
 /**
 * @author zj    default  

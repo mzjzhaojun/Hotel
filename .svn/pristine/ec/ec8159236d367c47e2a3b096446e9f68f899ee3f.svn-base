@@ -1,10 +1,10 @@
-package com.yichuang.kyjd.rest.dao.user_role.impl;
+package com.yichuang.kyjd.app.dao.user_role.impl;
 
 import java.util.List;
 import org.springframework.stereotype.Repository;
-import com.yichuang.kyjd.rest.dao.user_role.IUser_roleDao;
+import com.yichuang.kyjd.app.dao.user_role.IUser_roleDao;
 import com.yichuang.kyjd.commnd.base.impl.BaseDaoImpl;
-import com.yichuang.kyjd.rest.entity.user_role.User_role;
+import com.yichuang.kyjd.app.entity.user_role.User_role;
 
 /**
  * @author zj default

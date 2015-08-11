@@ -1,4 +1,4 @@
-package com.yichuang.kyjd.rest.controller.room;
+package com.yichuang.kyjd.app.controller.room;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -17,8 +17,8 @@ import com.yichuang.kyjd.commnd.base.impl.BaseController;
 import com.yichuang.kyjd.commnd.system.util.SubNumUtil;
 import com.yichuang.kyjd.commnd.web.StaticSources;
 import net.sf.json.JSONObject;
-import com.yichuang.kyjd.rest.service.room.impl.RoomServiceImpl;
-import com.yichuang.kyjd.rest.entity.room.Room;
+import com.yichuang.kyjd.app.service.room.impl.RoomServiceImpl;
+import com.yichuang.kyjd.app.entity.room.Room;
 
 /**
  * @author zj default test

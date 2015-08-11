@@ -1,4 +1,4 @@
-package com.yichuang.kyjd.rest.entity.user_role;
+package com.yichuang.kyjd.app.entity.user_role;
 
 /**
 * @author zj    default  

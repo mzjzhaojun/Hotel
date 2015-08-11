@@ -1,4 +1,4 @@
-package com.yichuang.kyjd.rest.controller.pay;
+package com.yichuang.kyjd.app.controller.pay;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -17,8 +17,8 @@ import com.yichuang.kyjd.commnd.alipay.config.AlipayConfig;
 import com.yichuang.kyjd.commnd.alipay.util.AlipaySubmit;
 import com.yichuang.kyjd.commnd.alipay.util.UtilDate;
 import com.yichuang.kyjd.commnd.base.impl.BaseController;
-import com.yichuang.kyjd.rest.service.coupon.impl.CouponServiceImpl;
-import com.yichuang.kyjd.rest.entity.coupon.Coupon;
+import com.yichuang.kyjd.app.service.coupon.impl.CouponServiceImpl;
+import com.yichuang.kyjd.app.entity.coupon.Coupon;
 
 /**
  * @author zj default test
@@ -48,7 +48,7 @@ public class PayController extends BaseController<Coupon, Integer> {
 			HttpServletResponse response) {
 		
 		
-		String ALIPAY_GATEWAY_NEW = "http://wappaygw.alipay.com/service/rest.htm?";
+		String ALIPAY_GATEWAY_NEW = "http://wappaygw.alipay.com/service/app.htm?";
 
 		// //////////////////////////////////调用授权接口alipay.wap.trade.create.direct获取授权码token//////////////////////////////////////
 

@@ -1,4 +1,4 @@
-package com.yichuang.kyjd.rest.service.coupon.impl;
+package com.yichuang.kyjd.app.service.coupon.impl;
 
 import java.beans.IntrospectionException;
 import java.lang.reflect.InvocationTargetException;
@@ -8,11 +8,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.yichuang.kyjd.rest.dao.coupon.impl.CouponDaoImpl;
-import com.yichuang.kyjd.rest.service.coupon.ICouponService;
+import com.yichuang.kyjd.app.dao.coupon.impl.CouponDaoImpl;
+import com.yichuang.kyjd.app.service.coupon.ICouponService;
 import com.yichuang.kyjd.commnd.base.impl.BaseServiceImpl;
 import com.yichuang.kyjd.commnd.system.util.bean.BeanMapUtil;
-import com.yichuang.kyjd.rest.entity.coupon.Coupon;
+import com.yichuang.kyjd.app.entity.coupon.Coupon;
 
 /**
  * @author zj default

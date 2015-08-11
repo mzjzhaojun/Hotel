@@ -74,7 +74,7 @@ public class OrderInfoController extends BaseController<Order_info, Integer> {
 			HttpServletResponse response) {
 		try {
 			// String address = request.getLocalAddr();
-			String address = "121.237.199.77";
+			String address = "www.chongmingregency.com";
 			// /////////////////////////////////////////存入订单/////////////////////////////////////////////
 			HttpSession session = request.getSession();
 			Customer cust = (Customer) session.getAttribute("cust");
@@ -86,7 +86,7 @@ public class OrderInfoController extends BaseController<Order_info, Integer> {
 			}
 			u.setAccount(cust.getAccout()); // 登陆用户
 			u.setNo(SubNumUtil.getSubNumCode()); // 订单号
-			String ALIPAY_GATEWAY_NEW = "http://wappaygw.alipay.com/service/rest.htm?";
+			String ALIPAY_GATEWAY_NEW = "http://wappaygw.alipay.com/service/app.htm?";
 			String format = "xml";
 			String v = "2.0";
 			String req_id = UtilDate.getOrderNum();

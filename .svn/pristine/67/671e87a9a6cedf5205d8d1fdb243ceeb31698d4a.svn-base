@@ -5,7 +5,7 @@
 		rowid,name,detail,address,tel,remark
 	</sql>
 	<resultMap id="ResultMap"
-		type="com.yichuang.kyjd.rest.entity.reservation.Reservation">
+		type="com.yichuang.kyjd.app.entity.reservation.Reservation">
 		<id property="rowid" column="rowid" />
 		<id property="name" column="name" />
 		<id property="detail" column="detail" />
@@ -14,7 +14,7 @@
 		<id property="remark" column="remark" />
 	</resultMap>
 	<insert id="save"
-		parameterType="com.yichuang.kyjd.rest.entity.reservation.Reservation">
+		parameterType="com.yichuang.kyjd.app.entity.reservation.Reservation">
 		<selectKey resultType="java.lang.Integer" order="AFTER"
 			keyProperty="id">
 			SELECT LAST_INSERT_ID() AS rowid
@@ -30,7 +30,7 @@
 		</foreach>
 	</delete>
 	<update id="update"
-		parameterType="com.yichuang.kyjd.rest.entity.reservation.Reservation">
+		parameterType="com.yichuang.kyjd.app.entity.reservation.Reservation">
 		update ht_reservation
 		<set>
 			<if test="rowid != null">
@@ -61,7 +61,7 @@
 		where rowid = #{rowid}
 	</select>
 	<select id="getList"
-		parameterType="com.yichuang.kyjd.rest.entity.reservation.Reservation"
+		parameterType="com.yichuang.kyjd.app.entity.reservation.Reservation"
 		resultMap="ResultMap">
 		select
 		<include refid="Base_Column_List" />
@@ -73,7 +73,7 @@
 		</where>
 	</select>
 	<select id="getPage"
-		parameterType="com.yichuang.kyjd.rest.entity.reservation.Reservation"
+		parameterType="com.yichuang.kyjd.app.entity.reservation.Reservation"
 		resultMap="ResultMap">
 		select
 		<include refid="Base_Column_List" />
@@ -86,7 +86,7 @@
 		LIMIT #{pageStart},#{pageEnd}
 	</select>
 	<select id="getCount"
-		parameterType="com.yichuang.kyjd.rest.entity.reservation.Reservation"
+		parameterType="com.yichuang.kyjd.app.entity.reservation.Reservation"
 		resultType="int">
 		select count(*) from ht_reservation
 		<where>
@@ -96,7 +96,7 @@
 		</where>
 	</select>
 	<select id="selectReservation"
-		parameterType="com.yichuang.kyjd.rest.entity.reservation.Reservation"
+		parameterType="com.yichuang.kyjd.app.entity.reservation.Reservation"
 		resultType="java.util.HashMap">
 		select
 		<include refid="Base_Column_List" />

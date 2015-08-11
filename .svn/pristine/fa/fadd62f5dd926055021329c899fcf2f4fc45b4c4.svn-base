@@ -1,4 +1,4 @@
-package com.yichuang.kyjd.rest.entity.news_info;
+package com.yichuang.kyjd.app.entity.news_info;
 
 /**
 * @author zj    default  

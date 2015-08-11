@@ -4,13 +4,13 @@
   <sql id="Base_Column_List">
      rowid,user_code,role_code,remarks
   </sql>
-  <resultMap id="ResultMap" type="com.yichuang.kyjd.rest.entity.user_role.User_role">
+  <resultMap id="ResultMap" type="com.yichuang.kyjd.app.entity.user_role.User_role">
          <id property="rowid" column="rowid" />
          <id property="user_code" column="user_code" />
          <id property="role_code" column="role_code" />
          <id property="remarks" column="remarks" />
   </resultMap>
-  <insert id="save" parameterType="com.yichuang.kyjd.rest.entity.user_role.User_role">
+  <insert id="save" parameterType="com.yichuang.kyjd.app.entity.user_role.User_role">
   <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
   	SELECT LAST_INSERT_ID() AS id 
   </selectKey>
@@ -24,7 +24,7 @@
            #{item}
         </foreach>
  </delete>
- <update id="update" parameterType="com.yichuang.kyjd.rest.entity.user_role.User_role">
+ <update id="update" parameterType="com.yichuang.kyjd.app.entity.user_role.User_role">
     update ht_user_role
          <set>
              <if test="rowid != null">
@@ -48,7 +48,7 @@
         from ht_user_role 
         where id = #{id}
  </select>
- <select id="getList" parameterType="com.yichuang.kyjd.rest.entity.user_role.User_role" resultMap="ResultMap">
+ <select id="getList" parameterType="com.yichuang.kyjd.app.entity.user_role.User_role" resultMap="ResultMap">
        select
         <include refid="Base_Column_List" />
         from ht_user_role 
@@ -58,7 +58,7 @@
              </if>
         </where>
  </select>
- <select id="getPage" parameterType="com.yichuang.kyjd.rest.entity.user_role.User_role" resultMap="ResultMap">
+ <select id="getPage" parameterType="com.yichuang.kyjd.app.entity.user_role.User_role" resultMap="ResultMap">
       select
        <include refid="Base_Column_List" />
         from ht_user_role 
@@ -69,7 +69,7 @@
        </where>
        LIMIT #{pageStart},#{pageEnd}
  </select>
- <select id="getCount" parameterType="com.yichuang.kyjd.rest.entity.user_role.User_role" resultType="int">
+ <select id="getCount" parameterType="com.yichuang.kyjd.app.entity.user_role.User_role" resultType="int">
        select count(*) from ht_user_role 
          <where>
              <if test="name != null and name != ''">
@@ -77,7 +77,7 @@
              </if>
          </where>
  </select>
- <select id="selectUserRole" parameterType="com.yichuang.kyjd.rest.entity.user_role.User_role" resultMap="ResultMap">
+ <select id="selectUserRole" parameterType="com.yichuang.kyjd.app.entity.user_role.User_role" resultMap="ResultMap">
        select
         <include refid="Base_Column_List" />
         from ht_user_role 

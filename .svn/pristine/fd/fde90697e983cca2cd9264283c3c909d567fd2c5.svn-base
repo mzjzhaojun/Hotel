@@ -1,14 +1,14 @@
-package com.yichuang.kyjd.rest.service.role_module.impl;
+package com.yichuang.kyjd.app.service.role_module.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.yichuang.kyjd.rest.dao.role_module.impl.Role_moduleDaoImpl;
-import com.yichuang.kyjd.rest.service.role_module.IRole_moduleService;
+import com.yichuang.kyjd.app.dao.role_module.impl.Role_moduleDaoImpl;
+import com.yichuang.kyjd.app.service.role_module.IRole_moduleService;
 import com.yichuang.kyjd.commnd.base.impl.BaseServiceImpl;
-import com.yichuang.kyjd.rest.entity.role_module.Role_module;
-import com.yichuang.kyjd.rest.entity.user_role.User_role;
+import com.yichuang.kyjd.app.entity.role_module.Role_module;
+import com.yichuang.kyjd.app.entity.user_role.User_role;
 
 /**
  * @author zj default

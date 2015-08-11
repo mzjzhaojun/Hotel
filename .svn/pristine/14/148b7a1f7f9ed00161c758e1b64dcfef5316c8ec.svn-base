@@ -1,12 +1,12 @@
-package com.yichuang.kyjd.rest.service.room.impl;
+package com.yichuang.kyjd.app.service.room.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.yichuang.kyjd.rest.dao.room.impl.RoomDaoImpl;
-import com.yichuang.kyjd.rest.service.room.IRoomService;
+import com.yichuang.kyjd.app.dao.room.impl.RoomDaoImpl;
+import com.yichuang.kyjd.app.service.room.IRoomService;
 import com.yichuang.kyjd.commnd.base.impl.BaseServiceImpl;
-import com.yichuang.kyjd.rest.entity.room.Room;
+import com.yichuang.kyjd.app.entity.room.Room;
 
 /**
 * @author zj    default  

@@ -1,12 +1,12 @@
-package com.yichuang.kyjd.rest.service.reservation.impl;
+package com.yichuang.kyjd.app.service.reservation.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.yichuang.kyjd.rest.dao.reservation.impl.ReservationDaoImpl;
-import com.yichuang.kyjd.rest.service.reservation.IReservationService;
+import com.yichuang.kyjd.app.dao.reservation.impl.ReservationDaoImpl;
+import com.yichuang.kyjd.app.service.reservation.IReservationService;
 import com.yichuang.kyjd.commnd.base.impl.BaseServiceImpl;
-import com.yichuang.kyjd.rest.entity.reservation.Reservation;
+import com.yichuang.kyjd.app.entity.reservation.Reservation;
 
 /**
 * @author zj    default  

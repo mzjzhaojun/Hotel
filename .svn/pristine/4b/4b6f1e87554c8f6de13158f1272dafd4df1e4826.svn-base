@@ -1,4 +1,4 @@
-package com.yichuang.kyjd.rest.controller.specialty_info;
+package com.yichuang.kyjd.app.controller.specialty_info;
 
 import java.util.Date;
 import java.util.List;
@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.yichuang.kyjd.commnd.base.impl.BaseController;
 import com.yichuang.kyjd.commnd.system.util.DateUtil;
 import com.yichuang.kyjd.commnd.web.StaticSources;
-import com.yichuang.kyjd.rest.entity.specialty_info.Specialty_info;
-import com.yichuang.kyjd.rest.entity.user.User;
-import com.yichuang.kyjd.rest.service.specialty_info.impl.Specialty_infoServiceImpl;
+import com.yichuang.kyjd.app.entity.specialty_info.Specialty_info;
+import com.yichuang.kyjd.app.entity.user.User;
+import com.yichuang.kyjd.app.service.specialty_info.impl.Specialty_infoServiceImpl;
 
 /**
  * @author zj default test

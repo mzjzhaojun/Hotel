@@ -1,4 +1,4 @@
-package com.yichuang.kyjd.rest.controller.pay;
+package com.yichuang.kyjd.app.controller.pay;
 
 import java.net.URLEncoder;
 import java.util.SortedMap;
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.yichuang.kyjd.commnd.base.impl.BaseController;
 import com.yichuang.kyjd.commnd.system.wxpay.CommonUtil;
 import com.yichuang.kyjd.commnd.system.wxpay.Sha1Util;
-import com.yichuang.kyjd.rest.service.coupon.impl.CouponServiceImpl;
-import com.yichuang.kyjd.rest.entity.coupon.Coupon;
+import com.yichuang.kyjd.app.service.coupon.impl.CouponServiceImpl;
+import com.yichuang.kyjd.app.entity.coupon.Coupon;
 
 /**
  * @author zj default test

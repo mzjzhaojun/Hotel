@@ -11,7 +11,7 @@ import org.dom4j.io.SAXReader;
 
 import com.yichuang.kyjd.commnd.base.impl.BaseCommonDao;
 import com.yichuang.kyjd.commnd.system.util.ApplicationUtil;
-import com.yichuang.kyjd.rest.entity.message.Message;
+import com.yichuang.kyjd.app.entity.message.Message;
 
 
 /**

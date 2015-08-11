@@ -1,12 +1,12 @@
-package com.yichuang.kyjd.rest.service.order_info.impl;
+package com.yichuang.kyjd.app.service.order_info.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.yichuang.kyjd.rest.dao.order_info.impl.Order_infoDaoImpl;
-import com.yichuang.kyjd.rest.service.order_info.IOrder_infoService;
+import com.yichuang.kyjd.app.dao.order_info.impl.Order_infoDaoImpl;
+import com.yichuang.kyjd.app.service.order_info.IOrder_infoService;
 import com.yichuang.kyjd.commnd.base.impl.BaseServiceImpl;
-import com.yichuang.kyjd.rest.entity.order_info.Order_info;
+import com.yichuang.kyjd.app.entity.order_info.Order_info;
 
 /**
 * @author zj    default  

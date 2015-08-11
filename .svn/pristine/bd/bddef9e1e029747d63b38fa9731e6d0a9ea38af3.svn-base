@@ -5,7 +5,7 @@
 		rowid,type,no,status,sumamounts,add_date,add_user,mobile_phone,remark
 	</sql>
 	<resultMap id="ResultMap"
-		type="com.yichuang.kyjd.rest.entity.order_info.Order_info">
+		type="com.yichuang.kyjd.app.entity.order_info.Order_info">
 		<id property="rowid" column="rowid" />
 		<id property="type" column="type" />
 		<id property="no" column="no" />
@@ -17,7 +17,7 @@
 	</resultMap>
 
 	<resultMap id="ResultMap1"
-		type="com.yichuang.kyjd.rest.entity.order_info.Order">
+		type="com.yichuang.kyjd.app.entity.order_info.Order">
 		<id property="rowid" column="rowid" />
 		<id property="type" column="type" />
 		<id property="no" column="no" />
@@ -41,7 +41,7 @@
 	</resultMap>
 
 	<resultMap id="ResultMap2"
-		type="com.yichuang.kyjd.rest.entity.order_info.Order_info">
+		type="com.yichuang.kyjd.app.entity.order_info.Order_info">
 		<id property="rowid" column="rowid" />
 		<result property="type" column="type" />
 		<result property="no" column="no" />
@@ -54,7 +54,7 @@
 		<result property="remark" column="remark" />
 
 		<association property="orderdetail"
-			javaType="com.yichuang.kyjd.rest.entity.order_detail.Order_detail">
+			javaType="com.yichuang.kyjd.app.entity.order_detail.Order_detail">
 			<id column="rowid" property="rowid" />
 			<result property="title" column="title" />
 			<result property="count" column="count" />
@@ -72,7 +72,7 @@
 
 	</resultMap>
 
-	<insert id="save" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order_info">
+	<insert id="save" parameterType="com.yichuang.kyjd.app.entity.order_info.Order_info">
 		<selectKey resultType="java.lang.Integer" order="AFTER"
 			keyProperty="id">
 			SELECT LAST_INSERT_ID() AS id
@@ -82,7 +82,7 @@
 		values
 		(#{type},#{no},#{status},#{sumamounts},#{add_date},#{add_user},#{remark})
 	</insert>
-	<insert id="insertorderinfo" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order">
+	<insert id="insertorderinfo" parameterType="com.yichuang.kyjd.app.entity.order_info.Order">
 		<selectKey resultType="java.lang.Integer" order="AFTER"
 			keyProperty="rowid">
 			SELECT LAST_INSERT_ID() AS rowid
@@ -102,7 +102,7 @@
 	<delete id="deleteid" parameterType="java.lang.String" >
 		delete from ht_order_info where rowid = #{rowid}
 	</delete>
-	<update id="update" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order_info">
+	<update id="update" parameterType="com.yichuang.kyjd.app.entity.order_info.Order_info">
 		update ht_order_info
 		<set>
 
@@ -121,7 +121,7 @@
 		where o.rowid =
 		d.order_rowid and o.rowid = #{rowid}
 	</select>
-	<select id="getList" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order_info"
+	<select id="getList" parameterType="com.yichuang.kyjd.app.entity.order_info.Order_info"
 		resultMap="ResultMap">
 		select
 		<include refid="Base_Column_List" />
@@ -132,7 +132,7 @@
 			</if>
 		</where>
 	</select>
-	<select id="getPage" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order_info"
+	<select id="getPage" parameterType="com.yichuang.kyjd.app.entity.order_info.Order_info"
 		resultMap="ResultMap2">
 		select o.*, d.*,(SELECT
 		NAME FROM ht_dictionaries WHERE CODE = status)
@@ -155,7 +155,7 @@
 		ORDER BY o.add_date DESC
 		LIMIT #{pageStart},#{pageEnd}
 	</select>
-	<select id="getCount" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order_info"
+	<select id="getCount" parameterType="com.yichuang.kyjd.app.entity.order_info.Order_info"
 		resultType="int">
 		select count(*) from ht_order_info o, ht_order_detail d
 		<where>
@@ -174,7 +174,7 @@
 			</if>
 		</where>
 	</select>
-	<select id="selectOrderRoom" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order"
+	<select id="selectOrderRoom" parameterType="com.yichuang.kyjd.app.entity.order_info.Order"
 		resultMap="ResultMap1">
 		SELECT fo.rowid,fo.type,fo.no,fo.status,(SELECT
 		NAME FROM
@@ -194,7 +194,7 @@
 		AND fo.ADD_USER = #{account} ORDER BY createdate DESC
 	</select>
 
-	<select id="selectOrder" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order"
+	<select id="selectOrder" parameterType="com.yichuang.kyjd.app.entity.order_info.Order"
 		resultMap="ResultMap1">
 		SELECT fo.rowid,fo.type,fo.no,fo.status,fo.add_user as
 		account,il.card,il.passport,il.remark,(SELECT
@@ -216,7 +216,7 @@
 		#{rowid}
 	</select>
 
-	<select id="selectOrderInfo" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order"
+	<select id="selectOrderInfo" parameterType="com.yichuang.kyjd.app.entity.order_info.Order"
 		resultMap="ResultMap1">
 		SELECT fo.rowid,fo.type,fo.no,fo.status,fo.add_user as
 		account,(SELECT
@@ -238,7 +238,7 @@
 		WHERE fo.no = #{no}
 	</select>
 
-	<update id="updateOrder" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order">
+	<update id="updateOrder" parameterType="com.yichuang.kyjd.app.entity.order_info.Order">
 		update ht_order_info
 		<set>
 			<if test="status != null">
@@ -263,7 +263,7 @@
 		where rowid = #{rowid}
 	</update>
 
-	<update id="updateOrderPay" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order">
+	<update id="updateOrderPay" parameterType="com.yichuang.kyjd.app.entity.order_info.Order">
 		update ht_order_info
 		<set>
 			<if test="no != null and no != ''">
@@ -276,7 +276,7 @@
 		where rowid = #{rowid}
 	</update>
 
-	<update id="updateOrderDetail" parameterType="com.yichuang.kyjd.rest.entity.order_info.Order">
+	<update id="updateOrderDetail" parameterType="com.yichuang.kyjd.app.entity.order_info.Order">
 		update ht_order_detail
 		<set>
 			<if test="tradeno != null">

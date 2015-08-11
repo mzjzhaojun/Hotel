@@ -1,76 +1,88 @@
 package com.yichuang.kyjd.rest.entity.reservation;
 
 /**
-* @author zj    default  
-* 
-* @version 1.1
-*/
-public class Reservation implements java.io.Serializable{
+ * @author zj default
+ * 
+ * @version 1.1
+ */
+public class Reservation implements java.io.Serializable {
 
-  private static final long serialVersionUID=1L;
+	private static final long serialVersionUID = 1L;
 
-  Integer rowid;
-  String name;
-  String detail;
-  String address;
-  String tel;
-  String remark;
+	Integer rowid;
+	String name;
+	String detail;
+	String address;
+	String tel;
+	String img;
+	String remark;
 
-  public Integer getRowid(){
-      return rowid;
-  }
+	public String getImg() {
+		return img;
+	}
 
-  public void setRowid(Integer rowid) {
-      this.rowid =rowid;
-  }
+	public void setImg(String img) {
+		this.img = img;
+	}
 
-  public String getName(){
-      return name;
-  }
+	public Integer getRowid() {
+		return rowid;
+	}
 
-  public void setName(String name) {
-      this.name =name;
-  }
+	public void setRowid(Integer rowid) {
+		this.rowid = rowid;
+	}
 
-  public String getDetail(){
-      return detail;
-  }
+	public String getName() {
+		return name;
+	}
 
-  public void setDetail(String detail) {
-      this.detail =detail;
-  }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-  public String getAddress(){
-      return address;
-  }
+	public String getDetail() {
+		return detail;
+	}
 
-  public void setAddress(String address) {
-      this.address =address;
-  }
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
 
-  public String getTel(){
-      return tel;
-  }
+	public String getAddress() {
+		return address;
+	}
 
-  public void setTel(String tel) {
-      this.tel =tel;
-  }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-  public String getRemark(){
-      return remark;
-  }
+	public String getTel() {
+		return tel;
+	}
 
-  public void setRemark(String remark) {
-      this.remark =remark;
-  }
-  public Reservation(){
-  }
-  public Reservation(Integer rowid,String name,String detail,String address,String tel,String remark){
-      this.rowid=rowid;
-      this.name=name;
-      this.detail=detail;
-      this.address=address;
-      this.tel=tel;
-      this.remark=remark;
-  }
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public Reservation() {
+	}
+
+	public Reservation(Integer rowid, String name, String detail,
+			String address, String tel, String remark) {
+		this.rowid = rowid;
+		this.name = name;
+		this.detail = detail;
+		this.address = address;
+		this.tel = tel;
+		this.remark = remark;
+	}
 }

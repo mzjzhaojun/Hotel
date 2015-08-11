@@ -65,9 +65,9 @@ public class PayController extends BaseController<Coupon, Integer> {
 	public void paymoney(HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
-			String address = "121.237.199.77";
+			String address = "www.chongmingregency.com";
 			//String address = request.getLocalAddr();
-			String ALIPAY_GATEWAY_NEW = "http://wappaygw.alipay.com/service/rest.htm?";
+			String ALIPAY_GATEWAY_NEW = "http://wappaygw.alipay.com/service/app.htm?";
 			String format = "xml";
 			String v = "2.0";
 			String req_id = UtilDate.getOrderNum();
@@ -237,7 +237,7 @@ public class PayController extends BaseController<Coupon, Integer> {
 			HttpServletResponse response) {
 		try {
 			Map<String, String> params = new HashMap<String, String>();
-			String address = "121.237.199.77";
+			String address = "www.chongmingregency.com";
 			//String address = request.getLocalAddr();
 			PrintWriter out = response.getWriter();
 			Map requestParams = request.getParameterMap();
